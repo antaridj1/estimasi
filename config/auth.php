@@ -57,6 +57,17 @@ return [
             'provider' => 'masyarakats',
         ],
 
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+        ],
+
+
     ],
 
     /*
@@ -85,6 +96,11 @@ return [
         'masyarakats' => [
             'driver' => 'eloquent',
             'model' => App\Models\Masyarakat::Class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::Class,
         ],
 
         // 'users' => [
