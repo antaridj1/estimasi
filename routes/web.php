@@ -27,7 +27,7 @@ Route::group(['middleware' =>['auth:masyarakat']], function (){
 
 Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/dashboard','App\Http\Controllers\AdminController@index');
-    Route::get('/dashboard/indeks','App\Http\Controllers\IndekController@create');
+    Route::get('/dashboard/indeks','App\Http\Controllers\IndekController@index');
     Route::post('/dashboard/indeks','App\Http\Controllers\IndekController@store')->name('input_indeks');
 });
 

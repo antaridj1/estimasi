@@ -12,9 +12,10 @@ class IndekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Indek $indek)
     {
-        return view('admin.indeks');
+        $indek = Indek::all();
+        return view('admin.indeks',compact('indek'));
     }
 
     /**
@@ -58,7 +59,7 @@ class IndekController extends Controller
      */
     public function show(Indek $indek)
     {
-        return view('admin.indeks',compact('indek'));
+       
     }
 
     /**

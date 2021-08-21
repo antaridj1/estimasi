@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Dashboard Admin</title>
@@ -73,6 +79,7 @@
 <table class="table table-bordered text-center">
   <thead class="table-light">
     <tr>
+        <th scope="col">No.</th>
       <th scope="col">ID</th>
       <th scope="col">Kategori</th>
       <th scope="col">Tingkatan</th>
@@ -83,8 +90,10 @@
     </tr>
   </thead>
   <tbody>
+      
      @foreach ($indek as $ind)
       <tr> 
+        <td>{{$loop->iteration}}</td>
         <td>{{$ind->id}}</td>
         <td>{{$ind->kategori}}</td>
         <td>{{$ind->tingkatan}}</td>
@@ -97,6 +106,7 @@
           </a>
         </td>
       </tr>
+      @endforeach
     </tbody>
 </table>
       </div>
