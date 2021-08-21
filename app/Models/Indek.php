@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Indek extends Model
 {
     use HasFactory;
+    protected $table = 'indeks';
+    protected $attributes = ['status'=>true];
 }
