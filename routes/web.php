@@ -22,8 +22,12 @@ Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login
 Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
 
 //Route::middleware(['auth:masyarakat'])->group( function (){
-Route::group(['middleware' => ['auth:masyarakat']], function (){
+Route::group(['middleware' =>['auth:masyarakat']], function (){
     Route::get('/estimasi','App\Http\Controllers\MasyarakatController@index');
+});
+
+Route::group(['middleware' =>['auth:admin']], function (){
+    Route::get('/dashboard','App\Http\Controllers\AdminController@index');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use App\Models\Admin;
 use Auth;
 
 class AuthController extends Controller
@@ -45,19 +46,23 @@ class AuthController extends Controller
             'email' => ['required','email'],
             'password' => 'required'
         ]);
-      //  $login = $request->only('email','password');
-       if(Auth::guard('masyarakat')->attempt($login)){
-        // $nama = Masyarakat::where('email',$request->email)->value('nama'); 
-        // $id = Masyarakat::where('email',$request->email)->value('id');    
-        // session(['namaku'=>$nama,'idku' =>$id ]);
-        
+
+       if(Auth::guard('masyarakat')->attempt($login))
+       {
+           dd("berhasil");
             $request->session()->regenerate();
-           // dd($request->session());
              return redirect()->intended('estimasi');
         }
-        else
+        else if(Auth::guard('admin')->attempt($login)){
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        }
+         else{
             return back();
-    }
+         }
+
+    //         return back();
+     }
 
     public function getLogout(Request $request)
     {
