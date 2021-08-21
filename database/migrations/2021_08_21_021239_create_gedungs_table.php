@@ -14,12 +14,12 @@ class CreateGedungsTable extends Migration
     public function up()
     {
         Schema::create('gedungs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('bobot_indeks');
-            $table->string('biaya');
+            $table->integer('bobot_indeks');
+            $table->integer('biaya');
             $table->string('keterangan');
-            $table->string('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
