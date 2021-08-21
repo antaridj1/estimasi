@@ -14,6 +14,9 @@
 <div class="container">
 <h1>DASHBOARD ADMIN</h1>
 <a href="/logout">Logout</a>
+<a href="/dashboard/indeks">Indeks</a>
+<a href="/dashboard/sarana">Sarana</a>
+<a href="/dashboard/gedung">Gedung</a>
 </div>
   </body>
 </html>
