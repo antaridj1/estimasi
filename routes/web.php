@@ -21,25 +21,18 @@ Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware(
 Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
 Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
 
-//Route::middleware(['auth:masyarakat'])->group( function (){
 Route::group(['middleware' =>['auth:masyarakat']], function (){
     Route::get('/estimasi','App\Http\Controllers\MasyarakatController@index');
 });
 
 Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/dashboard','App\Http\Controllers\AdminController@index');
+    Route::get('/dashboard/indeks','App\Http\Controllers\IndekController@create');
+    Route::post('/dashboard/indeks','App\Http\Controllers\IndekController@store')->name('input_indeks');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');
 Route::post('/regis','App\Http\Controllers\AuthController@postRegis')->name('regis');
-// Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');
-// Route::post('/regis','App\Http\Controllers\AuthController@postRegis')->name('regis');
-// Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
-// Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
 
-// //Route::middleware(['auth:masyarakat'])->group( function (){
-// Route::group(['middleware' => ['auth','revalidate']], function (){
-//     Route::get('/estimasi','App\Http\Controllers\MasyarakatController@index');
-// });
 
 });

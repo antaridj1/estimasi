@@ -10,4 +10,5 @@ class Indek extends Model
     use HasFactory;
     protected $table = 'indeks';
     protected $attributes = ['status'=>true];
+    protected $fillable = ['kategori','tingkatan','bobot_indeks','keterangan'];
 }

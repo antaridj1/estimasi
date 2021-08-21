@@ -14,7 +14,7 @@ class IndekController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.indeks');
     }
 
     /**
@@ -22,10 +22,9 @@ class IndekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
+     }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +34,20 @@ class IndekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kategori'=>'required',
+            'tingkatan'=>'required',
+            'bobot_indeks'=>'required',
+            'keterangan'=>'required',
+        ]);
+
+        Indek::create($request->all());
+            // 'kategori'=>$request->kategori,
+            // 'tingkatan'=>$request->tingkatan,
+            // 'bobot_indeks'=>$request->bobot_indeks,
+            // 'keterangan'=>$request->keterangan,
+        
+        return redirect('dashboard/indeks');
     }
 
     /**
@@ -46,7 +58,7 @@ class IndekController extends Controller
      */
     public function show(Indek $indek)
     {
-        //
+        return view('admin.indeks',compact('indek'));
     }
 
     /**
