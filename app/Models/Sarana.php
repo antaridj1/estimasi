@@ -9,5 +9,6 @@ class Sarana extends Model
 {
     use HasFactory;
     protected $table = 'saranas';
+    protected $fillable =['nama','kategori','biaya','keterangan'];
     protected $attributes = ['status'=>true];
 }
