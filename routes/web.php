@@ -27,13 +27,20 @@ Route::group(['middleware' =>['auth:masyarakat']], function (){
 
 Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/dashboard','App\Http\Controllers\AdminController@index');
+    //indeks
     Route::get('/dashboard/indeks','App\Http\Controllers\IndekController@index');
     Route::post('/dashboard/indeks','App\Http\Controllers\IndekController@store')->name('input_indeks');
     Route::patch('/dashboard/indeks','App\Http\Controllers\IndekController@update')->name('edit_indeks');
+    //sarana
     Route::get('/dashboard/sarana','App\Http\Controllers\SaranaController@index');
     Route::post('/dashboard/sarana','App\Http\Controllers\SaranaController@store')->name('input_sarana');
     Route::patch('/dashboard/sarana','App\Http\Controllers\SaranaController@update')->name('edit_sarana');
     Route::put('dashboard/sarana/{sarana}','App\Http\Controllers\SaranaController@updateStatus');
+    //gedung
+    Route::get('/dashboard/gedung','App\Http\Controllers\GedungController@index');
+    Route::post('/dashboard/gedung','App\Http\Controllers\GedungController@store')->name('input_gedung');
+    Route::patch('/dashboard/gedung','App\Http\Controllers\GedungController@update')->name('edit_gedung');
+    Route::put('dashboard/gedung/{gedung}','App\Http\Controllers\GedungController@updateStatus');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');

@@ -9,5 +9,6 @@ class Gedung extends Model
 {
     use HasFactory;
     protected $table = 'gedungs';
+    protected $fillable =['nama','bobot_indeks','biaya','keterangan'];
     protected $attributes = ['status'=>true];
 }
