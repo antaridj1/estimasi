@@ -101,9 +101,63 @@
         <td>{{$ind->keterangan}}</td>
         <td>{{$ind->status}}</td>
         <td>
-          <a href="" class="btn btn-primary" >
+        <a href="dashboard/indeks/{{$ind->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$ind->id}}">
             Edit
           </a>
+
+         <!-- The Modal -->
+        <div class="modal fade" id="edit_{{$ind->id}}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Edit Data</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form method="post" action="{{route('edit_indeks')}}">
+                @method('patch')
+                @csrf
+                    <div class="form-group">
+                          <label for="id">ID</label>
+                          <input type="text" class="form-control" id="id" value="{{$ind->id}}" name="id" readonly>
+                        </div>
+                    <div class="form-group">
+                      <label for="kategori">Kategori</label>
+                      <input type="text" class="form-control" id="kategori" value="{{$ind->kategori}}" name="kategori" >
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="tingkatan">Tingkatan</label>
+                      <input type="text" class="form-control " id="tingkatan" value="{{$ind->tingkatan}}" name="tingkatan" >
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="bobot_indeks">Bobot</label>
+                      <input type="text" class="form-control" id="bobot_indeks" value="{{$ind->bobot_indeks}}" name="bobot_indeks">
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" id="keterangan" value="{{$ind->keterangan}}" name="keterangan">
+                    </div>
+                    <div class="form-group mt-2">
+                      <label for="status">Status</label>
+                      <input type="text" class="form-control" id="status" value="{{$ind->status}}" name="status">
+                    </div>
+                    <div class="form-group mt-4"> 
+                        <button type="submit" class="btn btn-primary" >Simpan </button>
+                    </div>
+                </form>
+              </div>
+
+              <!-- Modal footer -->
+              
+              
+            </div>
+          </div>
+        </div>
+        </div>
         </td>
       </tr>
       @endforeach

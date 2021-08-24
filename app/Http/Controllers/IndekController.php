@@ -82,7 +82,14 @@ class IndekController extends Controller
      */
     public function update(Request $request, Indek $indek)
     {
-        //
+        Indek::where('id',$request->id)->update([
+            'kategori'=>$request->kategori,
+            'tingkatan'=>$request->tingkatan,
+            'bobot_indeks'=>$request->bobot_indeks,
+            'keterangan' =>$request->keterangan,
+            'status'=>$request->status
+        ]);
+        return redirect('/dashboard/indeks');
     }
 
     /**
