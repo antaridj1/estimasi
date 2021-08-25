@@ -18,24 +18,11 @@ class IndekController extends Controller
         return view('admin.indeks',compact('indek'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $request->validate([
+            'nama' => 'required',
             'kategori'=>'required',
             'tingkatan'=>'required',
             'bobot_indeks'=>'required',
@@ -43,46 +30,15 @@ class IndekController extends Controller
         ]);
 
         Indek::create($request->all());
-            // 'kategori'=>$request->kategori,
-            // 'tingkatan'=>$request->tingkatan,
-            // 'bobot_indeks'=>$request->bobot_indeks,
-            // 'keterangan'=>$request->keterangan,
-        
+
         return redirect('dashboard/indeks');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Indek  $indek
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Indek $indek)
-    {
-       
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Indek  $indek
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Indek $indek)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Indek  $indek
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Indek $indek)
     {
         Indek::where('id',$request->id)->update([
+            'nama' => $request->nama,
             'kategori'=>$request->kategori,
             'tingkatan'=>$request->tingkatan,
             'bobot_indeks'=>$request->bobot_indeks,
@@ -92,14 +48,21 @@ class IndekController extends Controller
         return redirect('/dashboard/indeks');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Indek  $indek
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Indek $indek)
+    public function updateStatus(Indeks $indeks)
     {
-        //
+        $id = $indeks->id;
+
+        if( $indeks->status == false){
+            Indeks::where('id',$id)->update([
+                'status'=>true,
+            ]);
+            return redirect('/dashboard/indeks')->with('status','data diaktifkan');
+        }
+        else {
+            Indeks::where('id',$id)->update([
+                'status'=>false,
+            ]);
+            return redirect('/dashboard/indeks')->with('status','data dinonaktifkan');
+        }
     }
 }

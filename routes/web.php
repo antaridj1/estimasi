@@ -31,6 +31,7 @@ Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/dashboard/indeks','App\Http\Controllers\IndekController@index');
     Route::post('/dashboard/indeks','App\Http\Controllers\IndekController@store')->name('input_indeks');
     Route::patch('/dashboard/indeks','App\Http\Controllers\IndekController@update')->name('edit_indeks');
+    Route::put('dashboard/indeks/{indeks}','App\Http\Controllers\IndeksController@updateStatus');
     //sarana
     Route::get('/dashboard/sarana','App\Http\Controllers\SaranaController@index');
     Route::post('/dashboard/sarana','App\Http\Controllers\SaranaController@store')->name('input_sarana');

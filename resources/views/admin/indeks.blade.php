@@ -44,6 +44,10 @@
           <form method="post" action="{{route('input_indeks')}}">
               @csrf
               <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" placeholder="nama" name="nama" >
+              </div>
+              <div class="form-group">
                 <label for="kategori">Kategori</label>
                 <input type="text" class="form-control" id="kategori" placeholder="kategori" name="kategori" >
               </div>
@@ -79,8 +83,9 @@
 <table class="table table-bordered text-center">
   <thead class="table-light">
     <tr>
-        <th scope="col">No.</th>
+      <th scope="col">No.</th>
       <th scope="col">ID</th>
+      <th scope="col">Nama</th>
       <th scope="col">Kategori</th>
       <th scope="col">Tingkatan</th>
       <th scope="col">Bobot</th>
@@ -95,6 +100,7 @@
       <tr> 
         <td>{{$loop->iteration}}</td>
         <td>{{$ind->id}}</td>
+        <td>{{$ind->nama}}</td>
         <td>{{$ind->kategori}}</td>
         <td>{{$ind->tingkatan}}</td>
         <td>{{$ind->bobot_indeks}}</td>
@@ -125,6 +131,10 @@
                           <label for="id">ID</label>
                           <input type="text" class="form-control" id="id" value="{{$ind->id}}" name="id" readonly>
                         </div>
+                        <div class="form-group">
+                      <label for="nama">Nama</label>
+                      <input type="text" class="form-control" id="nama" value="{{$ind->nama}}" name="nama" >
+                    </div>
                     <div class="form-group">
                       <label for="kategori">Kategori</label>
                       <input type="text" class="form-control" id="kategori" value="{{$ind->kategori}}" name="kategori" >
@@ -154,6 +164,38 @@
               <!-- Modal footer -->
               
               
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <a href="dashboard/indeks/{{$indeks->id}}" class="btn btn-primary" data-toggle="modal" data-target="#editStatus_{{$indeks->id}}">
+            Non-aktifkan
+        </a>
+        <div class="modal fade" id="editStatus_{{$indeks->id}}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Nonaktifkan Data {{$indeks->nama}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form method="post" action="indeks/{{$indeks->id}}">
+                @method('put')
+                @csrf
+                <div class="form-group mt-4"> 
+                    <p>Apakah Anda yakin?</p>
+                    <div class="form-group mt-4"> 
+                        <button type="submit" class="btn btn-primary" >Ya </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+              </div>
+              <!-- Modal footer -->
             </div>
           </div>
         </div>
