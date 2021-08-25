@@ -12,10 +12,10 @@ class IndekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Indek $indek)
+    public function index(Indek $indeks)
     {
-        $indek = Indek::all();
-        return view('admin.indeks',compact('indek'));
+        $indeks = Indek::all();
+        return view('admin.indeks',compact('indeks'));
     }
 
   
@@ -35,7 +35,7 @@ class IndekController extends Controller
     }
 
    
-    public function update(Request $request, Indek $indek)
+    public function update(Request $request, Indek $indeks)
     {
         Indek::where('id',$request->id)->update([
             'nama' => $request->nama,

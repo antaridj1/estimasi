@@ -48,8 +48,12 @@
                 <input type="text" class="form-control" id="nama" placeholder="nama" name="nama" >
               </div>
               <div class="form-group">
-                <label for="kategori">Kategori</label>
-                <input type="text" class="form-control" id="kategori" placeholder="kategori" name="kategori" >
+              <label for="kategori">Kategori</label>
+                <select class="form-select" aria-label=".form-select-sm example" name="kategori" id="kategori">
+                  <option value="fungsi">Fungsi</option>
+                  <option value="klasifikasi">Klasifikasi</option>
+                  <option value="waktu">Waktu</option>
+                </select>
               </div>
               <div class="form-group mt-2">
                 <label for="tingkatan">Tingkatan</label>
@@ -96,23 +100,23 @@
   </thead>
   <tbody>
       
-     @foreach ($indek as $ind)
+     @foreach ($indeks as $indek)
       <tr> 
         <td>{{$loop->iteration}}</td>
-        <td>{{$ind->id}}</td>
-        <td>{{$ind->nama}}</td>
-        <td>{{$ind->kategori}}</td>
-        <td>{{$ind->tingkatan}}</td>
-        <td>{{$ind->bobot_indeks}}</td>
-        <td>{{$ind->keterangan}}</td>
-        <td>{{$ind->status}}</td>
+        <td>{{$indek->id}}</td>
+        <td>{{$indek->nama}}</td>
+        <td>{{$indek->kategori}}</td>
+        <td>{{$indek->tingkatan}}</td>
+        <td>{{$indek->bobot_indeks}}</td>
+        <td>{{$indek->keterangan}}</td>
+        <td>{{$indek->status}}</td>
         <td>
-        <a href="dashboard/indeks/{{$ind->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$ind->id}}">
+        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$indek->id}}">
             Edit
           </a>
 
          <!-- The Modal -->
-        <div class="modal fade" id="edit_{{$ind->id}}">
+        <div class="modal fade" id="edit_{{$indek->id}}">
           <div class="modal-dialog">
             <div class="modal-content">
             
@@ -129,31 +133,35 @@
                 @csrf
                     <div class="form-group">
                           <label for="id">ID</label>
-                          <input type="text" class="form-control" id="id" value="{{$ind->id}}" name="id" readonly>
+                          <input type="text" class="form-control" id="id" value="{{$indek->id}}" name="id" readonly>
                         </div>
                         <div class="form-group">
                       <label for="nama">Nama</label>
-                      <input type="text" class="form-control" id="nama" value="{{$ind->nama}}" name="nama" >
+                      <input type="text" class="form-control" id="nama" value="{{$indek->nama}}" name="nama" >
                     </div>
                     <div class="form-group">
                       <label for="kategori">Kategori</label>
-                      <input type="text" class="form-control" id="kategori" value="{{$ind->kategori}}" name="kategori" >
+                      <select class="form-select" aria-label=".form-select-sm example" name="kategori" id="kategori">
+                        <option value="fungsi">Fungsi</option>
+                        <option value="klasifikasi">Klasifikasi</option>
+                        <option value="waktu">Waktu</option>
+                      </select>
                     </div>
                     <div class="form-group mt-2">
                       <label for="tingkatan">Tingkatan</label>
-                      <input type="text" class="form-control " id="tingkatan" value="{{$ind->tingkatan}}" name="tingkatan" >
+                      <input type="text" class="form-control " id="tingkatan" value="{{$indek->tingkatan}}" name="tingkatan" >
                     </div>
                     <div class="form-group mt-2">
                       <label for="bobot_indeks">Bobot</label>
-                      <input type="text" class="form-control" id="bobot_indeks" value="{{$ind->bobot_indeks}}" name="bobot_indeks">
+                      <input type="text" class="form-control" id="bobot_indeks" value="{{$indek->bobot_indeks}}" name="bobot_indeks">
                     </div>
                     <div class="form-group mt-2">
                       <label for="keterangan">Keterangan</label>
-                      <input type="text" class="form-control" id="keterangan" value="{{$ind->keterangan}}" name="keterangan">
+                      <input type="text" class="form-control" id="keterangan" value="{{$indek->keterangan}}" name="keterangan">
                     </div>
                     <div class="form-group mt-2">
                       <label for="status">Status</label>
-                      <input type="text" class="form-control" id="status" value="{{$ind->status}}" name="status">
+                      <input type="text" class="form-control" id="status" value="{{$indek->status}}" name="status">
                     </div>
                     <div class="form-group mt-4"> 
                         <button type="submit" class="btn btn-primary" >Simpan </button>
@@ -169,22 +177,22 @@
         </div>
         </div>
 
-        <a href="dashboard/indeks/{{$indeks->id}}" class="btn btn-primary" data-toggle="modal" data-target="#editStatus_{{$indeks->id}}">
+        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary" data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
             Non-aktifkan
         </a>
-        <div class="modal fade" id="editStatus_{{$indeks->id}}">
+        <div class="modal fade" id="editStatus_{{$indek->id}}">
           <div class="modal-dialog">
             <div class="modal-content">
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4 class="modal-title">Nonaktifkan Data {{$indeks->nama}}</h4>
+                <h4 class="modal-title">Nonaktifkan Data {{$indek->nama}}</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               
               <!-- Modal body -->
               <div class="modal-body">
-                <form method="post" action="indeks/{{$indeks->id}}">
+                <form method="post" action="indeks/{{$indek->id}}">
                 @method('put')
                 @csrf
                 <div class="form-group mt-4"> 
