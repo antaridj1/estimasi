@@ -11,4 +11,8 @@ class Indek extends Model
     protected $table = 'indeks';
     protected $attributes = ['status'=>true];
     protected $fillable = ['nama','kategori','tingkatan','bobot_indeks','keterangan'];
+
+    public function estimasis(){
+        return $this->hasMany(Estimasi::class);
+    }
 }

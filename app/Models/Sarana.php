@@ -11,4 +11,9 @@ class Sarana extends Model
     protected $table = 'saranas';
     protected $fillable =['nama','kategori','biaya','keterangan'];
     protected $attributes = ['status'=>true];
+
+    public function detail_estimasi(){
+        return $this->hasMany(DetailEstimasi::class);
+    }
+
 }

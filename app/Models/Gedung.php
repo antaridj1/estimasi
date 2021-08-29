@@ -11,4 +11,8 @@ class Gedung extends Model
     protected $table = 'gedungs';
     protected $fillable =['nama','bobot_indeks','biaya','keterangan'];
     protected $attributes = ['status'=>true];
+
+    public function estimasis(){
+        return $this->hasMany(Estimasi::class);
+    }
 }

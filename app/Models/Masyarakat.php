@@ -12,4 +12,8 @@ class Masyarakat extends Authenticatable
     protected $table = 'masyarakats';
     protected $fillable = ['nama','email','password','telp','no_ktp'];
     protected $attributes = ['status'=>true];
+
+    public function estimasis(){
+        return $this->hasMany(Estimasi::class);
+    }
 }
