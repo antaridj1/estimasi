@@ -18,7 +18,7 @@ class CreateIndeksTable extends Migration
             $table->string('kategori');
             $table->string('nama');
             $table->string('tingkatan');
-            $table->integer('bobot_indeks');
+            $table->double('bobot_indeks');
             $table->string('keterangan');
             $table->boolean('status');
             $table->timestamps();

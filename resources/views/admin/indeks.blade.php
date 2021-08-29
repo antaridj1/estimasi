@@ -159,10 +159,6 @@
                       <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" id="keterangan" value="{{$indek->keterangan}}" name="keterangan">
                     </div>
-                    <div class="form-group mt-2">
-                      <label for="status">Status</label>
-                      <input type="text" class="form-control" id="status" value="{{$indek->status}}" name="status">
-                    </div>
                     <div class="form-group mt-4"> 
                         <button type="submit" class="btn btn-primary" >Simpan </button>
                     </div>

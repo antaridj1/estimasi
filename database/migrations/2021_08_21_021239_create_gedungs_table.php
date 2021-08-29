@@ -16,7 +16,7 @@ class CreateGedungsTable extends Migration
         Schema::create('gedungs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->integer('bobot_indeks');
+            $table->double('bobot_indeks');
             $table->integer('biaya');
             $table->string('keterangan');
             $table->boolean('status');
