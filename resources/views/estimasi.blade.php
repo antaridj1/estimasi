@@ -14,6 +14,7 @@
 <div class="container">
 <h1>HOME ESTIMASI</h1>
 <a href="/logout">Logout</a>
+<a href="/hitung">Hitung</a>
 </div>
   </body>
 </html>

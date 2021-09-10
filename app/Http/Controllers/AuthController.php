@@ -49,7 +49,6 @@ class AuthController extends Controller
 
        if(Auth::guard('masyarakat')->attempt($login))
        {
-           dd("berhasil");
             $request->session()->regenerate();
              return redirect()->intended('estimasi');
         }

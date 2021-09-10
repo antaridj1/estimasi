@@ -23,6 +23,9 @@ Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('pos
 
 Route::group(['middleware' =>['auth:masyarakat']], function (){
     Route::get('/estimasi','App\Http\Controllers\MasyarakatController@index');
+    Route::get('/hitung','App\Http\Controllers\EstimasiController@index')->name('hitung');
+    Route::post('/hitung','App\Http\Controllers\EstimasiController@index')->name('show_sarana');
+   
 });
 
 Route::group(['middleware' =>['auth:admin']], function (){
