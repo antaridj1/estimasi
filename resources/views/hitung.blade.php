@@ -74,7 +74,7 @@
           <h4 class="modal-title">Sarana Prasarana</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form method="post" action="{{route('show_sarana')}}">
+        <form method="" action="">
         <!-- Modal body -->
         <div class="modal-body">
             <div class="accordion" id="accordionPanelsStayOpenExample">
