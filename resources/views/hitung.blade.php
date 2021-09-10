@@ -106,7 +106,7 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="simpan">Simpan </button>
+            <button  class="btn btn-primary" id="simpan">Simpan </button>
         </div>
         </form>
       </div>
