@@ -12,7 +12,7 @@ class Sarana extends Model
     protected $fillable =['nama','kategori','biaya','keterangan'];
     protected $attributes = ['status'=>true];
 
-    public function detail_estimasi(){
+    public function detail_estimasis(){
         return $this->hasMany(DetailEstimasi::class);
     }
 

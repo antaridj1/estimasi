@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndeksTable extends Migration
+class CreateKategoriIndeksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateIndeksTable extends Migration
      */
     public function up()
     {
-        Schema::create('indeks', function (Blueprint $table) {
+        Schema::create('kategori_indeks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('tingkatan');
-            $table->double('bobot_indeks');
-            $table->string('keterangan');
+            $table->double('bobot_kategori');
             $table->boolean('status');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateIndeksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indeks');
+        Schema::dropIfExists('kategori_indeks');
     }
 }

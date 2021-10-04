@@ -10,11 +10,11 @@ class DetailEstimasi extends Model
     use HasFactory;
     protected $table = 'detail_estimasi';
 
-    public function estimasis(){
+    public function estimasi(){
         return $this->belongsTo(Estimasi::class);
     }
 
-    public function saranas(){
+    public function sarana(){
         return $this->belongsTo(Sarana::class);
     }
 

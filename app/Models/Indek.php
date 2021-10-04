@@ -15,4 +15,8 @@ class Indek extends Model
     public function estimasis(){
         return $this->hasMany(Estimasi::class);
     }
+
+    public function kategori_indek(){
+        return $this->belongsTo(KategoriIndeks::Class);
+    }
 }

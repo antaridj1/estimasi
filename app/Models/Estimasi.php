@@ -11,16 +11,16 @@ class Estimasi extends Model
     protected $table = 'estimasi';
 
 
-    public function masyarakats(){
+    public function masyarakat(){
         return $this->belongsTo(Masyarakat::class);
     }
-    public function indeks(){
+    public function indek(){
         return $this->belongsTo(Indek::class);
     }
-    public function gedungs(){
+    public function gedung(){
         return $this->belongsTo(Gedung::class);
     }
-    public function detail_estimasi(){
+    public function detail_estimasis(){
         return $this->hasMany(DetailEstimasi::class);
     }
 }

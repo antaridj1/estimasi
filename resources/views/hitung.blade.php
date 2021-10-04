@@ -189,38 +189,6 @@
           });
         });
 
-      //   const modal = document.getElementById('ModalSarana');
-      //   const checks = modal.querySelectorAll('.form-check-input');
-      //   checks.forEach(function(check){
-      //     check.addEventListener('click',function(e){
-      //       e.target.classList.toggle('checked');
-       
-      //       const checkbox = modal.querySelectorAll('.checked');
-      //       checkbox.forEach(function(box){
-      //         const table = document.querySelector('table');
-      //         const tr = document.createElement('tr');
-      //         const td = document.createElement('td');
-      //         const td2 = document.createElement('td');
-      //         let teks = document.createTextNode(box.value);
-      //         const jumlah = document.createElement('input');
-      //         jumlah.setAttribute('name','jumlah_sarana[]');
-      //         td.appendChild(teks);
-      //         td2.appendChild(jumlah);
-      //         tr.appendChild(td);
-      //         tr.appendChild(td2);
-      //         table.appendChild(tr);
-      //       });
-
-      //     });
-      //  });
-
-      //     const simpan = document.getElementById('simpan');
-      //       simpan.addEventListener('click',function(){
-      //     //
-      //     });
-
-
-
       //Display 
         // const formUmum = document.getElementById('form_umum');
         // const formKlasifikasi = document.getElementById('form_klasifikasi');
