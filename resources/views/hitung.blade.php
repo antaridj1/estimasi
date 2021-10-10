@@ -44,29 +44,29 @@
               <label for="fungsi">Fungsi Bangunan</label>
               @foreach ($fungsis as $fungsi)
               <div class="form-check">
-                      <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->nama}}" value="{{$fungsi->id}}">
-                      <label class="form-check-label" for="{{$fungsi->nama}}">
-                      {{$fungsi->nama}}
+                      <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}" value="{{$fungsi->id}}">
+                      <label class="form-check-label" for="{{$fungsi->tingkatan}}">
+                      {{$fungsi->tingkatan}}
                       </label>
                   </div>
               @endforeach
           </div>
-          @foreach ($indeks as $indek)
-          @if ($indek->kategori == "klasifikasi")
+          @foreach ($kategori_indeks as $ktgr)
+         
           <div class="form-group">
-              <label for="{{$indek->nama}}">{{$indek->nama}}</label>
-              @foreach ($tingkatan_indeks as $tk_indek)
-              @if ($tk_indek->nama == $indek->nama)
+              <label for="{{$ktgr->nama}}">{{$ktgr->nama}}</label>
+              @foreach ($indeks as $tk_indek)
+              @if ($tk_indek->kategori_indeks_id == $ktgr->id)
               <div class="form-check">
-                      <input class="form-check-input" type="radio" name="{{$tk_indek->nama}}" id="{{$tk_indek->tingkatan}}" value="{{$tk_indek->id}}">
-                      <label class="form-check-label" for="{{$tk_indek->tingkatan}}">
+                      <input class="form-check-input" type="radio" name="{{$ktgr->nama}}" id="{{$tk_indek->id}}" value="{{$tk_indek->id}}">
+                      <label class="form-check-label" for="{{$tk_indek->id}}">
                       {{$tk_indek->tingkatan}}
                       </label>
                   </div>
               @endif
               @endforeach
           </div>
-          @endif
+         
           @endforeach
           <div class="form-group">
               <label for="waktu">Jangka Waktu Bangunan</label>

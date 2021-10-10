@@ -10,13 +10,12 @@ class Indek extends Model
     use HasFactory;
     protected $table = 'indeks';
     protected $attributes = ['status'=>true];
-    protected $fillable = ['nama','kategori','tingkatan','bobot_indeks','keterangan'];
+    protected $fillable = ['parameter','kategori_indeks_id','tingkatan','bobot_indeks','keterangan'];
 
-    public function estimasis(){
-        return $this->hasMany(Estimasi::class);
-    }
-
-    public function kategori_indek(){
+    public function kategori_indeks(){
         return $this->belongsTo(KategoriIndeks::Class);
+    }
+    public function detail_estimasi(){
+        return $this->hasMany(DetailEstimasi::class);
     }
 }

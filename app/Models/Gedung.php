@@ -12,7 +12,7 @@ class Gedung extends Model
     protected $fillable =['nama','bobot_indeks','biaya','keterangan'];
     protected $attributes = ['status'=>true];
 
-    public function estimasis(){
+    public function estimasi(){
         return $this->hasMany(Estimasi::class);
     }
 }

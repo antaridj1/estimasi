@@ -45,6 +45,11 @@ Route::group(['middleware' =>['auth:admin']], function (){
     Route::post('/dashboard/gedung','App\Http\Controllers\GedungController@store')->name('input_gedung');
     Route::patch('/dashboard/gedung','App\Http\Controllers\GedungController@update')->name('edit_gedung');
     Route::put('dashboard/gedung/{gedung}','App\Http\Controllers\GedungController@updateStatus');
+    //kategoriIndeks
+    Route::get('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@index');
+    Route::post('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@store')->name('input_kategoriIndeks');
+    Route::patch('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@update')->name('edit_kategoriIndeks');
+    Route::put('dashboard/kategoriIndeks/{kategoriIndeks}','App\Http\Controllers\KategoriIndeksController@updateStatus');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');

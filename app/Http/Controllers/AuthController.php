@@ -48,7 +48,7 @@ class AuthController extends Controller
         ]);
 
        if(Auth::guard('masyarakat')->attempt($login))
-       {
+       {   
             $request->session()->regenerate();
              return redirect()->intended('estimasi');
         }
@@ -59,8 +59,6 @@ class AuthController extends Controller
          else{
             return back();
          }
-
-    //         return back();
      }
 
     public function getLogout(Request $request)

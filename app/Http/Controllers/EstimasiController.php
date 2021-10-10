@@ -7,6 +7,7 @@ use App\Models\Estimasi;
 use App\Models\Gedung;
 use App\Models\Indek;
 use App\Models\Sarana;
+use App\Models\KategoriIndeks;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -14,10 +15,11 @@ class EstimasiController extends Controller
 {
     public function index(){
         $gedungs = Gedung::get(['nama','id']);
-        $indeks = Indek::distinct('nama')->get(['nama','kategori']);
-        $tingkatan_indeks = Indek::get(['tingkatan','nama','id']);
-        $fungsis = Indek::where('kategori','fungsi')->get(['nama','id']);
-        $jangka_waktu = Indek::where('kategori','waktu')->get(['nama','id']);
+       // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
+        $kategori_indeks = KategoriIndeks::all();
+        $indeks = Indek::where('parameter','klasifikasi')->get(['id','tingkatan','kategori_indeks_id']);
+        $fungsis = Indek::where('parameter','fungsi')->get(['tingkatan','id']);
+        $jangka_waktu = Indek::where('parameter','waktu')->get(['tingkatan','id']);
 
         $collection = Sarana::all();
         $unique = $collection->unique('kategori');
@@ -26,7 +28,7 @@ class EstimasiController extends Controller
         $saranas = Sarana::get(['nama','kategori','id']);
 
         return view('hitung',compact(
-            'gedungs','tingkatan_indeks','indeks','fungsis','jangka_waktu','kategori_sarana','saranas'
+            'kategori_indeks','gedungs','indeks','fungsis','jangka_waktu','kategori_sarana','saranas'
         ));
     }
 

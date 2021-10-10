@@ -8,17 +8,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+
     <title>Dashboard Admin</title>
-
-    <style type="text/css">
-
-      #kategori_indeks {
-        display:none;
-    }
-      </style>
   </head>
   <body>
 <div class="container">
@@ -30,7 +26,7 @@
 <a href="/dashboard/kategoriIndeks">Kategori Indeks</a>
 
 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalIndeks">
-    Tambahkan Data Indeks
+    Tambahkan Data Kategori Indeks
   </button>
 
   <!-- The Modal -->
@@ -46,32 +42,16 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <form method="post" action="{{route('input_indeks')}}">
+          <form method="post" action="{{route('input_kategoriIndeks')}}">
               @csrf
-              <div class="form-group" id="kategori_indeks">
-              <label for="kategori_indeks_id">Kategori</label>
-                <select class="form-select" aria-label=".form-select-sm example" name="kategori_indeks_id" id="kategori_indeks_id">
-                  @foreach ($kategori as $ktgr)
-                    <option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
-                  @endforeach
-                </select>
+              <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" placeholder="nama" name="nama" >
               </div>
               <div class="form-group mt-2">
-                <label for="tingkatan">Tingkatan</label>
-                <input type="text" class="form-control " id="tingkatan" placeholder="tingkatan" name="tingkatan" >
+                <label for="bobot_kategori">Bobot</label>
+                <input type="text" class="form-control" id="bobot_kategori" placeholder="bobot" name="bobot_kategori">
               </div>
-              <div class="form-group mt-2">
-                <label for="bobot_indeks">Bobot</label>
-                <input type="text" class="form-control" id="bobot_indeks" placeholder="bobot" name="bobot_indeks">
-              </div>
-              <div class="form-group mt-2" id="dropdown_input">
-                <label for="parameter">Parameter</label>
-                <select class="form-select" aria-label=".form-select-sm example" name="parameter" id="parameter">
-                  <option value="fungsi">Fungsi</option>
-                  <option value="klasifikasi">Klasifikasi</option>
-                  <option value="waktu">Waktu</option>
-                </select>
-                </div>
               <div class="form-group mt-2">
                 <label for="keterangan">Keterangan</label>
                 <input type="text" class="form-control" id="keterangan" placeholder="keterangan" name="keterangan">
@@ -98,10 +78,8 @@
     <tr>
       <th scope="col">No.</th>
       <th scope="col">ID</th>
-      <th scope="col">Kategori</th>
-      <th scope="col">Tingkatan</th>
+      <th scope="col">Nama</th>
       <th scope="col">Bobot</th>
-      <th scope="col">Parameter</th>
       <th scope="col">Keterangan</th>
       <th scope="col">Status</th>
       <th scope="col">Aksi</th>
@@ -109,23 +87,21 @@
   </thead>
   <tbody>
       
-     @foreach ($indeks as $indek)
+     @foreach ($kategoriIndeks as $kategori)
       <tr> 
         <td>{{$loop->iteration}}</td>
-        <td>{{$indek->id}}</td>
-        <td>{{$indek->kategori_indeks->nama}}</td> 
-        <td>{{$indek->tingkatan}}</td>
-        <td>{{$indek->bobot_indeks}}</td>
-        <td>{{$indek->parameter}}</td>
-        <td>{{$indek->keterangan}}</td>
-        <td>{{$indek->status}}</td>
+        <td>{{$kategori->id}}</td>
+        <td>{{$kategori->nama}}</td>
+        <td>{{$kategori->bobot_kategori}}</td>
+        <td>{{$kategori->keterangan}}</td>
+        <td>{{$kategori->status}}</td>
         <td>
-        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$indek->id}}">
+        <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$kategori->id}}">
             Edit
           </a>
 
          <!-- The Modal -->
-        <div class="modal fade" id="edit_{{$indek->id}}">
+        <div class="modal fade" id="edit_{{$kategori->id}}">
           <div class="modal-dialog">
             <div class="modal-content">
             
@@ -137,34 +113,24 @@
               
               <!-- Modal body -->
               <div class="modal-body">
-                <form method="post" action="{{route('edit_indeks')}}">
+                <form method="post" action="{{route('edit_kategoriIndeks')}}">
                 @method('patch')
                 @csrf
                     <div class="form-group">
                           <label for="id">ID</label>
-                          <input type="text" class="form-control" id="id" value="{{$indek->id}}" name="id" readonly>
+                          <input type="text" class="form-control" id="id" value="{{$kategori->id}}" name="id" readonly>
                         </div>
-                    <div class="form-group">
-                      <label for="kategori_indeks_id">Kategori</label>
-                      <select class="form-select" aria-label=".form-select-sm example" name="kategori_indeks_id" id="kategori_indeks_id">
-                        <option value="{{$indek->kategori_indeks->id}}">{{$indek->kategori_indeks->nama}}</option>
-                      </select>
+                        <div class="form-group">
+                      <label for="nama">Nama</label>
+                      <input type="text" class="form-control" id="nama" value="{{$kategori->nama}}" name="nama" >
                     </div>
                     <div class="form-group mt-2">
-                      <label for="tingkatan">Tingkatan</label>
-                      <input type="text" class="form-control " id="tingkatan" value="{{$indek->tingkatan}}" name="tingkatan" >
-                    </div>
-                    <div class="form-group mt-2">
-                      <label for="bobot_indeks">Bobot</label>
-                      <input type="text" class="form-control" id="bobot_indeks" value="{{$indek->bobot_indeks}}" name="bobot_indeks">
-                    </div>
-                    <div class="form-group mt-2">
-                      <label for="parameters">Parameter</label>
-                      <input type="text" class="form-control " id="parameters" value="{{$indek->parameter}}" name="parameter" >
+                      <label for="bobot_kategori">Bobot</label>
+                      <input type="text" class="form-control" id="bobot_kategori" value="{{$kategori->bobot_kategori}}" name="bobot_kategori">
                     </div>
                     <div class="form-group mt-2">
                       <label for="keterangan">Keterangan</label>
-                      <input type="text" class="form-control" id="keterangan" value="{{$indek->keterangan}}" name="keterangan">
+                      <input type="text" class="form-control" id="keterangan" value="{{$kategori->keterangan}}" name="keterangan">
                     </div>
                     <div class="form-group mt-4"> 
                         <button type="submit" class="btn btn-primary" >Simpan </button>
@@ -180,22 +146,22 @@
         </div>
         </div>
 
-        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary" data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
+        <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="btn btn-primary" data-toggle="modal" data-target="#editStatus_{{$kategori->id}}">
             Non-aktifkan
         </a>
-        <div class="modal fade" id="editStatus_{{$indek->id}}">
+        <div class="modal fade" id="editStatus_{{$kategori->id}}">
           <div class="modal-dialog">
             <div class="modal-content">
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4 class="modal-title">Nonaktifkan Data {{$indek->nama}}</h4>
+                <h4 class="modal-title">Nonaktifkan Data {{$kategori->nama}}</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               
               <!-- Modal body -->
               <div class="modal-body">
-                <form method="post" action="indeks/{{$indek->id}}">
+                <form method="post" action="kategoriIndeks/{{$kategori->id}}">
                 @method('put')
                 @csrf
                 <div class="form-group mt-4"> 
@@ -214,30 +180,11 @@
         </td>
       </tr>
       @endforeach
- 
     </tbody>
 </table>
       </div>
       </div>
       </div>
 
-      <script>
-      //Checkbox
-        const kategori = document.getElementById('kategori_indeks');
-        const dropdown = document.getElementById('dropdown_input');
-        const optionss = dropdown.querySelectorAll('option');
-        optionss.forEach(function(options){
-        options.addEventListener('click',function(e){
-        console.log(e.target);
-        //     // if(e.target.value == 'klasifikasi'){
-        //     //   kategori.style.display = 'block';
-        //     / }
-          });
-        });
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

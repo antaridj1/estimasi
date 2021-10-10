@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indek;
+use App\Models\KategoriIndeks;
 use Illuminate\Http\Request;
 
 class IndekController extends Controller
@@ -15,19 +16,20 @@ class IndekController extends Controller
     public function index(Indek $indeks)
     {
         $indeks = Indek::all();
-        return view('admin.indeks',compact('indeks'));
+        $kategori = KategoriIndeks::all();
+        return view('admin.indeks',compact(['indeks','kategori']));
     }
 
   
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kategori'=>'required',
-            'tingkatan'=>'required',
-            'bobot_indeks'=>'required',
-            'keterangan'=>'required',
-        ]);
+        // $request->validate([
+        //     'kategori_indeks_id'=>'required',
+        //     'tingkatan'=>'required',
+        //     'bobot_indeks'=>'required',
+        //     'parameter'=>'required',
+        //     'keterangan'=>'required',
+        // ]);
 
         Indek::create($request->all());
 
@@ -38,10 +40,10 @@ class IndekController extends Controller
     public function update(Request $request, Indek $indeks)
     {
         Indek::where('id',$request->id)->update([
-            'nama' => $request->nama,
-            'kategori'=>$request->kategori,
+            'kategori_indeks_id'=>$request->kategori_indeks_id,
             'tingkatan'=>$request->tingkatan,
             'bobot_indeks'=>$request->bobot_indeks,
+            'parameter'=>$request->parameter,
             'keterangan' =>$request->keterangan,
         ]);
         return redirect('/dashboard/indeks');

@@ -15,9 +15,10 @@ class CreateIndeksTable extends Migration
     {
         Schema::create('indeks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->string('kategori_indeks_id');
             $table->string('tingkatan');
             $table->double('bobot_indeks');
+            $table->string('parameter');
             $table->string('keterangan');
             $table->boolean('status');
             $table->timestamps();
