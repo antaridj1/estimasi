@@ -49,18 +49,18 @@ class IndekController extends Controller
         return redirect('/dashboard/indeks');
     }
 
-    public function updateStatus(Indeks $indeks)
+    public function updateStatus(Indek $indeks)
     {
         $id = $indeks->id;
 
         if( $indeks->status == false){
-            Indeks::where('id',$id)->update([
+            Indek::where('id',$id)->update([
                 'status'=>true,
             ]);
             return redirect('/dashboard/indeks')->with('status','data diaktifkan');
         }
         else {
-            Indeks::where('id',$id)->update([
+            Indek::where('id',$id)->update([
                 'status'=>false,
             ]);
             return redirect('/dashboard/indeks')->with('status','data dinonaktifkan');

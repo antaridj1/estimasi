@@ -13,6 +13,6 @@ class KategoriIndeks extends Model
     protected $fillable = ['nama','bobot_kategori','keterangan'];
 
     public function indeks(){
-        return $this->hasMany(Indek::Class);
+        return $this->hasMany(Indek::class);
     }
 }
