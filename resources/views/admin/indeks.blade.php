@@ -278,7 +278,17 @@
                         $(this).parents('.modal').find('.kategori').hide();
                     }
                 })
-            })
+            });
+        //      //kategori
+        // function myFunction() {
+        //     const kategori = document.getElementById('kategori_indeks');
+        //     let x = document.getElementById('parameter').value;
+        //     if (x == "klasifikasi") {
+        //         kategori.style.display = 'block';
+        //     } else {
+        //         kategori.style.display = 'none';
+        //     }
+        // }
         </script>
 </body>
 
