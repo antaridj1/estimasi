@@ -169,25 +169,21 @@
                                                                     Waktu</option>
                                                             </select>
                                                         </div>
-
-
-                                                        <div class="form-group mt-2 kategori">
+                                                        <div class="form-group mt-2 kategori" style="display: none">
                                                             <label for="kategori_indeks_id">Kategori</label>
                                                             <select class="form-select"
                                                                 aria-label=".form-select-sm example"
                                                                 name="kategori_indeks_id"
                                                                 value="{{$indek->kategori_indeks->nama}}">
                                                                 @foreach ($kategori as $ktgr)
-                                                                @if($ktgr->id == $indek->kategori_indeks->id)
-                                                                <option selected value="{{$ktgr->id}}">{{$ktgr->nama}}
-                                                                </option>
-                                                                @else
-                                                                <option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
-                                                                @endif
+																	@if($ktgr->id == $indek->kategori_indeks->id)
+																	<option selected value="{{$ktgr->id}}">{{$ktgr->nama}}
+																	</option>
+																	@else
+																	<option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
+																	@endif
                                                                 @endforeach
                                                             </select>
-
-
                                                         </div>
                                                         <div class="form-group mt-2">
                                                             <label for="tingkatan">Tingkatan</label>
@@ -216,7 +212,7 @@
 
                                             </div>
                                         </div>
-                                    </div>]
+                                    </div>
 
 									<a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary" data-toggle="modal"
 										data-target="#editStatus_{{$indek->id}}">
@@ -261,7 +257,9 @@
 			</div>
 		</div>
 
-    <script>
+    {{-- <script>
+
+
         //kategori
         function myFunction() {
             const kategori = document.getElementById('kategori_indeks');
@@ -372,13 +370,24 @@
         //     kategoris.style.display = 'none';
         //   }
         // }
-    </script>
+    </script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+	<script>
+		$(document).ready(function () {
+			$('.edit_select').on('change', function () {
+				if ($(this).val() == 'klasifikasi') {
+					$(this).parents('.modal').find('.kategori').show();
+				} else {
+					$(this).parents('.modal').find('.kategori').hide();
+				}
+			})
+		})
+	</script>
 </body>
 
 </html>
