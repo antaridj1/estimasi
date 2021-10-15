@@ -39,7 +39,6 @@ class IndekController extends Controller
    
     public function update(Request $request, Indek $indeks)
     {
-        dd($request);
         Indek::where('id',$request->id)->update([
             'kategori_indeks_id'=>$request->kategori_indeks_id,
             'tingkatan'=>$request->tingkatan,
