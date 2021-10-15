@@ -113,7 +113,7 @@
               <!-- Modal body -->
               <div class="modal-body">
                 <form method="post" action="{{route('edit_sarana')}}">
-                @method('put')
+                @method('patch')
                 @csrf
                     <div class="form-group">
                           <label for="id">ID</label>
