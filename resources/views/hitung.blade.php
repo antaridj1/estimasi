@@ -72,9 +72,9 @@
               <label for="waktu">Jangka Waktu Bangunan</label>
               @foreach ($jangka_waktu as $waktu)
               <div class="form-check">
-                      <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->nama}}" value="{{$waktu->id}}">
-                      <label class="form-check-label" for="{{$waktu->nama}}">
-                      {{$waktu->nama}}
+                      <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}" value="{{$waktu->id}}">
+                      <label class="form-check-label" for="{{$waktu->id}}">
+                      {{$waktu->tingkatan}}
                       </label>
                   </div>
               @endforeach
