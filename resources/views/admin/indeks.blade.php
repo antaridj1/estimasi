@@ -60,10 +60,12 @@
                                     <option value="waktu">Waktu</option>
                                 </select>
                             </div>
+                            
                             <div class="form-group" id="kategori_indeks">
                                 <label for="kategori_indeks_id">Kategori</label>
                                 <select class="form-select" aria-label=".form-select-sm example"
                                     name="kategori_indeks_id" id="kategori_indeks_id">
+                                    <option value="">Pilih Kategori</option>
                                     @foreach ($kategori as $ktgr)
                                     <option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
                                     @endforeach
@@ -120,7 +122,11 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$indek->id}}</td>
+                                @if($indek->kategori_indeks_id == null)
+                                <td>-</td>
+                                @else
                                 <td>{{$indek->kategori_indeks->nama}}</td>
+                                @endif
                                 <td>{{$indek->tingkatan}}</td>
                                 <td>{{$indek->bobot_indeks}}</td>
                                 <td>{{$indek->parameter}}</td>
@@ -176,6 +182,9 @@
                                                                 aria-label=".form-select-sm example"
                                                                 name="kategori_indeks_id"
                                                                 value="{{$indek->kategori_indeks->nama}}">
+                                                                <option selected value="">
+                                                                    Pilih Kategori
+                                                                </option>
                                                                 @foreach ($kategori as $ktgr)
                                                                 @if($ktgr->id == $indek->kategori_indeks->id)
                                                                 <option selected value="{{$ktgr->id}}">
@@ -270,6 +279,16 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
         <script>
+             function myFunction() {
+                const kategori = document.getElementById('kategori_indeks');
+                let x = document.getElementById('parameter').value;
+                if (x == "klasifikasi") {
+                    kategori.style.display = 'block';
+                } else {
+                    kategori.style.display = 'none';
+                }
+            }
+
             $(document).ready(function () {
                 $('.edit_select').on('change', function () {
                     if ($(this).val() == 'klasifikasi') {
@@ -279,17 +298,9 @@
                     }
                 })
             });
-            
+
              //kategori
-            function myFunction() {
-                const kategori = document.getElementById('kategori_indeks');
-                let x = document.getElementById('parameter').value;
-                if (x == "klasifikasi") {
-                    kategori.style.display = 'block';
-                } else {
-                    kategori.style.display = 'none';
-                }
-            }
+           
         </script>
 </body>
 

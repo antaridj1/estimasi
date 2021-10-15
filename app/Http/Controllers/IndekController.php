@@ -16,6 +16,7 @@ class IndekController extends Controller
     public function index(Indek $indeks)
     {
         $indeks = Indek::all();
+       // dd($indeks);
         $kategori = KategoriIndeks::all();
         return view('admin.indeks',compact(['indeks','kategori']));
     }
@@ -23,15 +24,32 @@ class IndekController extends Controller
   
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'kategori_indeks_id'=>'required',
-        //     'tingkatan'=>'required',
-        //     'bobot_indeks'=>'required',
-        //     'parameter'=>'required',
-        //     'keterangan'=>'required',
-        // ]);
-
-        Indek::create($request->all());
+       
+        
+        if($request->parameter == "klasifikasi"){
+            $request->validate([
+                'kategori_indeks_id'=>'required',
+                'tingkatan'=>'required',
+                'bobot_indeks'=>'required',
+                'parameter'=>'required',
+                'keterangan'=>'required',
+            ]);
+            Indek::create($request->all());
+        } else {
+            $request->validate([
+                'tingkatan'=>'required',
+                'bobot_indeks'=>'required',
+                'parameter'=>'required',
+                'keterangan'=>'required',
+            ]);
+            Indek::create([
+                'tingkatan'=>$request->tingkatan,
+                'bobot_indeks'=>$request->bobot_indeks,
+                'parameter'=>$request->parameter,
+                'keterangan' =>$request->keterangan,
+            ]);
+        }
+        
 
         return redirect('dashboard/indeks');
     }
@@ -39,13 +57,36 @@ class IndekController extends Controller
    
     public function update(Request $request, Indek $indeks)
     {
-        Indek::where('id',$request->id)->update([
-            'kategori_indeks_id'=>$request->kategori_indeks_id,
-            'tingkatan'=>$request->tingkatan,
-            'bobot_indeks'=>$request->bobot_indeks,
-            'parameter'=>$request->parameter,
-            'keterangan' =>$request->keterangan,
-        ]);
+        if($request->parameter == "klasifikasi"){
+            $request->validate([
+                'kategori_indeks_id'=>'required',
+                'tingkatan'=>'required',
+                'bobot_indeks'=>'required',
+                'parameter'=>'required',
+                'keterangan'=>'required',
+            ]);
+            Indek::where('id',$request->id)->update([
+                'kategori_indeks_id'=>$request->kategori_indeks_id,
+                'tingkatan'=>$request->tingkatan,
+                'bobot_indeks'=>$request->bobot_indeks,
+                'parameter'=>$request->parameter,
+                'keterangan' =>$request->keterangan,
+            ]);
+        } else {
+            $request->validate([
+                'tingkatan'=>'required',
+                'bobot_indeks'=>'required',
+                'parameter'=>'required',
+                'keterangan'=>'required',
+            ]);
+            Indek::where('id',$request->id)->update([
+                'tingkatan'=>$request->tingkatan,
+                'bobot_indeks'=>$request->bobot_indeks,
+                'parameter'=>$request->parameter,
+                'keterangan' =>$request->keterangan,
+            ]);
+        }
+
         return redirect('/dashboard/indeks');
     }
 

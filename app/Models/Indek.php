@@ -13,7 +13,7 @@ class Indek extends Model
     protected $fillable = ['parameter','kategori_indeks_id','tingkatan','bobot_indeks','keterangan'];
 
     public function kategori_indeks(){
-        return $this->belongsTo(KategoriIndeks::Class);
+        return $this->belongsTo(KategoriIndeks::class)->withDefault();
     }
     public function detail_estimasi(){
         return $this->hasMany(DetailEstimasi::class);

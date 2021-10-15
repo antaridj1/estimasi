@@ -17,6 +17,7 @@
 <a href="/dashboard/indeks">Indeks</a>
 <a href="/dashboard/sarana">Sarana</a>
 <a href="/dashboard/gedung">Gedung</a>
+<a href="/dashboard/kategoriIndeks">Kategori Indeks</a>
 </div>
   </body>
 </html>

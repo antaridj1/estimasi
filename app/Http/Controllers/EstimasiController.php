@@ -33,6 +33,10 @@ class EstimasiController extends Controller
     }
 
     public function hitungEstimasi(Request $request){
+        // $kategori = KategoriIndeks::select('nama');
+        // for($i=0;$i<$kategori.length;$i++){
+        //     $a[$i] = Indek::where('id',$request->$kategori[$i])->value('bobot_indeks');
+        // }
         $a = Indek::where('id',$request->kompleksitas)->value('bobot_indeks');
         $b = Indek::where('id',$request->permanensi)->value('bobot_indeks');
         $c = Indek::where('id',$request->zonasi_kebakaran)->value('bobot_indeks');
