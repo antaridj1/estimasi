@@ -226,10 +226,21 @@
                                         </div>
                                     </div>
 
-                                    <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary"
+                                    {{-- <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary"
                                         data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
                                         Non-aktifkan
-                                    </a>
+                                    </a> --}}
+                                    @if ($indek->status == true)
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="btn btn-success"
+                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
+                                            Aktif
+                                        </a> 
+                                    @else
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="btn btn-danger"
+                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
+                                            Non-Aktif
+                                        </a>
+                                    @endif
 
                                     <!-- The Modal Non-Aktifkan -->
                                     <div class="modal fade" id="editStatus_{{$indek->id}}">
