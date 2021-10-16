@@ -227,18 +227,27 @@
 	<script>
 		$(document).ready(function () {
 			$('#simpan').on('click', function () {
-				let data = $(this).parents('.modal').find('.form-check-input:checked');
+				let dataCheck = $(this).parents('.modal').find('.form-check-input:checked');
+				let dataUncheck = $(this).parents('.modal').find('.form-check-input:not(:checked)');
 				const table = $('#datanya');
 				let datanya = '';
-				$.each(data, function (index, value) {
-					datanya += '<tr>\
-									<td>'+data.eq(index).val()+'</td>\
-									<td>\
-										<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
-									</td>\
-								</tr>';
-				})
-				table.html(datanya);
+				$.each(dataCheck, function (index, value) {
+					if (!table.find('.'+dataCheck.eq(index).val()).length) {
+					console.log('ini checked : '+dataCheck.eq(index).val());
+						table.append('<tr class="'+dataCheck.eq(index).val()+'">\
+										<td>'+dataCheck.eq(index).val()+'</td>\
+										<td>\
+											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
+										</td>\
+									</tr>');
+					}
+				});
+				$.each(dataUncheck, function (index, value) {
+					if (table.find('.'+dataUncheck.eq(index).val()).length) {
+					console.log('ini unchecked : '+dataUncheck.eq(index).val());
+						table.find('.'+dataUncheck.eq(index).val()).remove();
+					}
+				});
 			})
 		})
 	</script>
