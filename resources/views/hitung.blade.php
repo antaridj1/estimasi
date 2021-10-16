@@ -159,7 +159,7 @@
                                 </tr>
                             </thead>
 							<tbody id="datanya">
-								{{-- Datanya masuk disini --}}
+							
 							</tbody>
                         </table>
                     </div>
@@ -172,52 +172,43 @@
     </div>
 
 
-    {{-- <script>
-        //Checkbox
-        const modal = document.getElementById('ModalSarana');
-        const checks = modal.querySelectorAll('.form-check-input');
-        checks.forEach(function (check) {
-            check.addEventListener('click', function (e) {
-                e.target.classList.toggle('checked');
-            });
-        });
-        let array = [];
-        //Show Sarana
-        const simpan = document.getElementById('simpan');
-        simpan.addEventListener('click', function () {
-            const checkbox = modal.querySelectorAll('.checked');
-			const checkboxdie = modal.querySelectorAll('.checked');
-            const table = document.querySelector('table');
-
-            checkbox.forEach(function (box) {
-                if (array.includes(box.value) == false) {
-                    array.push(box.value);
-                    // console.log(array);
-                    const tr = document.createElement('tr');
-                    const td = document.createElement('td');
-                    const td2 = document.createElement('td');
-                    let teks = document.createTextNode(box.value);
-                    const jumlah = document.createElement('input');
-                    jumlah.setAttribute('name', 'jumlah_sarana[]');
-                    td.appendChild(teks);
-                    td2.appendChild(jumlah);
-                    tr.appendChild(td);
-                    tr.appendChild(td2);
-                    table.appendChild(tr);
-                }
-            });
-        });
-
-        //Display 
-        // const formUmum = document.getElementById('form_umum');
-        // const formKlasifikasi = document.getElementById('form_klasifikasi');
-        // const buttonNext = document.getElementById('next');
-        // buttonNext.addEventListener('click',function(){
-        //   formUmum.style.display = 'none';
-        //   formKlasifikasi.style.display = 'none';
+     <script>
+        // //Checkbox
+        // const modal = document.getElementById('ModalSarana');
+        // const checks = modal.querySelectorAll('.form-check-input');
+        // checks.forEach(function (check) {
+        //     check.addEventListener('click', function (e) {
+        //         e.target.classList.toggle('checked');
+        //     });
         // });
-        // const button = document.getElementById('next');
-    </script> --}}
+      //   let array = [];
+      //   //Show Sarana
+      //   const simpan = document.getElementById('simpan');
+      //   simpan.addEventListener('click', function () {
+      //       const checkbox = modal.querySelectorAll('.checked');
+			// const checkboxdie = modal.querySelectorAll('.checked');
+      //       const table = document.querySelector('table');
+
+      //       checkbox.forEach(function (box) {
+      //           if (array.includes(box.value) == false) {
+      //               array.push(box.value);
+      //               // console.log(array);
+      //               const tr = document.createElement('tr');
+      //               const td = document.createElement('td');
+      //               const td2 = document.createElement('td');
+      //               let teks = document.createTextNode(box.value);
+      //               const jumlah = document.createElement('input');
+      //               jumlah.setAttribute('name', 'jumlah_sarana[]');
+      //               td.appendChild(teks);
+      //               td2.appendChild(jumlah);
+      //               tr.appendChild(td);
+      //               tr.appendChild(td2);
+      //               table.appendChild(tr);
+      //           }
+      //       });
+      //   });
+
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
