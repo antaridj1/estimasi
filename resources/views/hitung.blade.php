@@ -217,6 +217,9 @@
     </script>
 	<script>
 		$(document).ready(function () {
+			function ubahKeSlug(Text) {
+				return Text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+			}
 			$('#simpan').on('click', function () {
 				let dataCheck = $(this).parents('.modal').find('.form-check-input:checked');
 				let dataUncheck = $(this).parents('.modal').find('.form-check-input:not(:checked)');
@@ -228,7 +231,7 @@
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
 										<td>\
-											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
+											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="' + ubahKeSlug(dataCheck.eq(index).val()) + '">\
 										</td>\
 									</tr>');
 					}
