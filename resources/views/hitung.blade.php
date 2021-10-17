@@ -223,9 +223,9 @@
 				const table = $('#datanya');
 				let datanya = '';
 				$.each(dataCheck, function (index, value) {
-					if (!table.find('.'+dataCheck.eq(index).val()).length) {
-					console.log('ini checked : '+dataCheck.eq(index).val());
-						table.append('<tr class="'+dataCheck.eq(index).val()+'">\
+					if (!table.find('tr[data-id="' + dataCheck.eq(index).val() + '"]').length) {
+						console.log('ini checked : '+dataCheck.eq(index).val());
+						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
 										<td>\
 											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
@@ -234,9 +234,10 @@
 					}
 				});
 				$.each(dataUncheck, function (index, value) {
-					if (table.find('.'+dataUncheck.eq(index).val()).length) {
-					console.log('ini unchecked : '+dataUncheck.eq(index).val());
-						table.find('.'+dataUncheck.eq(index).val()).remove();
+					if (table.find('tr[data-id="' + dataUncheck.eq(index).val() + '"]').length) {
+						console.log('ini unchecked : ' + dataUncheck.eq(index).val());
+						table.find('tr[data-id="' + dataUncheck.eq(index).val() + '"]').remove();
+						table
 					}
 				});
 			})
