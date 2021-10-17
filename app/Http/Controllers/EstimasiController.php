@@ -33,23 +33,33 @@ class EstimasiController extends Controller
     }
 
     public function hitungEstimasi(Request $request){
-        // $kategori = KategoriIndeks::select('nama');
-        // for($i=0;$i<$kategori.length;$i++){
-        //     $a[$i] = Indek::where('id',$request->$kategori[$i])->value('bobot_indeks');
-        // }
-        $a = Indek::where('id',$request->kompleksitas)->value('bobot_indeks');
-        $b = Indek::where('id',$request->permanensi)->value('bobot_indeks');
-        $c = Indek::where('id',$request->zonasi_kebakaran)->value('bobot_indeks');
-        $d = Indek::where('id',$request->zona_gempa)->value('bobot_indeks');
-        $e = Indek::where('id',$request->kepadatan_gedung)->value('bobot_indeks');
-        $f = Indek::where('id',$request->ketinggian_bangunan)->value('bobot_indeks');
-        $g = Indek::where('id',$request->kepemilikan)->value('bobot_indeks');
+        
+        $ktgr = KategoriIndeks::pluck('nama');
+        $ktgr_length = count($kategori);
+        $arr = collect(); 
 
-       // dd($i[3]);
+        for($i=0;$i<$ktgr_length;$i++){
+  
+            $arr = $ktgr[$i]; //kategori masih salah, harusnya ga pake spasi di request
+            $bobot_indeks = Indek::where('id',$request->$arr)->value('bobot_indeks');
+            $ktgr_id = Indek::where('id',$request->$arr)->value('kategori_indeks_id');
+            $bobot_ktgr = KategoriIndeks::where('id',$ktgr_id)->value('bobot_kategori');
+            $total_bobot = $bobot_indeks*$bobot_ktgr;
+            $arr->push($total_bobot);
+           
+         }
+         $ik = $arr->sum();
+          dd($ik);
+        
+        // $a = Indek::where('id',$request->kompleksitas)->value('bobot_indeks');
+        // $b = Indek::where('id',$request->permanensi)->value('bobot_indeks');
+        // $c = Indek::where('id',$request->zonasi_kebakaran)->value('bobot_indeks');
+        // $d = Indek::where('id',$request->zona_gempa)->value('bobot_indeks');
+        // $e = Indek::where('id',$request->kepadatan_gedung)->value('bobot_indeks');
+        // $f = Indek::where('id',$request->ketinggian_bangunan)->value('bobot_indeks');
+        // $g = Indek::where('id',$request->kepemilikan)->value('bobot_indeks');
        
-      // for($a=0;$a<=6;$a++){
-          // $ik = $ik + $i[$a];
-         $ik = $a+$b+$c+$d+$e+$f+$g;
+       
       
       // }
 
@@ -80,7 +90,24 @@ class EstimasiController extends Controller
         $total_estimasi = $bangunan_gedung + $total_sarana;
         dd($total_estimasi);
         
+        // DetailEstimasi::create([
+        //     'estimasi_id'=>$request->id;
+        //     'indeks_id'=>$request->indeks[];
+        // ]);
+
+        // DetailSarana::create([
+        //     'estimasi_id'=>$request->id;
+        //     'sarana_id'=>$request->sarana[];
+        //     'jumlah_sarana'=>$request_jumlah_sarana;
+        // ]);
         
+        // Estimasi::create([
+        //     'luas_tanah'=>$request->luas_tanah;
+        //     'luas_bangunan'=>$request->luas_bangunan;
+        //     'masyarakats_id'=>$request->masyarakat;
+        //     'gedungs_id'=>$request->gedung;
+        //     'total_estimasi'=>$total_estimasi;
+        // ]);
         
         return redirect('hitung');
     }
