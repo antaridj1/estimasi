@@ -15,6 +15,7 @@
 <h1>HOME ESTIMASI</h1>
 <a href="/logout">Logout</a>
 <a href="/hitung">Hitung</a>
+<a href="/akun">Akun</a>
 </div>
   </body>
 </html>

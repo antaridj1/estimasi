@@ -39,15 +39,14 @@ class EstimasiController extends Controller
         $arr = collect(); 
 
         for($i=0;$i<$ktgr_length;$i++){
-  
             $arr = $ktgr[$i]; //kategori masih salah, harusnya ga pake spasi di request
             $bobot_indeks = Indek::where('id',$request->$arr)->value('bobot_indeks');
             $ktgr_id = Indek::where('id',$request->$arr)->value('kategori_indeks_id');
             $bobot_ktgr = KategoriIndeks::where('id',$ktgr_id)->value('bobot_kategori');
             $total_bobot = $bobot_indeks*$bobot_ktgr;
-            $arr->push($total_bobot);
-           
+            $arr->push($total_bobot);   
          }
+
          $ik = $arr->sum();
           dd($ik);
         
