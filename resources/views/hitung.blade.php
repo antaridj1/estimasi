@@ -240,7 +240,6 @@
 					if (table.find('tr[data-id="' + dataUncheck.eq(index).val() + '"]').length) {
 						console.log('ini unchecked : ' + dataUncheck.eq(index).val());
 						table.find('tr[data-id="' + dataUncheck.eq(index).val() + '"]').remove();
-						table
 					}
 				});
 			})
