@@ -17,6 +17,7 @@ class CreateKategoriIndeksTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->double('bobot_kategori');
+            $table->string('slug');
             $table->boolean('status');
             $table->string('keterangan');
             $table->timestamps();

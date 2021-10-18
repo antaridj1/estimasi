@@ -66,7 +66,7 @@
                     @foreach ($indeks as $tk_indek)
                     @if ($tk_indek->kategori_indeks_id == $ktgr->id)
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="{{$ktgr->nama}}" id="{{$tk_indek->id}}"
+                        <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
                             value="{{$tk_indek->id}}">
                         <label class="form-check-label" for="{{$tk_indek->id}}">
                             {{$tk_indek->tingkatan}}

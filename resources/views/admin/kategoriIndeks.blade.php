@@ -79,6 +79,7 @@
       <th scope="col">No.</th>
       <th scope="col">ID</th>
       <th scope="col">Nama</th>
+      <th scope="col">Slug</th>
       <th scope="col">Bobot</th>
       <th scope="col">Keterangan</th>
       <th scope="col">Status</th>
@@ -92,6 +93,7 @@
         <td>{{$loop->iteration}}</td>
         <td>{{$kategori->id}}</td>
         <td>{{$kategori->nama}}</td>
+        <td>{{$kategori->slug}}</td>
         <td>{{$kategori->bobot_kategori}}</td>
         <td>{{$kategori->keterangan}}</td>
         <td>{{$kategori->status}}</td>

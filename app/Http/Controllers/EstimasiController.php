@@ -8,7 +8,7 @@ use App\Models\Gedung;
 use App\Models\Indek;
 use App\Models\Sarana;
 use App\Models\KategoriIndeks;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
 class EstimasiController extends Controller
@@ -33,21 +33,28 @@ class EstimasiController extends Controller
     }
 
     public function hitungEstimasi(Request $request){
-        
-        $ktgr = KategoriIndeks::pluck('nama');
-        $ktgr_length = count($kategori);
-        $arr = collect(); 
+       
+        $ktgr = KategoriIndeks::pluck('slug');
+
+        // $slug = collect(); 
+        // foreach ($ktgr as $item){
+        //     $test = Str::upper($item);
+        //     $slug->push(Str::slug($test,'_')); // ku ubah jadi slug
+        // }
+
+        $ktgr_length = count($ktgr);
+        $collect = collect(); 
 
         for($i=0;$i<$ktgr_length;$i++){
-            $arr = $ktgr[$i]; //kategori masih salah, harusnya ga pake spasi di request
+            $arr = $ktgr[$i]; // data yg dipake buat nyari id di request
             $bobot_indeks = Indek::where('id',$request->$arr)->value('bobot_indeks');
             $ktgr_id = Indek::where('id',$request->$arr)->value('kategori_indeks_id');
             $bobot_ktgr = KategoriIndeks::where('id',$ktgr_id)->value('bobot_kategori');
-            $total_bobot = $bobot_indeks*$bobot_ktgr;
-            $arr->push($total_bobot);   
+            $total_bobot = $bobot_indeks*$bobot_ktgr; // bobotnya kategori sm bobot indeks dikali
+            $collect->push($total_bobot);  // tra gimana caranya ngepush ko gamau ya
          }
 
-         $ik = $arr->sum();
+         $ik = $collect->sum(); // trus smua bobot di jumlahin dapet dah total bobot indeks nya
           dd($ik);
         
         // $a = Indek::where('id',$request->kompleksitas)->value('bobot_indeks');
@@ -62,6 +69,7 @@ class EstimasiController extends Controller
       
       // }
 
+      // ITUNG INDEKS FUNGSI + WAKTU
         $fungsi = Indek::where('id',$request->fungsi)->value('bobot_indeks');
         $waktu = Indek::where('id',$request->waktu)->value('bobot_indeks');
 

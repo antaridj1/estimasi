@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriIndeks;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class KategoriIndeksController extends Controller
@@ -27,7 +28,12 @@ class KategoriIndeksController extends Controller
             'keterangan'=>'required',
         ]);
 
-        KategoriIndeks::create($request->all());
+        KategoriIndeks::create([
+            'nama' => $request->nama,
+            'bobot_kategori'=>$request->bobot_kategori,
+            'keterangan' =>$request->keterangan,
+            'slug'=>Str::slug($request->nama,'_'),
+        ]);
 
         return redirect('dashboard/kategoriIndeks');
     }
@@ -39,6 +45,7 @@ class KategoriIndeksController extends Controller
             'nama' => $request->nama,
             'bobot_kategori'=>$request->bobot_kategori,
             'keterangan' =>$request->keterangan,
+            'slug'=>Str::slug($request->nama,'_'),
         ]);
         return redirect('/dashboard/kategoriIndeks');
     }

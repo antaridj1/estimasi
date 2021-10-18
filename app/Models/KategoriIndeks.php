@@ -10,7 +10,7 @@ class KategoriIndeks extends Model
     use HasFactory;
     protected $table = 'kategori_indeks';
     protected $attributes = ['status'=>true];
-    protected $fillable = ['nama','bobot_kategori','keterangan'];
+    protected $fillable = ['nama','bobot_kategori','keterangan','slug'];
 
     public function indeks(){
         return $this->hasMany(Indek::class);
