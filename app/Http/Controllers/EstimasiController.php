@@ -15,16 +15,14 @@ class EstimasiController extends Controller
 {
     public function index(){
         $gedungs = Gedung::get(['nama','id']);
-       // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
+        // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
         $kategori_indeks = KategoriIndeks::all();
         $indeks = Indek::where('parameter','klasifikasi')->get(['id','tingkatan','kategori_indeks_id']);
         $fungsis = Indek::where('parameter','fungsi')->get(['tingkatan','id']);
         $jangka_waktu = Indek::where('parameter','waktu')->get(['tingkatan','id']);
-
         $collection = Sarana::all();
         $unique = $collection->unique('kategori');
         $kategori_sarana = $unique->values()->all();
-
         $saranas = Sarana::get(['nama','kategori','id']);
 
         return view('hitung',compact(
@@ -36,14 +34,9 @@ class EstimasiController extends Controller
        
         $ktgr = KategoriIndeks::pluck('slug');
 
-        // $slug = collect(); 
-        // foreach ($ktgr as $item){
-        //     $test = Str::upper($item);
-        //     $slug->push(Str::slug($test,'_')); // ku ubah jadi slug
-        // }
-
         $ktgr_length = count($ktgr);
         $collect = collect(); 
+        $id_ik = collect();
 
         for($i=0;$i<$ktgr_length;$i++){
             $arr = $ktgr[$i]; // data yg dipake buat nyari id di request
@@ -51,70 +44,73 @@ class EstimasiController extends Controller
             $ktgr_id = Indek::where('id',$request->$arr)->value('kategori_indeks_id');
             $bobot_ktgr = KategoriIndeks::where('id',$ktgr_id)->value('bobot_kategori');
             $total_bobot = $bobot_indeks*$bobot_ktgr; // bobotnya kategori sm bobot indeks dikali
-            $collect->push($total_bobot);  // tra gimana caranya ngepush ko gamau ya
-         }
+            $collect->push($total_bobot);  
 
-         $ik = $collect->sum(); // trus smua bobot di jumlahin dapet dah total bobot indeks nya
-          dd($ik);
-        
-        // $a = Indek::where('id',$request->kompleksitas)->value('bobot_indeks');
-        // $b = Indek::where('id',$request->permanensi)->value('bobot_indeks');
-        // $c = Indek::where('id',$request->zonasi_kebakaran)->value('bobot_indeks');
-        // $d = Indek::where('id',$request->zona_gempa)->value('bobot_indeks');
-        // $e = Indek::where('id',$request->kepadatan_gedung)->value('bobot_indeks');
-        // $f = Indek::where('id',$request->ketinggian_bangunan)->value('bobot_indeks');
-        // $g = Indek::where('id',$request->kepemilikan)->value('bobot_indeks');
-       
-       
-      
-      // }
+            // data request indeks klasifikasi
+            $id_ik->push($request->$arr);
+        }
+        // Hitung Indeks Klasifikasi
+        $ik = $collect->sum();
 
-      // ITUNG INDEKS FUNGSI + WAKTU
+        // Hitung Indeks Terintegrasi
         $fungsi = Indek::where('id',$request->fungsi)->value('bobot_indeks');
         $waktu = Indek::where('id',$request->waktu)->value('bobot_indeks');
-
         $it = $ik*$fungsi*$waktu;
-        
+      
+        // Hitung Estimasi Gedung
         $status = Gedung::where('id',$request->gedung)->value('bobot_indeks');
         $biaya = Gedung::where('id',$request->gedung)->value('biaya');
         $luas = $request->luas_bangunan;
-
         $bangunan_gedung = $luas*$it*$status*$biaya;
 
+        // Hitung Estimasi Sarana
         $namasarana = collect($request->sarana);
-        $length = count($namasarana);
-        $jmlh = collect($request->jumlah_sarana);
-        $costs = collect();
-        
-        for($a=0;$a<$length;$a++){
-            $x = Sarana::where('nama',$namasarana[$a])->value('biaya');
-            $cost = $x*$jmlh[$a];
-            $costs->push($cost);
+        $sarana_length = count($namasarana);
+
+        if($sarana_length > 0){
+            $jmlh = collect($request->jumlah_sarana);
+            $costs = collect();
+
+            for($i=0;$i<$sarana_length;$i++){
+                $id_saranas = Sarana::where('nama',$namasarana[$a])->pluck('id');
+                $biaya_sarana = Sarana::where('nama',$namasarana[$a])->value('biaya');
+                $cost = $biaya_sarana * $jmlh[$i];
+                $costs->push($cost);
+
+                // Input data DetailSarana
+                $item = $id_saranas[$i];
+                $jmlh_sarana = $jmlh[$i];
+                DetailSarana::create([
+                    'estimasi_id'=>$request->id,
+                    'sarana_id'=>$request->$item,
+                    'jumlah_sarana'=>$request->jmlh_sarana,
+                ]);
+            }
+            $total_sarana = $costs->sum();
+
+        } else {
+            $total_sarana = 0;
         }
-
-        $total_sarana = $costs->sum();
-
+        // Hitung Total Estimasi
         $total_estimasi = $bangunan_gedung + $total_sarana;
-        dd($total_estimasi);
-        
-        // DetailEstimasi::create([
-        //     'estimasi_id'=>$request->id;
-        //     'indeks_id'=>$request->indeks[];
-        // ]);
 
-        // DetailSarana::create([
-        //     'estimasi_id'=>$request->id;
-        //     'sarana_id'=>$request->sarana[];
-        //     'jumlah_sarana'=>$request_jumlah_sarana;
-        // ]);
+        // Input Data DetailEstimasi
+        $id_indeks = $id_ik->push($request->fungsi,$request->waktu);
+        foreach($id_indeks as $item){
+            DetailEstimasi::create([
+                'estimasi_id'=>$request->id,
+                'indeks_id'=>$item,
+            ]);
+        }
         
-        // Estimasi::create([
-        //     'luas_tanah'=>$request->luas_tanah;
-        //     'luas_bangunan'=>$request->luas_bangunan;
-        //     'masyarakats_id'=>$request->masyarakat;
-        //     'gedungs_id'=>$request->gedung;
-        //     'total_estimasi'=>$total_estimasi;
-        // ]);
+        // Input Data Estimasi
+        Estimasi::create([
+            'luas_tanah'=>$request->luas_tanah,
+            'luas_bangunan'=>$request->luas_bangunan,
+            'masyarakats_id'=>$request->masyarakat,
+            'gedungs_id'=>$request->gedung,
+            'total_estimasi'=>$total_estimasi,
+        ]);
         
         return redirect('hitung');
     }

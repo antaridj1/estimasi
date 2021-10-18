@@ -231,7 +231,7 @@
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
 										<td>\
-											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="' + ubahKeSlug(dataCheck.eq(index).val()) + '">\
+											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
 										</td>\
 									</tr>');
 					}
