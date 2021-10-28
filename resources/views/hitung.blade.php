@@ -18,6 +18,10 @@
 </head>
 
 <body>
+    
+    <?php
+$hehe = 2 + 2; echo $hehe;
+?>
     <div class="container">
         <h1>HITUNG ESTIMASI</h1>
         <a href="/estimasi">Home</a>
@@ -109,7 +113,6 @@
                             @foreach ($kategori_sarana as $ktgr)
                             <div class="accordion" id="accordionPanelsStayOpenExample">
                                 <div class="accordion-item">
-
                                     <h2 class="accordion-header" id="panelsStayOpen-heading_{{$ktgr->id}}">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#panelsStayOpen-collapse_{{$ktgr->id}}" aria-expanded="true"
