@@ -10,7 +10,7 @@ class DetailSarana extends Model
     use HasFactory;
 
     protected $table = 'detail_sarana';
-    protected $fillable =['estimasi_id','sarana_id','jumlah_sarana'];
+    protected $fillable =['estimasi_id','saranas_id','jumlah_sarana'];
 
     public function estimasi(){
         return $this->belongsTo(Estimasi::class);

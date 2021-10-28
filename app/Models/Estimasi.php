@@ -9,7 +9,7 @@ class Estimasi extends Model
 {
     use HasFactory;
     protected $table = 'estimasi';
-    protected $fillable = ['masyarakats_id','gedungs_id','luas_tanah','luas_bangunan','total_estimasi'];
+    protected $fillable = ['masyarakats_id','gedungs_id','luas_tanah','luas_bangunan','total_biaya'];
 
     public function masyarakat(){
         return $this->belongsTo(Masyarakat::class);

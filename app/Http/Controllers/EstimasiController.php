@@ -8,8 +8,12 @@ use App\Models\Gedung;
 use App\Models\Indek;
 use App\Models\Sarana;
 use App\Models\KategoriIndeks;
+use App\Models\DetailSarana;
+use App\Models\DetailEstimasi;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class EstimasiController extends Controller
 {
@@ -72,19 +76,10 @@ class EstimasiController extends Controller
             $costs = collect();
 
             for($i=0;$i<$sarana_length;$i++){
-                $id_saranas = Sarana::where('nama',$namasarana[$a])->pluck('id');
-                $biaya_sarana = Sarana::where('nama',$namasarana[$a])->value('biaya');
+                $biaya_sarana = Sarana::where('nama',$namasarana[$i])->value('biaya');
                 $cost = $biaya_sarana * $jmlh[$i];
                 $costs->push($cost);
 
-                // Input data DetailSarana
-                $item = $id_saranas[$i];
-                $jmlh_sarana = $jmlh[$i];
-                DetailSarana::create([
-                    'estimasi_id'=>$request->id,
-                    'sarana_id'=>$request->$item,
-                    'jumlah_sarana'=>$request->jmlh_sarana,
-                ]);
             }
             $total_sarana = $costs->sum();
 
@@ -94,25 +89,45 @@ class EstimasiController extends Controller
         // Hitung Total Estimasi
         $total_estimasi = $bangunan_gedung + $total_sarana;
 
+         //Input Data Estimasi
+         $user_id = Auth::id();
+         $estimasi = Estimasi::create([
+            'luas_tanah'=>$request->luas_tanah,
+            'luas_bangunan'=>$request->luas_bangunan,
+            'masyarakats_id'=>$user_id,
+            'gedungs_id'=>$request->gedung,
+            'total_biaya'=>$total_estimasi,
+        ]);
+
         // Input Data DetailEstimasi
         $id_indeks = $id_ik->push($request->fungsi,$request->waktu);
         foreach($id_indeks as $item){
             DetailEstimasi::create([
-                'estimasi_id'=>$request->id,
+                'estimasi_id'=>$estimasi->id,
                 'indeks_id'=>$item,
             ]);
         }
-        
-        // Input Data Estimasi
-        Estimasi::create([
-            'luas_tanah'=>$request->luas_tanah,
-            'luas_bangunan'=>$request->luas_bangunan,
-            'masyarakats_id'=>$request->masyarakat,
-            'gedungs_id'=>$request->gedung,
-            'total_estimasi'=>$total_estimasi,
-        ]);
-        
-        return redirect('hitung');
+
+        // Input data DetailSarana
+        if($sarana_length > 0){
+            $jmlh = collect($request->jumlah_sarana);
+
+            for($i=0;$i<$sarana_length;$i++){
+                $id_sarana = Sarana::where('nama',$namasarana[$i])->value('id');
+                DetailSarana::create([
+                    'estimasi_id'=>$estimasi->id,
+                    'saranas_id'=>$id_sarana,
+                    'jumlah_sarana'=> $jmlh[$i],
+                ]);
+            }
+
+        }
+
+        $estimasis = Estimasi::where('id',$estimasi->id)->get();
+        $detail_estimasi = DetailEstimasi::where('estimasi_id',$estimasi->id)->get();
+        $detail_sarana = DetailSarana::where('estimasi_id',$estimasi->id)->get();
+
+        return view('hasil',compact(['estimasis','detail_estimasi','detail_sarana']));
     }
 
     
