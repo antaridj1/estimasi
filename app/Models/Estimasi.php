@@ -14,7 +14,7 @@ class Estimasi extends Model
     public function masyarakat(){
         return $this->belongsTo(Masyarakat::class);
     }
-    public function gedung(){
+    public function gedungs(){
         return $this->belongsTo(Gedung::class);
     }
     public function detail_estimasi(){

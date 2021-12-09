@@ -19,9 +19,6 @@
 
 <body>
     
-    <?php
-$hehe = 2 + 2; echo $hehe;
-?>
     <div class="container">
         <h1>HITUNG ESTIMASI</h1>
         <a href="/estimasi">Home</a>

@@ -22,10 +22,12 @@ Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login
 Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
 
 Route::group(['middleware' =>['auth:masyarakat']], function (){
-    Route::get('/estimasi','App\Http\Controllers\MasyarakatController@index');
+    Route::get('/estimasi','App\Http\Controllers\EstimasiController@landing');
     Route::get('/hitung','App\Http\Controllers\EstimasiController@index')->name('hitung');
     Route::post('/hitung','App\Http\Controllers\EstimasiController@hitungEstimasi')->name('hitung');
     Route::get('/hasil','App\Http\Controllers\EstimasiController@hitungEstimasi');
+    Route::get('/akun','App\Http\Controllers\MasyarakatController@index');
+    Route::patch('/akun','App\Http\Controllers\MasyarakatController@edit')->name('edit_user');
    
 });
 

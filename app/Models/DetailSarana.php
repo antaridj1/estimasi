@@ -16,7 +16,7 @@ class DetailSarana extends Model
         return $this->belongsTo(Estimasi::class);
     }
 
-    public function sarana(){
+    public function saranas(){
         return $this->belongsTo(Sarana::class);
     }
 }

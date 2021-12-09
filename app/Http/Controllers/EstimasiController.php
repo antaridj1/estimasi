@@ -17,17 +17,20 @@ use DB;
 
 class EstimasiController extends Controller
 {
+    public function landing(){
+        return view('estimasi');
+    }
     public function index(){
-        $gedungs = Gedung::get(['nama','id']);
+        $gedungs = Gedung::where('status','1')->get(['nama','id']);
         // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
-        $kategori_indeks = KategoriIndeks::all();
-        $indeks = Indek::where('parameter','klasifikasi')->get(['id','tingkatan','kategori_indeks_id']);
-        $fungsis = Indek::where('parameter','fungsi')->get(['tingkatan','id']);
-        $jangka_waktu = Indek::where('parameter','waktu')->get(['tingkatan','id']);
-        $collection = Sarana::all();
+        $kategori_indeks = KategoriIndeks::where('status','1')->get();
+        $indeks = Indek::where([['parameter','klasifikasi'],['status','1']])->get(['id','tingkatan','kategori_indeks_id']);
+        $fungsis = Indek::where([['parameter','fungsi'],['status','1']])->get(['tingkatan','id']);
+        $jangka_waktu = Indek::where([['parameter','waktu'],['status','1']])->get(['tingkatan','id']);
+        $collection = Sarana::where('status','1')->get();
         $unique = $collection->unique('kategori');
         $kategori_sarana = $unique->values()->all();
-        $saranas = Sarana::get(['nama','kategori','id']);
+        $saranas = Sarana::where('status','1')->get(['nama','kategori','id']);
 
         return view('hitung',compact(
             'kategori_indeks','gedungs','indeks','fungsis','jangka_waktu','kategori_sarana','saranas'
@@ -36,7 +39,7 @@ class EstimasiController extends Controller
 
     public function hitungEstimasi(Request $request){
        
-        $ktgr = KategoriIndeks::pluck('slug');
+        $ktgr = KategoriIndeks::where('status','1')->pluck('slug');
 
         $ktgr_length = count($ktgr);
         $collect = collect(); 
@@ -124,10 +127,10 @@ class EstimasiController extends Controller
         }
 
         $estimasis = Estimasi::where('id',$estimasi->id)->get();
-        $detail_estimasi = DetailEstimasi::where('estimasi_id',$estimasi->id)->get();
-        $detail_sarana = DetailSarana::where('estimasi_id',$estimasi->id)->get();
+        $detail_estimasis = DetailEstimasi::where('estimasi_id',$estimasi->id)->get();
+        $detail_saranas = DetailSarana::where('estimasi_id',$estimasi->id)->get();
 
-        return view('hasil',compact(['estimasis','detail_estimasi','detail_sarana']));
+        return view('hasil',compact(['estimasis','detail_estimasis','detail_saranas','ik','it','bangunan_gedung','total_sarana']));
     }
 
     
