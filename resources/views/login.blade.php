@@ -26,8 +26,12 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password" required>
               </div>
-              <div class="text-center"><button type="submit">Masuk</button></div>
-              <div class="text-center mt-3 "><p>Belum memiliki Akun? <a href="/regis"> Daftar Akun</a></p></div>
+              <div class="text-center">
+                <button type="submit" value="submit">Masuk</button>
+              </div>
+              <div class="text-center mt-3 ">
+                <p>Belum memiliki Akun? <a href="/regis"> Daftar Akun</a></p>
+              </div>
             </form>
           </div>
         </div>
