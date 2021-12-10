@@ -46,7 +46,13 @@
           <li><a class="nav-link scrollto active" href="/">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#">Riwayat Estimasi</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
-          <li><a class="getstarted scrollto" href="/login">Masuk</a></li>
+         
+          @if($hehe == 'Antari')
+           <li><a class="nav-link scrollto" href="/akun">Hi, {{$hehe}}</a></li>
+          @else
+            <li><a class="getstarted scrollto" href="/login">Masuk</a></li>
+           @endif
+         
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

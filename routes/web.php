@@ -20,9 +20,9 @@ Route::get('/', function () {
 Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');
 Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
 Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
-Route::get('/estimasi','App\Http\Controllers\EstimasiController@landing');
 
 Route::group(['middleware' =>['auth:masyarakat']], function (){
+    Route::get('/estimasi','App\Http\Controllers\EstimasiController@landing');
     Route::get('/hitung','App\Http\Controllers\EstimasiController@index')->name('hitung');
     Route::post('/hitung','App\Http\Controllers\EstimasiController@hitungEstimasi')->name('hitung');
     Route::get('/hasil','App\Http\Controllers\EstimasiController@hitungEstimasi');
