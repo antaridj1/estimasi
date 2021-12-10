@@ -18,10 +18,10 @@ use DB;
 class EstimasiController extends Controller
 {
     public function landing(){
-        $user_id = Auth::user();
-        dd($user_id);
-        $nama = Auth::where('id',$user_id)->pluck('nama');
-        return view('estimasi',compact('nama'));
+        // $user_id = Auth::user();
+        // dd($user_id);
+        // $nama = Auth::where('id',$user_id)->pluck('nama');
+        return view('estimasi');
     }
     public function index(){
         $gedungs = Gedung::where('status','1')->get(['nama','id']);
