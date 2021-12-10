@@ -1,36 +1,39 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@section('title','Masuk | Estimasi Retribusi IMB')
 
-    <title>Login</title>
-  </head>
-  <body>
-<div class="container">
-<div class="row">
-    <div class="col-6">
-    <h1> LOGIN </h1>
-  <form method="post" action="{{route('postlogin')}}" enctype="multipart/form-data">
-  @csrf
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="text" class="form-control" id="email" name="email" aria-describedby="email">
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password">
-  </div>
- 
- 
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
-</div>
-</div>
-</div>
+@section('container')
+   <!-- ======= Login Section ======= -->
+   <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/img/login.svg" class="img-fluid animated">
+          </div> 
+          <div class="col-lg-6 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+          <form method="post" action="{{route('postlogin')}}" enctype="multipart/form-data" class="php-email-form">
+            @csrf
+              <div class="row">
+                <div class="section-title">
+                    <p>Login</p>
+                </div>
+                <div class="form-group">
+                  <label for="name">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3 mb-3">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password" required>
+              </div>
+              <div class="text-center"><button type="submit">Masuk</button></div>
+              <div class="text-center mt-3 "><p>Belum memiliki Akun? <a href="/regis"> Daftar Akun</a></p></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Login Section -->
+@endsection
+
   </body>
 </html>
