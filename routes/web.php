@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => 'revalidate'],function(){
 Route::get('/', function () {
-    return view('estimasi');
+    $hehe = null;
+    return view('estimasi', compact('hehe'));
 });
 
 Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');

@@ -47,7 +47,7 @@
           <li><a class="nav-link scrollto" href="#">Riwayat Estimasi</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
          
-          @if($hehe == 'Antari')
+          @if(!empty($hehe))
            <li><a class="nav-link scrollto" href="/akun">Hi, {{$hehe}}</a></li>
           @else
             <li><a class="getstarted scrollto" href="/login">Masuk</a></li>
