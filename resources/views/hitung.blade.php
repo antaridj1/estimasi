@@ -24,7 +24,7 @@
     <div class="container" id="hitung">
         <h1>HITUNG ESTIMASI</h1>
         <a href="/estimasi">Home</a>
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-sm-8">
                 <form method="post" action="{{route('hitung')}}">
                     @csrf
