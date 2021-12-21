@@ -18,8 +18,11 @@ use DB;
 class EstimasiController extends Controller
 {
     public function landing(){
-        
+        if(Auth::check()){
             $hehe = Auth::user()->value('nama');
+        }else{
+            $hehe = null;
+        }
             // ->value('nama');
        
             //   $hehe = collect();

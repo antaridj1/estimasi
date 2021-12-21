@@ -15,6 +15,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Hitung Estimasi</title>
+
+   
 </head>
 
 <body>
@@ -22,149 +24,169 @@
     <div class="container" id="hitung">
         <h1>HITUNG ESTIMASI</h1>
         <a href="/estimasi">Home</a>
-
-        <form method="post" action="{{route('hitung')}}">
-            @csrf
-            <div id="form_umum">
-                <div class="form-group">
-                    <label for="luas_bangunan">Luas Bangunan</label>
-                    <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
-                        name="luas_bangunan">
-                </div>
-                <div class="form-group">
-                    <label for="luas_tanah">Luas Tanah</label>
-                    <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
-                        name="luas_tanah">
-                </div>
-                <div class="form-group">
-                    <label for="gedung">Status Bangunan</label>
-                    @foreach ($gedungs as $gedung)
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
-                            value="{{$gedung->id}}">
-                        <label class="form-check-label" for="{{$gedung->nama}}">
-                            {{$gedung->nama}}
-                        </label>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="form-group">
-                    <label for="fungsi">Fungsi Bangunan</label>
-                    @foreach ($fungsis as $fungsi)
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
-                            value="{{$fungsi->id}}">
-                        <label class="form-check-label" for="{{$fungsi->tingkatan}}">
-                            {{$fungsi->tingkatan}}
-                        </label>
-                    </div>
-                    @endforeach
-                </div>
-                @foreach ($kategori_indeks as $ktgr)
-
-                <div class="form-group">
-                    <label for="{{$ktgr->nama}}">{{$ktgr->nama}}</label>
-                    @foreach ($indeks as $tk_indek)
-                    @if ($tk_indek->kategori_indeks_id == $ktgr->id)
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
-                            value="{{$tk_indek->id}}">
-                        <label class="form-check-label" for="{{$tk_indek->id}}">
-                            {{$tk_indek->tingkatan}}
-                        </label>
-                    </div>
-                    @endif
-                    @endforeach
-                </div>
-
-                @endforeach
-                <div class="form-group">
-                    <label for="waktu">Jangka Waktu Bangunan</label>
-                    @foreach ($jangka_waktu as $waktu)
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
-                            value="{{$waktu->id}}">
-                        <label class="form-check-label" for="{{$waktu->id}}">
-                            {{$waktu->tingkatan}}
-                        </label>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalSarana">
-                Tambahkan Sarana
-            </button>
-            <!-- The Modal -->
-            <div class="modal fade" id="ModalSarana">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Sarana Prasarana</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            @foreach ($kategori_sarana as $ktgr)
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-heading_{{$ktgr->id}}">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapse_{{$ktgr->id}}" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapse_{{$ktgr->id}}">
-                                            {{$ktgr->kategori}}
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapse_{{$ktgr->id}}"
-                                        class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-heading_{{$ktgr->id}}">
-                                        <div class="accordion-body">
-                                            @foreach ($saranas as $sarana)
-                                            @if ($sarana->kategori == $ktgr->kategori)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
-                                                    value="{{$sarana->nama}}" name="sarana[]" id="{{$sarana->id}}">
-                                                <label class="form-check-label" for="{{$sarana->id}}">
-                                                    {{$sarana->nama}}
-                                                </label>
-                                            </div>
-                                            @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
-
+        <div class="row">
+            <div class="col-sm-8">
+                <form method="post" action="{{route('hitung')}}">
+                    @csrf
+                    <div id="form_umum">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="luas_bangunan">Luas Bangunan</label>
+                                    <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
+                                        name="luas_bangunan">
                                 </div>
                             </div>
-                            @endforeach
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="luas_tanah">Luas Tanah</label>
+                                    <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
+                                        name="luas_tanah">
+                                </div>
+                            </div>
                         </div>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="simpan" data-dismiss="modal">Simpan
-                            </button>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="gedung">Status Bangunan</label>
+                                    @foreach ($gedungs as $gedung)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
+                                            value="{{$gedung->id}}">
+                                        <label class="form-check-label" for="{{$gedung->nama}}">
+                                            {{$gedung->nama}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="fungsi">Fungsi Bangunan</label>
+                                    @foreach ($fungsis as $fungsi)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
+                                            value="{{$fungsi->id}}">
+                                        <label class="form-check-label" for="{{$fungsi->tingkatan}}">
+                                            {{$fungsi->tingkatan}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="mt-3">
-                        <table class="table table-bordered text-center">
-                            <thead>
-                                <tr>
-                                    <td> Nama Sarana</td>
-                                    <td> Jumlah</td>
-                                </tr>
-                            </thead>
-							<tbody id="datanya">
-							
-							</tbody>
-                        </table>
+                        <div class="row">
+                            @foreach ($kategori_indeks as $ktgr)
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="{{$ktgr->nama}}">{{$ktgr->nama}}</label>
+                                        @foreach ($indeks as $tk_indek)
+                                        @if ($tk_indek->kategori_indeks_id == $ktgr->id)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
+                                                value="{{$tk_indek->id}}">
+                                            <label class="form-check-label" for="{{$tk_indek->id}}">
+                                                {{$tk_indek->tingkatan}}
+                                            </label>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                             @endforeach
+                        
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="waktu">Jangka Waktu Bangunan</label>
+                                    @foreach ($jangka_waktu as $waktu)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
+                                            value="{{$waktu->id}}">
+                                        <label class="form-check-label" for="{{$waktu->id}}">
+                                            {{$waktu->tingkatan}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalSarana">
+                        Tambahkan Sarana
+                    </button>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="ModalSarana">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Sarana Prasarana</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    @foreach ($kategori_sarana as $ktgr)
+                                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsStayOpen-heading_{{$ktgr->id}}">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapse_{{$ktgr->id}}" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapse_{{$ktgr->id}}">
+                                                    {{$ktgr->kategori}}
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapse_{{$ktgr->id}}"
+                                                class="accordion-collapse collapse show"
+                                                aria-labelledby="panelsStayOpen-heading_{{$ktgr->id}}">
+                                                <div class="accordion-body">
+                                                    @foreach ($saranas as $sarana)
+                                                    @if ($sarana->kategori == $ktgr->kategori)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="{{$sarana->nama}}" name="sarana[]" id="{{$sarana->id}}">
+                                                        <label class="form-check-label" for="{{$sarana->id}}">
+                                                            {{$sarana->nama}}
+                                                        </label>
+                                                    </div>
+                                                    @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="simpan" data-dismiss="modal">Simpan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="mt-3">
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                        <tr>
+                                            <td> Nama Sarana</td>
+                                            <td> Jumlah</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="datanya">
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+</div>
+</div>
             <div class="form-group mt-4">
                 <button type="submit" class="btn btn-primary">Submit </button>
             </div>

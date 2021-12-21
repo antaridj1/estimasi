@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => 'revalidate'],function(){
-Route::get('/', function () {
-    $hehe = null;
-    return view('estimasi', compact('hehe'));
-});
+Route::get('/', 'App\Http\Controllers\EstimasiController@landing');
 
 Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');
 Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
