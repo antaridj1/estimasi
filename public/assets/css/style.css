@@ -11,6 +11,11 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #212529;
+  background-color: #fef8f5;
+}
+
+.round{
+  border-radius: 15px;
 }
 
 a {
@@ -23,8 +28,8 @@ a:hover {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6, .font-primary {
-  font-family: "Raleway", sans-serif;
+p, h1, h2, h3, h4, h5, h6, label, a, button, input, td{
+  font-family: "Poppins", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -96,6 +101,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 #main {
   margin-top: 72px;
 }
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -310,10 +316,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   font-size: 24px;
 }
 #hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  letter-spacing: 1px;
   display: inline-block;
   padding: 8px 28px;
   border-radius: 3px;
@@ -972,16 +976,33 @@ section {
 .contact .php-email-form input {
   height: 40px;
 }
-.contact .php-email-form button[type=submit] {
+.contact button {
   background: #eb5d1e;
   border: 0;
-  padding: 10px 24px;
   color: #fff;
   transition: 0.4s;
   border-radius: 4px;
 }
-.contact .php-email-form button[type=submit]:hover {
+.contact button:hover {
   background: #ef7f4d;
+}
+.secondary button #btnmodal {
+  padding: 2px 12px;
+}
+.secondary button {
+  background: #fff;
+  border: 1px solid #eb5d1e;
+  color:  #eb5d1e;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.secondary button:hover {
+  background: rgb(255, 128, 44);
+  border:1px solid rgb(247, 193, 157);
+  color: #fff;
+}
+.contact button[type=submit] {
+  padding: 10px 24px;
 }
 @-webkit-keyframes animate-loading {
   0% {
@@ -1000,6 +1021,17 @@ section {
   }
 }
 
+/*--------------------------------------------------------------
+# Hitung
+--------------------------------------------------------------*/
+#container_hitung{
+  margin-top: 100px;
+}
+
+.hitung{
+  font-weight: bold;
+  margin-bottom: 8px;
+}
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/

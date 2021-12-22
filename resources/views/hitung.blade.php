@@ -1,54 +1,42 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title','Hitung | Estimasi Retribusi IMB')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Hitung Estimasi</title>
-
-   
-</head>
-
-<body>
-    
-    <div class="container" id="hitung">
+@section('container')
+    <div class="container" id="container_hitung">
         <h1>HITUNG ESTIMASI</h1>
         <a href="/estimasi">Home</a>
         <div class="row justify-content-center">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <form method="post" action="{{route('hitung')}}">
                     @csrf
                     <div id="form_umum">
-                        <div class="row">
-                            <div class="col">
+                        <div class="row shadow-sm p-3 mb-1 bg-body round">
+                            <div class="col-sm-6 p-3 ">
                                 <div class="form-group">
-                                    <label for="luas_bangunan">Luas Bangunan</label>
-                                    <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
-                                        name="luas_bangunan">
+                                    <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
+                                            name="luas_bangunan">
+                                        <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-6 p-3">
                                 <div class="form-group">
-                                    <label for="luas_tanah">Luas Tanah</label>
-                                    <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
-                                        name="luas_tanah">
+                                    <label class="hitung" for="luas_tanah">Luas Tanah</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
+                                            name="luas_tanah">
+                                        <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
+                        <div class="row justify-content-evenly">
+                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
                                 <div class="form-group">
-                                    <label for="gedung">Status Bangunan</label>
+                                    <label class="hitung" for="gedung">Status Bangunan</label>
                                     @foreach ($gedungs as $gedung)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
@@ -60,9 +48,9 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
                                 <div class="form-group">
-                                    <label for="fungsi">Fungsi Bangunan</label>
+                                    <label for="fungsi" class="hitung">Fungsi Bangunan</label>
                                     @foreach ($fungsis as $fungsi)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
@@ -78,9 +66,9 @@
 
                         <div class="row">
                             @foreach ($kategori_indeks as $ktgr)
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
                                     <div class="form-group">
-                                        <label for="{{$ktgr->nama}}">{{$ktgr->nama}}</label>
+                                        <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
                                         @foreach ($indeks as $tk_indek)
                                         @if ($tk_indek->kategori_indeks_id == $ktgr->id)
                                         <div class="form-check">
@@ -96,9 +84,9 @@
                                 </div>
                              @endforeach
                         
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
                                 <div class="form-group">
-                                    <label for="waktu">Jangka Waktu Bangunan</label>
+                                    <label for="waktu" class="hitung">Jangka Waktu Bangunan</label>
                                     @foreach ($jangka_waktu as $waktu)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
@@ -112,9 +100,7 @@
                             </div>
                         </div>
 
-                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalSarana">
-                        Tambahkan Sarana
-                    </button>
+                   
                     <!-- The Modal -->
                     <div class="modal fade" id="ModalSarana">
                         <div class="modal-dialog modal-lg">
@@ -168,29 +154,25 @@
                         </div>
                     </div>
 
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="mt-3">
-                                <table class="table table-bordered text-center">
-                                    <thead>
-                                        <tr>
-                                            <td> Nama Sarana</td>
-                                            <td> Jumlah</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="datanya">
-                                    
-                                    </tbody>
+                        <div class="row round p-3 shadow-sm bg-body">                           
+                                <table class="table table-borderless text-center">
+                                    <label class="hitung">Sarana Prasarana</label>
+                                    <tbody id="datanya"></tbody>
                                 </table>
-                            </div>
+                                <div class="secondary mb-2">
+                                    <button type="button" class="shadow-sm" id="btnmodal" data-toggle="modal" data-target="#ModalSarana">
+                                    <i class="bi bi-plus-circle"></i>
+                                    Tambahkan Sarana
+                                    </button>
+                                </div>              
                         </div>
+
+                    <div class="form-group mt-4 contact">
+                        <button type="submit" class="btn btn-primary">Hitung </button>
                     </div>
-</div>
-</div>
-            <div class="form-group mt-4">
-                <button type="submit" class="btn btn-primary">Submit </button>
+		        </form>
             </div>
-		</form>
+        </div>
     </div>
 
 
@@ -267,6 +249,4 @@
 			})
 		})
 	</script>
-</body>
-
-</html>
+@endsection
