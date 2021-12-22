@@ -10,8 +10,8 @@
                     @csrf
                     <div id="form_umum">
                         <div class="row shadow-sm p-3 mb-1 bg-body round">
-                            <div class="col-sm-6 p-3 ">
-                                <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="form-group p-3">
                                     <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
@@ -20,8 +20,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 p-3">
-                                <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="form-group p-3">
                                     <label class="hitung" for="luas_tanah">Luas Tanah</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
@@ -32,8 +32,8 @@
                             </div>
                         </div>
                         <div class="row justify-content-evenly">
-                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
-                                <div class="form-group">
+                            <div class="col-sm-6 ps-0">
+                                <div class="form-group p-4 shadow-sm mb-1 bg-body round h-100">
                                     <label class="hitung" for="gedung">Status Bangunan</label>
                                     @foreach ($gedungs as $gedung)
                                     <div class="form-check">
@@ -46,8 +46,8 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
-                                <div class="form-group">
+                            <div class="col-sm-6 pe-0">
+                                <div class="form-group p-4 shadow-sm mb-1 bg-body round h-100">
                                     <label for="fungsi" class="hitung">Fungsi Bangunan</label>
                                     @foreach ($fungsis as $fungsi)
                                     <div class="form-check">
@@ -64,8 +64,8 @@
 
                         <div class="row">
                             @foreach ($kategori_indeks as $ktgr)
-                                <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
-                                    <div class="form-group">
+                                <div class="col-sm-6 {{ ($loop->iteration % 2 == 0) ? ' pe-0' : ' ps-0' }}">
+                                    <div class="form-group p-4 shadow-sm mb-1 bg-body round">
                                         <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
                                         @foreach ($indeks as $tk_indek)
                                         @if ($tk_indek->kategori_indeks_id == $ktgr->id)
