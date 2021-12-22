@@ -3,9 +3,7 @@
 @section('title','Hitung | Estimasi Retribusi IMB')
 
 @section('container')
-    <div class="container" id="container_hitung">
-        <h1>HITUNG ESTIMASI</h1>
-        <a href="/estimasi">Home</a>
+    <div class="container container_margin">
         <div class="row justify-content-center">
             <div class="col-sm-9">
                 <form method="post" action="{{route('hitung')}}">
