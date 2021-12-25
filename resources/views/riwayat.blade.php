@@ -11,7 +11,7 @@
                 @foreach($estimasis as $estimasi)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading_{{$estimasi->id}}">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$estimasi->id}}" aria-expanded="true" aria-controls="collapse_{{$estimasi->id}}">
+                    <button class="accordion-button"  data-bs-toggle="collapse" data-bs-target="#collapse_{{$estimasi->id}}" aria-expanded="true" aria-controls="collapse_{{$estimasi->id}}">
                         {{$estimasi->total_biaya}}
                     </button>
                     </h2>
@@ -35,13 +35,15 @@
 
                             <h5 class="hitung">Sarana</h5>
                             <table class="table table-borderless">
-                            
+                            @dd($detail_saranas)
                             @foreach($detail_saranas as $detail_sarana)
-                            @if($detail_sarana->estimasi_id == $estimasi->id) 
+                            @foreach($detail_sarana->child as $item)
+                            @if($item->estimasi_id == $estimasi->id) 
                                 <tr>
-                                    <td>{{$detail_sarana->estimasi_id->saranas}}</td>
+                                    <td>{{$item->saranas->nama}}</td>
                                 </tr>
                             @endif
+                            @endforeach
                             @endforeach 
                             </table>
                         </div>
