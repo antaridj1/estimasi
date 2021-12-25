@@ -46,7 +46,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="/">Beranda</a></li>
-          <li><a class="nav-link scrollto" href="#">Riwayat Estimasi</a></li>
+          <li><a class="nav-link scrollto" href="/riwayat">Riwayat Estimasi</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
          
           @if(!empty($hehe))

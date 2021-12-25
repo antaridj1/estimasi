@@ -6,28 +6,34 @@
 
 <div class="container container_margin">
     <div class="row justify-content-center">
-    <h1>HASIL</h1>
       <div class="col-sm-9">
-          <div class="row shadow-sm p-3 mb-1 bg-body round">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="/hitung">Hitung</a></li>
+              <li class="breadcrumb-item active"><a href="#">Hasil</a></li>
+            </ol>
+          </nav>
+          <div class="row shadow-sm p-3 mb-2 bg-body round">
               <h5 class="hitung">Data Dasar</h5>
                 @foreach($estimasis as $estimasi)
                 <table class="table table-borderless">
                   <tr>
                     <td>Luas Tanah</td>
-                    <td>{{$estimasi->luas_tanah}} m2</td>
+                    <td>: {{$estimasi->luas_tanah}} m<sup>2</sup></td>
                   </tr>
                   <tr>
                     <td>Luas Bangunan</td>
-                    <td>{{$estimasi->luas_bangunan}} m2</td>
+                    <td>: {{$estimasi->luas_bangunan}} m<sup>2</sup></td>
                   </tr>
                   <tr>
                     <td>Status Bangunan</td>
-                    <td>{{$estimasi->gedungs->nama}}</td>
+                    <td>: {{$estimasi->gedungs->nama}}</td>
                   </tr>
                 </table>
               @endforeach
             </div>
-          <div class="row shadow-sm p-3 mb-1 bg-body round">
+          <div class="row shadow-sm p-3 mb-2 bg-body round">
             <h5 class="hitung">Sarana</h5>
             <table class="table table-borderless">
               @foreach($detail_saranas as $detail_sarana)
@@ -46,45 +52,53 @@
                   </tfoot>
               </table>
           </div>
-          <div class="row shadow-sm p-3 mb-1 bg-body round">
+          <div class="row shadow-sm p-3 mb-2 bg-body round">
             <h5 class="hitung">Indeks Parameter</h5>
-            <p><b>Fungsi</b></p>
-              @foreach($detail_estimasis as $detail_estimasi)
-                  @if ($detail_estimasi->indeks->parameter == "fungsi")
-                    <p>{{$detail_estimasi->indeks->tingkatan}} | Indeks : {{$detail_estimasi->indeks->bobot_indeks}}</p>
-                  @endif
-                @endforeach
-            <p><b>Waktu</b></p>
-              @foreach($detail_estimasis as $detail_estimasi)
-                @if ($detail_estimasi->indeks->parameter == "waktu")
-                    <p>{{$detail_estimasi->indeks->tingkatan}} | Indeks : {{$detail_estimasi->indeks->bobot_indeks}}</p>
-                @endif
-              @endforeach
-            <table class="table mb-0">
-              <p><b>Klasifikasi</b></p>
+            <div class="mt-2">
+              <label class="mb-2"><b>Fungsi</b></label>
                 @foreach($detail_estimasis as $detail_estimasi)
-                  @if ($detail_estimasi->indeks->kategori_indeks_id!==Null)
-                    <tr>
-                      <td>{{$detail_estimasi->indeks->kategori_indeks->nama}} : {{$detail_estimasi->indeks->tingkatan}}</td>
-                      <td>Indeks : {{$detail_estimasi->indeks->bobot_indeks}}</td>
-                      <td>Bobot Kategori : {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}</td>
-                    </tr>
+                    @if ($detail_estimasi->indeks->parameter == "fungsi")
+                      <p>{{$detail_estimasi->indeks->tingkatan}} ( Indeks : {{$detail_estimasi->indeks->bobot_indeks}} )</p>
+                    @endif
+                  @endforeach
+            </div>
+            <div class="mt-2">
+              <label class="mb-2"><b>Waktu</b></label>
+                @foreach($detail_estimasis as $detail_estimasi)
+                  @if ($detail_estimasi->indeks->parameter == "waktu")
+                      <p>{{$detail_estimasi->indeks->tingkatan}} ( Indeks : {{$detail_estimasi->indeks->bobot_indeks}} )</p>
                   @endif
                 @endforeach
-            </table>
-            <div>
+            </div>
+            <div class="mt-2">
+              <table class="table mb-0">
+                <label class="mb-2"><b>Klasifikasi</b></label>
+                  @foreach($detail_estimasis as $detail_estimasi)
+                    @if ($detail_estimasi->indeks->kategori_indeks_id!==Null)
+                      <tr>
+                        <td>{{$detail_estimasi->indeks->kategori_indeks->nama}} : {{$detail_estimasi->indeks->tingkatan}}</td>
+                        <td>Indeks : {{$detail_estimasi->indeks->bobot_indeks}}</td>
+                        <td>Bobot Kategori : {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}</td>
+                      </tr>
+                    @endif
+                  @endforeach
+              </table>
+            </div>  
+            <div class="mt-4">
               <p>Indeks Klasifikasi = 
                   @foreach($detail_estimasis as $detail_estimasi)
                     @if ($detail_estimasi->indeks->kategori_indeks_id!==Null)
-                      ({{$detail_estimasi->indeks->bobot_indeks}}x{{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}})+
+                      ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}) +
                     @endif
                   @endforeach
                     = {{$ik}}
               </p>
+            </div>
+            <div class="mt-2 mb-2">
               <p>Indeks Terintegrasi =  
                 @foreach($detail_estimasis as $detail_estimasi)
                   @if ($detail_estimasi->indeks->kategori_indeks_id == Null)
-                      {{$detail_estimasi->indeks->bobot_indeks}}x
+                      {{$detail_estimasi->indeks->bobot_indeks}} x
                   @endif
                 @endforeach
                 {{$ik}} = {{$it}}
@@ -92,20 +106,33 @@
             </div>
           </div>
 
-          <div class="row shadow-sm p-3 mb-1 bg-body round">
+          <div class="row shadow-sm p-3 mb-2 bg-body round">
             <h5 class="hitung">Total Biaya Retribusi</h5>
-              <p>Bangunan Gedung = L x It x Indeks Gedung x HSbg</p>
-              @foreach($estimasis as $estimasi)
-              <p>= 
-                  {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} x {{$estimasi->gedungs->biaya}}
-              </p>
-              <p> = {{$bangunan_gedung}} </p>
-              <br></br>
-              <p> Total Retribusi = Biaya Bangunan + Biaya Prasarana</p>
-              <p> = {{$bangunan_gedung}} + {{$total_sarana}}</p>
-              <p> = {{$estimasi->total_biaya}}</p>
-              @endforeach
+            <div class="mt-2">
+                <p>Bangunan Gedung = L x It x Indeks Gedung x HSbg</p>
+                @foreach($estimasis as $estimasi)
+                <p>= 
+                    {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} x {{$estimasi->gedungs->biaya}}
+                </p>
+                <p> = {{$bangunan_gedung}} </p>
+                <p> Total Retribusi = Biaya Bangunan + Biaya Prasarana</p>
+                <p> = {{$bangunan_gedung}} + {{$total_sarana}}</p>
+                <p> = {{$estimasi->total_biaya}}</p>
+                @endforeach
+            </div>
           </div>
         </div>
     </div>
 </div>
+
+<header id="total" class="fixed-bottom d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-center">
+      <nav id="navbar" class="navbar">
+        @foreach($estimasis as $estimasi)
+          <h4 class="hitung"> TOTAL = Rp {{$estimasi->total_biaya}}</h4>
+        @endforeach
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+@endsection

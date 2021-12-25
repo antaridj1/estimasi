@@ -143,5 +143,15 @@ class EstimasiController extends Controller
         return view('hasil',compact(['estimasis','detail_estimasis','detail_saranas','ik','it','bangunan_gedung','total_sarana']));
     }
 
+
+    public function riwayatEstimasi(){
+        $user_id = Auth::id();
+        $estimasis = Estimasi::where('masyarakats_id',$user_id)->get();
+        $detail_saranas = Estimasi::findWhere(['masyarakats_id'=>$user_id])->detail_sarana();
+        dd($detail_saranas);
+        $detail_estimasis = DetailEstimasi::get();
+        return view('riwayat',compact(['estimasis','detail_estimasis','detail_saranas']));
+    }
+
     
 }

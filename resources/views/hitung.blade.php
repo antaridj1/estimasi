@@ -3,13 +3,20 @@
 @section('title','Hitung | Estimasi Retribusi IMB')
 
 @section('container')
+
     <div class="container container_margin">
         <div class="row justify-content-center">
             <div class="col-sm-9">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
+                <li class="breadcrumb-item active"><a href="#">Hitung</a></li>
+            </ol>
+        </nav>
                 <form method="post" action="{{route('hitung')}}">
                     @csrf
                     <div id="form_umum">
-                        <div class="row shadow-sm p-3 mb-1 bg-body round">
+                        <div class="row shadow-sm p-3 mb-2 bg-body round">
                             <div class="col-sm-6">
                                 <div class="form-group p-3">
                                     <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
@@ -32,8 +39,8 @@
                             </div>
                         </div>
                         <div class="row justify-content-evenly">
-                            <div class="col-sm-6 ps-0">
-                                <div class="form-group p-4 shadow-sm mb-1 bg-body round h-100">
+                            <div class="col-sm-6 ps-0 mb-2">
+                                <div class="form-group p-4 shadow-sm bg-body round h-100">
                                     <label class="hitung" for="gedung">Status Bangunan</label>
                                     @foreach ($gedungs as $gedung)
                                     <div class="form-check">
@@ -46,8 +53,8 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="col-sm-6 pe-0">
-                                <div class="form-group p-4 shadow-sm mb-1 bg-body round h-100">
+                            <div class="col-sm-6 pe-0 mb-2">
+                                <div class="form-group p-4 shadow-sm bg-body round h-100">
                                     <label for="fungsi" class="hitung">Fungsi Bangunan</label>
                                     @foreach ($fungsis as $fungsi)
                                     <div class="form-check">
@@ -65,7 +72,7 @@
                         <div class="row">
                             @foreach ($kategori_indeks as $ktgr)
                                 <div class="col-sm-6 {{ ($loop->iteration % 2 == 0) ? ' pe-0' : ' ps-0' }}">
-                                    <div class="form-group p-4 shadow-sm mb-1 bg-body round">
+                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round">
                                         <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
                                         @foreach ($indeks as $tk_indek)
                                         @if ($tk_indek->kategori_indeks_id == $ktgr->id)
@@ -82,7 +89,7 @@
                                 </div>
                              @endforeach
                         
-                            <div class="col-sm-6 p-4 shadow-sm mb-1 bg-body round">
+                            <div class="col-sm-6 p-4 shadow-sm mb-2 bg-body round">
                                 <div class="form-group">
                                     <label for="waktu" class="hitung">Jangka Waktu Bangunan</label>
                                     @foreach ($jangka_waktu as $waktu)
