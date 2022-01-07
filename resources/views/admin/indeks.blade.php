@@ -1,318 +1,337 @@
-<!doctype html>
-<html lang="en">
+@extends('admin.mainlayout')
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title','Indeks | Admin IMB')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Dashboard Admin</title>
-    <style type="text/css">
-        #kategori_indeks {
-            display: none;
-        }
-    </style>
+@section('container')
 
-</head>
+<div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Indeks</a></li>
+        </ol>
+    </div>
+</div>
+            <!-- row -->
 
-<body>
-    <div class="container">
-        <h1>DASHBOARD ADMIN</h1>
-        <a href="/logout">Logout</a>
-        <a href="/dashboard/indeks">Indeks</a>
-        <a href="/dashboard/sarana">Sarana</a>
-        <a href="/dashboard/gedung">Gedung</a>
-        <a href="/dashboard/kategoriIndeks">Kategori Indeks</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Data Indeks</h4>
 
-        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalIndeks">
-            Tambahkan Data Indeks
-        </button>
+                    <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal" data-target="#ModalIndeks">
+                        Tambahkan Data Indeks
+                    </button>
 
-        <!-- The Modal -->
-        <div class="modal fade" id="ModalIndeks">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tambah Data</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form method="post" action="{{route('input_indeks')}}" id="form_id">
-                            @csrf
-                            <div class="form-group mt-2" id="dropdown_input">
-                                <label for="parameter">Parameter</label>
-                                <select class="form-select" aria-label=".form-select-sm example" name="parameter"
-                                    id="parameter" onchange="myFunction()">
-                                    <option value="fungsi">Fungsi</option>
-                                    <option value="klasifikasi">Klasifikasi</option>
-                                    <option value="waktu">Waktu</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group" id="kategori_indeks">
-                                <label for="kategori_indeks_id">Kategori</label>
-                                <select class="form-select" aria-label=".form-select-sm example"
-                                    name="kategori_indeks_id" id="kategori_indeks_id">
-                                    <option value="">Pilih Kategori</option>
-                                    @foreach ($kategori as $ktgr)
-                                    <option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mt-2">
-                                <label for="tingkatan">Tingkatan</label>
-                                <input type="text" class="form-control " id="tingkatan" placeholder="tingkatan"
-                                    name="tingkatan">
-                            </div>
-                            <div class="form-group mt-2">
-                                <label for="bobot_indeks">Bobot</label>
-                                <input type="text" class="form-control" id="bobot_indeks" placeholder="bobot"
-                                    name="bobot_indeks">
-                            </div>
-                            <div class="form-group mt-2">
-                                <label for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan" placeholder="keterangan"
-                                    name="keterangan">
-                            </div>
-                            <div class="form-group mt-4">
-                                <button type="submit" class="btn btn-primary">Simpan </button>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="mt-3">
-                    <table class="table table-bordered text-center">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Tingkatan</th>
-                                <th scope="col">Bobot</th>
-                                <th scope="col">Parameter</th>
-                                <th scope="col">Keterangan</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tabel_edit">
-                            @foreach ($indeks as $indek)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$indek->id}}</td>
-                                @if($indek->kategori_indeks_id == null)
-                                <td>-</td>
-                                @else
-                                <td>{{$indek->kategori_indeks->nama}}</td>
-                                @endif
-                                <td>{{$indek->tingkatan}}</td>
-                                <td>{{$indek->bobot_indeks}}</td>
-                                <td>{{$indek->parameter}}</td>
-                                <td>{{$indek->keterangan}}</td>
-                                <td>{{$indek->status}}</td>
-                                <td>
-                                    <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary button_edit"
-                                        data-toggle="modal" data-target="#edit_{{$indek->id}}">
-                                        Edit
-                                    </a>
-
-                                    <!-- The Modal Edit -->
-                                    <div class="modal fade " id="edit_{{$indek->id}}">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Edit Data</h4>
-                                                    <button type="button" class="btn-close" data-dismiss="modal"
-                                                        aria-label="Close" id="test">&times;</button>
-                                                </div>
-
-                                                <!-- Modal body -->
-                                                <div class="modal-body">
-                                                    <form method="post" action="{{route('edit_indeks')}}">
-                                                        @method('patch')
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <label for="id">ID</label>
-                                                            <input type="text" class="form-control" id="id"
-                                                                value="{{$indek->id}}" name="id" readonly>
-                                                        </div>
-                                                        <div class="form-group mt-2">
-                                                            <label for="parameter_edit">Parameter</label>
-                                                            <select class="form-select edit_select"
-                                                                aria-label=".form-select-sm example" name="parameter"
-                                                                value="{{$indek->parameter}}">
-                                                                <option value="fungsi"
-                                                                    {{ $indek->parameter == "fungsi" ? 'selected': ''}}>
-                                                                    Fungsi</option>
-                                                                <option value="klasifikasi"
-                                                                    {{ $indek->parameter == "klasifikasi" ? 'selected': ''}}>
-                                                                    Klasifikasi</option>
-                                                                <option value="waktu"
-                                                                    {{ $indek->parameter == "waktu" ? 'selected': ''}}>
-                                                                    Waktu</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group mt-2 kategori" style="display: none">
-                                                            <label for="kategori_indeks_id">Kategori</label>
-                                                            <select class="form-select"
-                                                                aria-label=".form-select-sm example"
-                                                                name="kategori_indeks_id"
-                                                                value="{{$indek->kategori_indeks->nama}}">
-                                                                <option selected value="">
-                                                                    Pilih Kategori
-                                                                </option>
-                                                                @foreach ($kategori as $ktgr)
-                                                                @if($ktgr->id == $indek->kategori_indeks->id)
-                                                                <option selected value="{{$ktgr->id}}">
-                                                                    {{$ktgr->nama}}
-                                                                </option>
-                                                                @else
-                                                                <option value="{{$ktgr->id}}">{{$ktgr->nama}}
-                                                                </option>
-                                                                @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group mt-2">
-                                                            <label for="tingkatan">Tingkatan</label>
-                                                            <input type="text" class="form-control " id="tingkatan"
-                                                                value="{{$indek->tingkatan}}" name="tingkatan">
-                                                        </div>
-                                                        <div class="form-group mt-2">
-                                                            <label for="bobot_indeks">Bobot</label>
-                                                            <input type="text" class="form-control" id="bobot_indeks"
-                                                                value="{{$indek->bobot_indeks}}" name="bobot_indeks">
-                                                        </div>
-                                                        <div class="form-group mt-2">
-                                                            <label for="keterangan">Keterangan</label>
-                                                            <input type="text" class="form-control" id="keterangan"
-                                                                value="{{$indek->keterangan}}" name="keterangan">
-                                                        </div>
-                                                        <div class="form-group mt-4">
-                                                            <button type="submit" class="btn btn-primary">Simpan
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                                <!-- Modal footer -->
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {{-- <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary"
-                                        data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
-                                        Non-aktifkan
-                                    </a> --}}
+                    <!-- Modal end -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered zero-configuration">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Kategori</th>
+                                    <th>Tingkatan</th>
+                                    <th>Bobot</th>
+                                    <th>Parameter</th>
+                                    <th>Keterangan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tabel_edit">
+                                @foreach ($indeks as $indek)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$indek->id}}</td>
+                                    @if($indek->kategori_indeks_id == null)
+                                    <td>-</td>
+                                    @else
+                                    <td>{{$indek->kategori_indeks->nama}}</td>
+                                    @endif
+                                    <td>{{$indek->tingkatan}}</td>
+                                    <td>{{$indek->bobot_indeks}}</td>
+                                    <td>{{$indek->parameter}}</td>
+                                    <td>{{$indek->keterangan}}</td>
+                                    <td>
                                     @if ($indek->status == true)
-                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="btn btn-success"
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-pill label-success"
                                             data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
                                             Aktif
                                         </a> 
-                                    @else
-                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="btn btn-danger"
+                                        @else
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-pill label-danger"
                                             data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
-                                            Non-Aktif
+                                            Nonaktif
                                         </a>
-                                    @endif
-
-                                    <!-- The Modal Non-Aktifkan -->
-                                    <div class="modal fade" id="editStatus_{{$indek->id}}">
-                                        <div class="modal-dialog">
+                                        @endif
+                                        <div class="modal fade" id="editStatus_{{$indek->id}}">
+                                            <div class="modal-dialog">
                                             <div class="modal-content">
-
-                                                <!-- Modal Header -->
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">Nonaktifkan Data {{$indek->nama}}
-                                                    </h4>
-                                                    <button type="button" class="close"
-                                                        data-dismiss="modal">&times;</button>
+                                                @if($indek->status == 1)
+                                                    <h4 class="modal-title">Nonaktifkan Data {{$indek->nama}}</h4>
+                                                @else
+                                                    <h4 class="modal-title">Aktifkan Data {{$indek->nama}}</h4>
+                                                @endif
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-
-                                                <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    <form method="post" action="indeks/{{$indek->id}}">
-                                                        @method('put')
-                                                        @csrf
-                                                        <div class="form-group mt-4">
-                                                            <p>Apakah Anda yakin?</p>
-                                                            <div class="form-group mt-4">
-                                                                <button type="submit" class="btn btn-primary">Ya
-                                                                </button>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                            </div>
-                                                    </form>
+                                                <form method="post" action="indeks/{{$indek->id}}">
+                                                    @method('put')
+                                                    @csrf
+                                                    <div class="form-group"> 
+                                                    @if($indek->status == true)
+                                                        <p>Saat ini data Anda sedang dalam keadaan Aktif. Apakah Anda yakin untuk menonaktifkan data ini?</p>
+                                                    @else
+                                                        <p>Saat ini data Anda sedang dalam keadaan Nonaktif. Apakah Anda yakin untuk mengaktifkan data ini?</p>
+                                                    @endif
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary" >Ya </button>
+                                                    </div>
+                                                </form>
                                                 </div>
-                                                <!-- Modal footer -->
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td>
+                                        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary button_edit"
+                                            data-toggle="modal" data-target="#edit_{{$indek->id}}">
+                                            Edit
+                                        </a>
+
+                                        <!-- The Modal Edit -->
+                                        <div class="modal fade " id="edit_{{$indek->id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Data</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <form method="post" action="{{route('edit_indeks')}}">
+                                                            @method('patch')
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="id">ID</label>
+                                                                <input type="text" class="form-control" id="id"
+                                                                    value="{{$indek->id}}" name="id" readonly>
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="parameter_edit">Parameter</label>
+                                                                <select class="form-control edit_select @error('parameter') is-invalid @enderror"
+                                                                    aria-label=".form-select-sm example" name="parameter"
+                                                                    value="{{$indek->parameter}}">
+                                                                    <option value="fungsi"
+                                                                        {{ $indek->parameter == "fungsi" ? 'selected': ''}}>
+                                                                        Fungsi</option>
+                                                                    <option value="klasifikasi"
+                                                                        {{ $indek->parameter == "klasifikasi" ? 'selected': ''}}>
+                                                                        Klasifikasi</option>
+                                                                    <option value="waktu"
+                                                                        {{ $indek->parameter == "waktu" ? 'selected': ''}}>
+                                                                        Waktu</option>
+                                                                </select>
+                                                                @error('parameter')
+                                                                    <div class="invalid-feedback">
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                         
+                                                            <div class="form-group mt-2 kategori" style="display:{{ ($indek->kategori_indeks_id == null) ? 'none' : 'block' }}">
+                                                                <label for="kategori_indeks_id">Kategori</label>
+                                                                <select class="form-control @error('kategori_indeks_id') is-invalid @enderror"
+                                                                    aria-label=".form-select-sm example"
+                                                                    name="kategori_indeks_id"
+                                                                    value="{{$indek->kategori_indeks->nama}}">
+                                                                    <option selected value="">
+                                                                        Pilih Kategori
+                                                                    </option>
+                                                                    @foreach ($kategori as $ktgr)
+                                                                    @if($ktgr->id == $indek->kategori_indeks->id)
+                                                                    <option selected value="{{$ktgr->id}}">
+                                                                        {{$ktgr->nama}}
+                                                                    </option>
+                                                                    @else
+                                                                    <option value="{{$ktgr->id}}">{{$ktgr->nama}}
+                                                                    </option>
+                                                                    @endif
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('kategori_indeks_id')
+                                                                    <div class="invalid-feedback">
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="tingkatan">Tingkatan</label>
+                                                                <input type="text" class="form-control @error('tingkatan') is-invalid @enderror" id="tingkatan"
+                                                                    value="{{$indek->tingkatan}}" name="tingkatan">
+                                                                @error('tingkatan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="bobot_indeks">Bobot</label>
+                                                                <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" id="bobot_indeks"
+                                                                    value="{{$indek->bobot_indeks}}" name="bobot_indeks">
+                                                                @error('bobot_indeks')
+                                                                    <div class="invalid-feedback">
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
+                                                                    value="{{$indek->keterangan}}" name="keterangan">
+                                                                @error('keterangan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group mt-4">
+                                                                <button type="submit" class="btn btn-primary">Simpan
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal end -->
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                      <!-- The Modal -->
+                      <div class="modal fade" id="ModalIndeks">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tambah Data</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form method="post" action="{{route('input_indeks')}}" id="form_id">
+                                        @csrf
+                                        <div class="form-group mt-2" id="dropdown_input">
+                                            <label for="parameter">Parameter</label>
+                                            <select class="form-control @error('parameter') is-invalid @enderror" value="{{ @old('parameter') }}" aria-label=".form-select-sm example" name="parameter"
+                                                id="parameter">
+                                                <option value="fungsi">Fungsi</option>
+                                                <option value="klasifikasi">Klasifikasi</option>
+                                                <option value="waktu">Waktu</option>
+                                            </select>
+                                            @error('parameter')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="form-group" id="kategori_indeks">
+                                            <label for="kategori_indeks_id">Kategori</label>
+                                            <select class="form-control @error('kategori_indeks_id') is-invalid @enderror" value="{{ @old('kategori_indeks_id') }}" aria-label=".form-select-sm example"
+                                                name="kategori_indeks_id" id="kategori_indeks_id">
+                                                <option value="">Pilih Kategori</option>
+                                                @foreach ($kategori as $ktgr)
+                                                <option value="{{$ktgr->id}}">{{$ktgr->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('kategori_indeks_id')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="tingkatan">Tingkatan</label>
+                                            <input type="text" class="form-control @error('tingkatan') is-invalid @enderror" value="{{ @old('tingkatan') }}" id="tingkatan" placeholder="tingkatan"
+                                                name="tingkatan">
+                                            @error('tingkatan')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="bobot_indeks">Bobot</label>
+                                            <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" placeholder="bobot"
+                                                name="bobot_indeks">
+                                            @error('bobot_indeks')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="keterangan">Keterangan</label>
+                                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="keterangan"
+                                                name="keterangan">
+                                            @error('keterangan')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mt-4">
+                                            <button type="submit" class="btn btn-primary">Simpan </button>
+                                        </div>
+                                    </form>
+                                <div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+    $('#parameter').on('change', function () {
+        if ($(this).val() == 'klasifikasi') {
+            $(this).parents('.modal').find('#kategori_indeks').show();
+        } else {
+            $(this).parents('.modal').find('#kategori_indeks').hide();
+        }
+    })
+});
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
-        <script>
-             function myFunction() {
-                const kategori = document.getElementById('kategori_indeks');
-                let x = document.getElementById('parameter').value;
-                if (x == "klasifikasi") {
-                    kategori.style.display = 'block';
-                } else {
-                    kategori.style.display = 'none';
-                }
-            }
+$(document).ready(function () {
+    $('.edit_select').on('change', function () {
+        if ($(this).val() == 'klasifikasi') {
+            $(this).parents('.modal').find('.kategori').show();
+        } else {
+            $(this).parents('.modal').find('.kategori').hide();
+        }
+    })
+});
 
-            $(document).ready(function () {
-                $('.edit_select').on('change', function () {
-                    if ($(this).val() == 'klasifikasi') {
-                        $(this).parents('.modal').find('.kategori').show();
-                    } else {
-                        $(this).parents('.modal').find('.kategori').hide();
-                    }
-                })
-            });
+    //kategori
 
-             //kategori
-           
-        </script>
-</body>
+</script>
 
-</html>
+@endsection

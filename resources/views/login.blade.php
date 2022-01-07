@@ -19,18 +19,29 @@
                 </div>
                 <div class="form-group">
                   <label for="name">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan Email" required>
+                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Masukkan Email" required >
+                  @error('email')
+                    <div class="invalid-feedback">
+                      {{$message}}
+                    </div>
+                  @enderror
                 </div>
-              </div>
-              <div class="form-group mt-3 mb-3">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password" required>
-              </div>
-              <div class="text-center">
-                <button type="submit" value="submit">Masuk</button>
-              </div>
-              <div class="text-center mt-3 ">
-                <p>Belum memiliki Akun? <a href="/regis"> Daftar Akun</a></p>
+              
+                <div class="form-group mt-3 mb-3">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Masukkan Password" required>
+                  @error('password')
+                      <div class="invalid-feedback">
+                        {{$message}}
+                      </div>
+                  @enderror
+                </div>
+                <div class="text-center">
+                  <button type="submit" value="submit">Masuk</button>
+                </div>
+                <div class="text-center mt-3 ">
+                  <p>Belum memiliki Akun? <a href="/regis"> Daftar Akun</a></p>
+                </div>
               </div>
             </form>
           </div>

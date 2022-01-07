@@ -15,12 +15,12 @@ class AuthController extends Controller
 
     public function postRegis(Request $request){
         $request->validate([
-            'nama'=>'required',
-            'email'=>'required',
-            'password1'=>'required',
-            'password2'=>'required',
-            'telp'=>'required',
-            'no_ktp'=>'required'
+            'nama'=>'required|max:255',
+            'email'=>'required|email|unique:masyarakats|max:255',
+            'password1'=>'required|min:3|max:255',
+            'password2'=>'required|min:3|max:255|',
+            'telp'=>'required|min:10|max:14',
+            'no_ktp'=>'required|unique:masyarakats'
         ]);
 
         if($request->password1 == $request->password2){

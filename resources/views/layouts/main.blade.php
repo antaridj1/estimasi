@@ -45,16 +45,28 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/">Beranda</a></li>
-          <li><a class="nav-link scrollto" href="/riwayat">Riwayat Estimasi</a></li>
-          <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
-         
-          @if(!empty($hehe))
-           <li><a class="nav-link scrollto" href="/akun">Hi, {{$hehe}}</a></li>
-          @else
-            <li><a class="getstarted scrollto" href="/login">Masuk</a></li>
-           @endif
-         
+          <li><a class="nav-link scrollto {{ Request::is('estimasi'||'login'||'regis') ? 'active' : ''}}" href="/estimasi">Beranda</a></li>
+          <li><a class="nav-link scrollto {{ Request::is('riwayat') ? 'active' : ''}}" href="/riwayat">Riwayat Estimasi</a></li>
+          <li><a class="nav-link scrollto {{ Request::is('about') ? 'active' : ''}}" href="#about">Tentang</a></li>
+          <li>
+            @guest
+            <a class="getstarted scrollto" href="/login">Masuk</a>
+            @endguest
+
+            @auth
+            <div class="dropdown">
+                <a class="nav-link scrollto {{ Request::is('akun') ? 'active' : ''}} dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="{{asset('admin/images/user.png')}}" height="40" width="40" alt=""> 
+                  {{\Auth::user()->nama}}                    
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="/akun">Profil</a></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </div>
+            @endauth
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -70,10 +82,13 @@
   <script src="{{asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
   <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-  {{-- <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script> --}}
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 

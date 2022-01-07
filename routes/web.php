@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => 'revalidate'],function(){
-Route::get('/', 'App\Http\Controllers\EstimasiController@landing');
+Route::get('/', 'App\Http\Controllers\EstimasiController@landing')->middleware('guest');
 
 Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');
 Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
@@ -27,6 +27,7 @@ Route::group(['middleware' =>['auth:masyarakat']], function (){
     Route::get('/riwayat','App\Http\Controllers\EstimasiController@riwayatEstimasi');
     Route::get('/akun','App\Http\Controllers\MasyarakatController@index');
     Route::patch('/akun','App\Http\Controllers\MasyarakatController@edit')->name('edit_user');
+    Route::post('/akun','App\Http\Controllers\MasyarakatController@editpass')->name('edit_pass_akun');
    
 });
 
@@ -41,17 +42,23 @@ Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/dashboard/sarana','App\Http\Controllers\SaranaController@index');
     Route::post('/dashboard/sarana','App\Http\Controllers\SaranaController@store')->name('input_sarana');
     Route::patch('/dashboard/sarana','App\Http\Controllers\SaranaController@update')->name('edit_sarana');
-    Route::put('dashboard/sarana/{sarana}','App\Http\Controllers\SaranaController@updateStatus');
+    Route::put('dashboard/sarana/{sarana}','App\Http\Controllers\SaranaController@updateStatus')->name('edit_statusSarana');
     //gedung
     Route::get('/dashboard/gedung','App\Http\Controllers\GedungController@index');
     Route::post('/dashboard/gedung','App\Http\Controllers\GedungController@store')->name('input_gedung');
     Route::patch('/dashboard/gedung','App\Http\Controllers\GedungController@update')->name('edit_gedung');
-    Route::put('dashboard/gedung/{gedung}','App\Http\Controllers\GedungController@updateStatus');
+    Route::put('dashboard/gedung/{gedung}','App\Http\Controllers\GedungController@updateStatus')->name('edit_statusGedung');
     //kategoriIndeks
     Route::get('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@index');
     Route::post('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@store')->name('input_kategoriIndeks');
     Route::patch('/dashboard/kategoriIndeks','App\Http\Controllers\KategoriIndeksController@update')->name('edit_kategoriIndeks');
-    Route::put('dashboard/kategoriIndeks/{kategoriIndeks}','App\Http\Controllers\KategoriIndeksController@updateStatus');
+    Route::put('dashboard/kategoriIndeks/{kategoriIndeks}','App\Http\Controllers\KategoriIndeksController@updateStatus')->name('edit_statusKategori');
+    //masyarakat
+    Route::get('/dashboard/masyarakat','App\Http\Controllers\MasyarakatController@tampil');
+    //admin
+    Route::get('/profil','App\Http\Controllers\AdminController@profil');
+    Route::patch('/profil','App\Http\Controllers\AdminController@edit')->name('edit_admin');
+    Route::post('/profil','App\Http\Controllers\AdminController@editpass')->name('edit_pass_admin');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');

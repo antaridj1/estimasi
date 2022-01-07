@@ -30,7 +30,7 @@ class IndekController extends Controller
             $request->validate([
                 'kategori_indeks_id'=>'required',
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required',
+                'bobot_indeks'=>'required|numeric',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -38,7 +38,7 @@ class IndekController extends Controller
         } else {
             $request->validate([
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required',
+                'bobot_indeks'=>'required|numeric',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -61,7 +61,7 @@ class IndekController extends Controller
             $request->validate([
                 'kategori_indeks_id'=>'required',
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required',
+                'bobot_indeks'=>'required|numeric',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -75,7 +75,7 @@ class IndekController extends Controller
         } else {
             $request->validate([
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required',
+                'bobot_indeks'=>'required|numeric',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);

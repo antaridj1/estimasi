@@ -18,18 +18,9 @@ use DB;
 class EstimasiController extends Controller
 {
     public function landing(){
-        if(Auth::check()){
-            $hehe = Auth::user()->value('nama');
-        }else{
-            $hehe = null;
-        }
-            // ->value('nama');
-       
-            //   $hehe = collect();
-            //   collect->push('kosong');
-        
-        return view('estimasi',compact('hehe'));
+        return view('estimasi');
     }
+
     public function index(){
         $gedungs = Gedung::where('status','1')->get(['nama','id']);
         // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
@@ -104,6 +95,16 @@ class EstimasiController extends Controller
 
          //Input Data Estimasi
          $user_id = Auth::id();
+
+         $request->validate([
+            'luas_tanah'=>'required|min:1',
+            'luas_bangunan'=>'required|min:1',
+            'gedung'=>'required',
+            'fungsi'=>'required',
+            'waktu'=>'required',
+            
+        ]);
+
          $estimasi = Estimasi::create([
             'luas_tanah'=>$request->luas_tanah,
             'luas_bangunan'=>$request->luas_bangunan,

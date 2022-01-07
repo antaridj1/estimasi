@@ -16,9 +16,9 @@ class GedungController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'=>'required',
-            'bobot_indeks'=>'required',
-            'biaya'=>'required',
+            'nama'=>'required|max:255',
+            'bobot_indeks'=>'required|numeric',
+            'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
 
@@ -28,6 +28,13 @@ class GedungController extends Controller
 
     public function update(Request $request, Gedung $gedungs)
     {
+        $request->validate([
+            'nama'=>'required|max:255',
+            'bobot_indeks'=>'required|numeric',
+            'biaya'=>'required|numeric|min:1',
+            'keterangan'=>'required',
+        ]);
+        
         Gedung::where('id',$request->id)->update([
             'nama'=>$request->nama,
             'bobot_indeks'=>$request->bobot_indeks,

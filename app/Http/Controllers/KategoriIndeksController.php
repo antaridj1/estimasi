@@ -24,7 +24,7 @@ class KategoriIndeksController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'bobot_kategori'=>'required',
+            'bobot_kategori'=>'required|numeric',
             'keterangan'=>'required',
         ]);
 
@@ -38,9 +38,14 @@ class KategoriIndeksController extends Controller
         return redirect('dashboard/kategoriIndeks');
     }
 
-   
     public function update(Request $request, KategoriIndeks $kategoriIndeks)
     {
+        $request->validate([
+            'nama' => 'required',
+            'bobot_kategori'=>'required|numeric',
+            'keterangan'=>'required',
+        ]);
+
         KategoriIndeks::where('id',$request->id)->update([
             'nama' => $request->nama,
             'bobot_kategori'=>$request->bobot_kategori,

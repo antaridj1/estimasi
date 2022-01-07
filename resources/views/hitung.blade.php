@@ -21,9 +21,14 @@
                                 <div class="form-group p-3">
                                     <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="luas_bangunan" placeholder="Luas Bangunan"
-                                            name="luas_bangunan">
+                                        <input type="number" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
+                                            name="luas_bangunan" required>
                                         <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                        @error('luas_bangunan')
+                                            <div class="invalid-feedback">
+                                            {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -31,16 +36,21 @@
                                 <div class="form-group p-3">
                                     <label class="hitung" for="luas_tanah">Luas Tanah</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
-                                            name="luas_tanah">
+                                        <input type="number" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
+                                            name="luas_tanah" required>
                                         <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                        @error('luas_tanah')
+                                            <div class="invalid-feedback">
+                                            {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-evenly">
                             <div class="col-sm-6 ps-0 mb-2">
-                                <div class="form-group p-4 shadow-sm bg-body round h-100">
+                                <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('gedung') ? 'estimasi_error' : '')}}">
                                     <label class="hitung" for="gedung">Status Bangunan</label>
                                     @foreach ($gedungs as $gedung)
                                     <div class="form-check">
@@ -51,10 +61,11 @@
                                         </label>
                                     </div>
                                     @endforeach
+                                    {!! $errors->first('gedung', '<p class="text-error mt-2">This field is required</p>') !!}
                                 </div>
                             </div>
                             <div class="col-sm-6 pe-0 mb-2">
-                                <div class="form-group p-4 shadow-sm bg-body round h-100">
+                                <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('fungsi') ? 'estimasi_error' : '')}}">
                                     <label for="fungsi" class="hitung">Fungsi Bangunan</label>
                                     @foreach ($fungsis as $fungsi)
                                     <div class="form-check">
@@ -65,6 +76,7 @@
                                         </label>
                                     </div>
                                     @endforeach
+                                    {!! $errors->first('fungsi', '<p class="text-error mt-2">This field is required</p>') !!}
                                 </div>
                             </div>
                         </div>
@@ -72,7 +84,7 @@
                         <div class="row">
                             @foreach ($kategori_indeks as $ktgr)
                                 <div class="col-sm-6 {{ ($loop->iteration % 2 == 0) ? ' pe-0' : ' ps-0' }}">
-                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round">
+                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has('$ktgr->slug') ? 'estimasi_error' : '')}}">
                                         <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
                                         @foreach ($indeks as $tk_indek)
                                         @if ($tk_indek->kategori_indeks_id == $ktgr->id)
@@ -85,13 +97,14 @@
                                         </div>
                                         @endif
                                         @endforeach
+                                        {!! $errors->first('{{$ktgr->slug}}', '<p class="text-error mt-2">This field is required</p>') !!}
                                     </div>
                                 </div>
                              @endforeach
                         
-                            <div class="col-sm-6 p-4 shadow-sm mb-2 bg-body round">
+                            <div class="col-sm-6 p-4 shadow-sm mb-2 bg-body round {{($errors->first('waktu') ? 'estimasi_error' : '')}}">
                                 <div class="form-group">
-                                    <label for="waktu" class="hitung">Jangka Waktu Bangunan</label>
+                                    <label for="waktu" class="hitung ">Jangka Waktu Bangunan</label>
                                     @foreach ($jangka_waktu as $waktu)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
@@ -101,6 +114,7 @@
                                         </label>
                                     </div>
                                     @endforeach
+                                    {!! $errors->first('waktu', '<p class="text-error mt-2">This field is required</p>') !!}
                                 </div>
                             </div>
                         </div>

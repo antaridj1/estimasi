@@ -39,15 +39,15 @@
               @foreach($detail_saranas as $detail_sarana)
                   <tr>
                     <td>{{$detail_sarana->saranas->nama}}</td>
-                    <td>{{$detail_sarana->jumlah_sarana}} x {{$detail_sarana->saranas->biaya}}</td>
-                    <td>{{$detail_sarana->jumlah_sarana*$detail_sarana->saranas->biaya}}</td>
+                    <td>{{$detail_sarana->jumlah_sarana}} x {{number_format($detail_sarana->saranas->biaya,0)}}</td>
+                    <td>{{number_format($detail_sarana->jumlah_sarana*$detail_sarana->saranas->biaya,0)}}</td>
                   </tr>
               @endforeach 
                   <tfoot>
                     <tr>
                       <th scope="col">Total</th>
                       <th scope="col"> </th>
-                      <th scope="col">{{$total_sarana}}</th>
+                      <th scope="col">{{number_format($total_sarana,0)}}</th>
                     </tr> 
                   </tfoot>
               </table>
@@ -112,12 +112,12 @@
                 <p>Bangunan Gedung = L x It x Indeks Gedung x HSbg</p>
                 @foreach($estimasis as $estimasi)
                 <p>= 
-                    {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} x {{$estimasi->gedungs->biaya}}
+                    {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} x {{number_format($estimasi->gedungs->biaya,0)}}
                 </p>
                 <p> = {{$bangunan_gedung}} </p>
                 <p> Total Retribusi = Biaya Bangunan + Biaya Prasarana</p>
-                <p> = {{$bangunan_gedung}} + {{$total_sarana}}</p>
-                <p> = {{$estimasi->total_biaya}}</p>
+                <p> = Rp{{number_format($bangunan_gedung,0)}} + Rp{{number_format($total_sarana,0)}}</p>
+                <p> = Rp{{number_format($estimasi->total_biaya,0)}}</p>
                 @endforeach
             </div>
           </div>
@@ -129,7 +129,7 @@
     <div class="container d-flex align-items-center justify-content-center">
       <nav id="navbar" class="navbar">
         @foreach($estimasis as $estimasi)
-          <h4 class="hitung"> TOTAL = Rp {{$estimasi->total_biaya}}</h4>
+          <h4 class="hitung"> TOTAL = Rp {{number_format($estimasi->total_biaya,0}}</h4>
         @endforeach
       </nav><!-- .navbar -->
     </div>

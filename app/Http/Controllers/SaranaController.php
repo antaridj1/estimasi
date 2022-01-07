@@ -17,7 +17,7 @@ class SaranaController extends Controller
         $request->validate([
             'nama'=>'required',
             'kategori'=>'required',
-            'biaya'=>'required',
+            'biaya'=>'required|numeric',
             'keterangan'=>'required',
         ]);
 
@@ -27,6 +27,13 @@ class SaranaController extends Controller
 
     public function update(Request $request, Sarana $saranas)
     {
+        $request->validate([
+            'nama'=>'required',
+            'kategori'=>'required',
+            'biaya'=>'required|numeric',
+            'keterangan'=>'required',
+        ]);
+        
         Sarana::where('id',$request->id)->update([
             'nama'=>$request->nama,
             'kategori'=>$request->kategori,
