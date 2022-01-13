@@ -13,10 +13,10 @@ class IndekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Indek $indeks)
+    public function index()
     {
-        $indeks = Indek::all();
-       // dd($indeks);
+        $indeks = Indek::filter(request(['search','parameter']))->paginate(10)->withQueryString();
+       // dd(request('search'));
         $kategori = KategoriIndeks::all();
         return view('admin.indeks',compact(['indeks','kategori']));
     }

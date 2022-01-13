@@ -8,8 +8,8 @@ use App\Models\Gedung;
 class GedungController extends Controller
 {
     public function index(Gedung $gedungs)
-    {
-        $gedungs = Gedung::all();
+    {   
+       $gedungs = Gedung::cari(request(['search']))->paginate(10)->withQueryString();
         return view('admin.gedung',compact('gedungs'));
     }
 

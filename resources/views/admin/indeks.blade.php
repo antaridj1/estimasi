@@ -10,10 +10,38 @@
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Indeks</a></li>
         </ol>
+        <div class="d-flex">
+          <div class="col-md-6">
+            <form action="/dashboard/indeks">
+                @if(request('parameter'))
+                    <input type="hidden" name="parameter" value="{{request('parameter')}}">
+                @endif
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Example single danger button -->
+          <div class="basic-dropdown">
+              <div class="dropdown">
+                  @if(request('parameter'))
+                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">{{request('parameter')}}</button>
+                  @else
+                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Semua Indeks</button>
+                  @endif
+                  <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/dashboard/indeks">Semua</a>
+                        <a class="dropdown-item" href="/dashboard/indeks?parameter=fungsi">Fungsi</a>
+                        <a class="dropdown-item" href="/dashboard/indeks?parameter=klasifikasi">Klasifikasi</a>
+                        <a class="dropdown-item" href="/dashboard/indeks?parameter=waktu">Waktu</a>
+                  </div>
+              </div>
+          </div>
+        </div>
     </div>
 </div>
             <!-- row -->
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -221,6 +249,10 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="d-flex justify-content-center">
+                        {{$indeks->links()}}
+                    </div>
                       <!-- The Modal -->
                       <div class="modal fade" id="ModalIndeks">
                         <div class="modal-dialog">
@@ -304,6 +336,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

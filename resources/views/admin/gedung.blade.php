@@ -4,10 +4,8 @@
 
 @section('container')
 
-
-
+                
   <!-- Modal end -->
-
 
 <div class="row page-titles mx-0">
     <div class="col p-md-0">
@@ -15,9 +13,20 @@
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Gedung</a></li>
         </ol>
-    </div>
+        <div class="d-flex">
+          <div class="col-md-6">
+            <form action="/dashboard/gedung">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Example single danger button -->
+        </div>
+    <div>
 </div>
-            <!-- row -->
+ <!-- row -->
 
 <div class="container-fluid">
     <div class="row">
@@ -232,6 +241,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="d-flex justify-content-center">
+                        {{$gedungs->links()}}
+                    </div>
             </div>
         </div>
     </div>

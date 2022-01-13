@@ -12,6 +12,13 @@ class Sarana extends Model
     protected $fillable =['nama','kategori','biaya','keterangan'];
     protected $attributes = ['status'=>true];
 
+    public function scopeCari($query, array $cari){
+        $query->when($cari['search'] ?? false, function($query, $search) {
+            return $query->where('nama','like','%'.$search.'%')
+                        ->orWhere('kategori','like','%'.$search.'%');
+        });
+    }
+
     public function detail_sarana(){
         return $this->hasMany(DetailSarana::class);
     }

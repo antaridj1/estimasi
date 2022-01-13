@@ -131,7 +131,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/dashboard/kategori_indeks" aria-expanded="false">
+                        <a href="/dashboard/kategoriIndeks" aria-expanded="false">
                             <i class="fa fa-list"></i><span class="nav-text">Kategori Klasifikasi</span>
                         </a>
                     </li>
