@@ -171,8 +171,8 @@
                                             </div>
                                             <div class="form-group mt-2">
                                               <label for="keterangan">Keterangan</label>
-                                              <input type="text" class="form-control @error(keterangan') is-invalid @enderror" id="keterangan" value="{{$kategori->keterangan}}" name="keterangan">
-                                              @error(keterangan')
+                                              <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" value="{{$kategori->keterangan}}" name="keterangan">
+                                              @error('keterangan')
                                                 <div class="invalid-feedback">
                                                   {{$message}}
                                                 </div>
