@@ -20,7 +20,7 @@ class Estimasi extends Model
     public function detail_estimasi(){
         return $this->hasMany(DetailEstimasi::class);
     }
-    public function detail_sarana(){
-        return $this->hasMany(DetailSarana::class);
+    public function detailsarana(){
+        return $this->hasMany(DetailSarana::class, 'estimasi_id', 'id');
     }
 }

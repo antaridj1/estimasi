@@ -20,7 +20,7 @@ class Sarana extends Model
     }
 
     public function detail_sarana(){
-        return $this->hasMany(DetailSarana::class);
+        return $this->hasMany(\App\Models\DetailSarana::class, 'saranas_id', 'id');
     }
 
 }
