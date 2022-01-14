@@ -35,15 +35,13 @@
 
                             <h5 class="hitung">Sarana</h5>
                             <table class="table table-borderless">
-                            {{-- @dd($detail_saranas) --}}
+                         
                             @foreach($estimasi->detailsarana as $detail)
-                            {{-- @foreach($detail_sarana->child as $item) --}}
-                            {{-- @if($detail->estimasi_id == $estimasi->id)  --}}
+                           
                                 <tr>
                                     <td>{{$detail->sarana->nama}}</td>
                                 </tr>
-                            {{-- @endif --}}
-                            {{-- @endforeach --}}
+                           
                             @endforeach 
                             </table>
                         </div>
