@@ -97,7 +97,31 @@
                             <td>{{$sarana->nama}}</td>
                             <td>{{$sarana->kategori}}</td>
                             <td>{{number_format($sarana->biaya,0)}}</td>
-                            <td>{{$sarana->keterangan}}</td>
+                            <td>
+                                <a href="dashboard/sarana/{{$sarana->id}}" class="label label-primary" data-toggle="modal" 
+                                  data-target="#detail_{{$sarana->id}}">
+                                  Detail
+                                </a>
+                              <!-- Modal -->
+                                <div class="modal fade" id="detail_{{$sarana->id}}">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                    
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                        <h4 class="modal-title">Keterangan</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                        <p>{{$sarana->keterangan}}</p>
+                                        </div>
+                                        <!-- Modal footer -->
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                             @if ($sarana->status == 1)
                               <a href="{{ route('edit_statusSarana', $sarana->id) }}" class="label label-pill label-success"
@@ -143,9 +167,9 @@
                               </div>
                             </td>
                             <td>
-                            <a href="dashboard/sarana/{{$sarana->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$sarana->id}}">
-                                Edit
-                              </a>
+                            <a href="dashboard/sarana/{{$sarana->id}}" class="label label-secondary" data-toggle="modal" data-target="#edit_{{$sarana->id}}">
+                              <i class="fa fa-edit"></i>
+                            </a>
 
                             <!-- The Modal -->
                             <div class="modal fade" id="edit_{{$sarana->id}}">

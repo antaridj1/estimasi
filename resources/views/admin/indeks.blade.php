@@ -82,7 +82,31 @@
                                     <td>{{$indek->tingkatan}}</td>
                                     <td>{{$indek->bobot_indeks}}</td>
                                     <td>{{$indek->parameter}}</td>
-                                    <td>{{$indek->keterangan}}</td>
+                                    <td>
+                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-primary" data-toggle="modal" 
+                                          data-target="#detail_{{$indek->id}}">
+                                          Detail
+                                        </a>
+                                      <!-- Modal -->
+                                        <div class="modal fade" id="detail_{{$indek->id}}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Keterangan</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                <p>{{$indek->keterangan}}</p>
+                                                </div>
+                                                <!-- Modal footer -->
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                     @if ($indek->status == true)
                                         <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-pill label-success"
@@ -128,9 +152,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="dashboard/indeks/{{$indek->id}}" class="btn btn-primary button_edit"
+                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-secondary button_edit"
                                             data-toggle="modal" data-target="#edit_{{$indek->id}}">
-                                            Edit
+                                            <i class="fa fa-edit"></i>
                                         </a>
 
                                         <!-- The Modal Edit -->

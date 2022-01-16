@@ -11,12 +11,16 @@ class DetailEstimasi extends Model
     protected $table = 'detail_estimasi';
     protected $fillable = ['indeks_id','estimasi_id'];
 
+    protected $with = [
+        'indeks'
+    ];
+
     public function estimasi(){
         return $this->belongsTo(Estimasi::class);
     }
 
     public function indeks(){
-        return $this->belongsTo(Indek::class);
+        return $this->belongsTo(Indek::class, 'indeks_id');
     }
 
 }

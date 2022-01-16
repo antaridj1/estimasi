@@ -18,7 +18,7 @@ class Estimasi extends Model
         return $this->belongsTo(Gedung::class);
     }
     public function detail_estimasi(){
-        return $this->hasMany(DetailEstimasi::class);
+        return $this->hasMany(DetailEstimasi::class, 'estimasi_id', 'id');
     }
     public function detailsarana(){
         return $this->hasMany(DetailSarana::class, 'estimasi_id', 'id');

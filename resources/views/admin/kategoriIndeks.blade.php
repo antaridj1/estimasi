@@ -14,6 +14,16 @@
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Kategori Klasifikasi</a></li>
         </ol>
+        <div class="d-flex">
+          <div class="col-md-6">
+            <form action="/dashboard/kategoriIndeks">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
     </div>
 </div>
             <!-- row -->
@@ -24,7 +34,7 @@
             <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Kategori Klasifikasi</h4>
-                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalIndeks">
+                    <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal" data-target="#ModalIndeks">
                         Tambahkan Kategori Klasifikasi
                     </button>
 
@@ -45,15 +55,15 @@
                                 @csrf
                                 <div class="form-group">
                                   <label for="nama">Nama</label>
-                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" placeholder="nama" name="nama" >
+                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" placeholder="Nama" name="nama" >
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="bobot_kategori">Bobot</label>
-                                  <input type="text" class="form-control @error('bobot_kategori') is-invalid @enderror" value="{{ @old('bobot_kategori') }}" id="bobot_kategori" placeholder="bobot" name="bobot_kategori">
+                                  <input type="text" class="form-control @error('bobot_kategori') is-invalid @enderror" value="{{ @old('bobot_kategori') }}" id="bobot_kategori" placeholder="Bobot" name="bobot_kategori">
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="keterangan">Keterangan</label>
-                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="keterangan" name="keterangan">
+                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="Keterangan" name="keterangan">
                                 </div>
                                 <div class="form-group mt-4"> 
                                     <button type="submit" class="btn btn-primary" >Simpan </button>
@@ -84,7 +94,27 @@
                               <td>{{$kategori->id}}</td>
                               <td>{{$kategori->nama}}</td>
                               <td>{{$kategori->bobot_kategori}}</td>
-                              <td>{{$kategori->keterangan}}</td>
+                              <td>
+                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-primary" data-toggle="modal" data-target="#detail_{{$kategori->id}}">
+                                Detail
+                                </a>
+                                <!-- The Modal -->
+                                <div class="modal fade" id="detail_{{$kategori->id}}">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Keterangan</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      </div>
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                        <p>{{$kategori->keterangan}}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
                               <td>
                                 @if ($kategori->status == 1)
                                   <a href="{{ route('edit_statusKategori', $kategori->id) }}" class="label label-pill label-success"
@@ -130,8 +160,8 @@
                                 </div>
                               </td>
                               <td>
-                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$kategori->id}}">
-                                    Edit
+                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-secondary" data-toggle="modal" data-target="#edit_{{$kategori->id}}">
+                                <i class="fa fa-edit"></i>
                                 </a>
                                 <!-- The Modal -->
                                 <div class="modal fade" id="edit_{{$kategori->id}}">
@@ -193,6 +223,9 @@
                       </table>
                     </div>
                 </div>
+                <div class="d-flex justify-content-center">
+                        {{$kategoriIndeks->links()}}
+                    </div>
             </div>
         </div>
     </div>

@@ -147,14 +147,9 @@ class EstimasiController extends Controller
 
     public function riwayatEstimasi(){
         $user_id = Auth::id();
-        $estimasis = Estimasi::with('detailsarana')->where('masyarakats_id',$user_id)->get();
-        $detail_saranas = DetailSarana::get();
-        // @foreach ($collection as $object)
-        //     {{ $object->title }}
-        // @endforeach
-        //  dd($detail_saranas[5]->sarana);
-        $detail_estimasis = DetailEstimasi::get();
-        return view('riwayat',compact(['estimasis','detail_estimasis','detail_saranas']));
+        $estimasis = Estimasi::with(['detailsarana','detail_estimasi'])->where('masyarakats_id',$user_id)->orderBy('created_at','DESC')->paginate(10)->withQueryString();
+
+        return view('riwayat',compact('estimasis'));
     }
 
     

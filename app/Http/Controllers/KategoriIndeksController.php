@@ -15,7 +15,7 @@ class KategoriIndeksController extends Controller
      */
     public function index(KategoriIndeks $kategoriIndeks)
     {
-        $kategoriIndeks = KategoriIndeks::all();
+        $kategoriIndeks = KategoriIndeks::cari(request(['search']))->paginate(10)->withQueryString();
         return view('admin.kategoriIndeks',compact('kategoriIndeks'));
     }
 

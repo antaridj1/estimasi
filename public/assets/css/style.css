@@ -1,5 +1,6 @@
 /**
-* Template Name: Ninestars - v4.7.0
+* Template Name: Ninestars - v4
+7.0
 * Template URL: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
@@ -39,7 +40,7 @@ a:hover {
   text-decoration: none;
 }
 
-p, h1, h2, h3, h4, h5, h6, label, a, button, input, td, tfoot, li{
+p, h1, h2, h3, h4, h5, h6, label, a, button, input, td, tfoot, li, small{
   font-family: "Poppins", sans-serif;
 }
 
@@ -123,6 +124,31 @@ p, h1, h2, h3, h4, h5, h6, label, a, button, input, td, tfoot, li{
   margin-top: 72px;
 }
 
+.date{
+  color: #67696b;
+  font-size:small;
+}
+
+#riwayat{
+  background-color: white;
+}
+
+.item{
+  color: black;
+}
+
+#riwayat:hover{
+  background-color: #dfdfdfa2;
+  
+}
+
+.border-grey{
+  border:1px solid rgb(216, 216, 216);
+}
+
+.item:hover {
+  color: rgb(41, 41, 41);
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu

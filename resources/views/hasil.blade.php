@@ -43,7 +43,7 @@
                     <td>{{number_format($detail_sarana->jumlah_sarana*$detail_sarana->saranas->biaya,0)}}</td>
                   </tr>
               @endforeach 
-                  <tfoot>
+                  <tfoot class="border-top">
                     <tr>
                       <th scope="col">Total</th>
                       <th scope="col"> </th>
@@ -88,7 +88,11 @@
               <p>Indeks Klasifikasi = 
                   @foreach($detail_estimasis as $detail_estimasi)
                     @if ($detail_estimasi->indeks->kategori_indeks_id!==Null)
-                      ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}) +
+                      @if(!$loop->last)
+                        ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}) +
+                      @else
+                        ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}})
+                      @endif
                     @endif
                   @endforeach
                     = {{$ik}}
