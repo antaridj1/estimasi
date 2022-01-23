@@ -81,6 +81,10 @@
                                                     <td>Masyarakat</td>
                                                     <td><a href="/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Kategori Klasifikasi</td>
+                                                    <td><a href="/kategoriIndeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

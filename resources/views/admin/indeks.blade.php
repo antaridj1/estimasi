@@ -10,35 +10,6 @@
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Indeks</a></li>
         </ol>
-        <div class="d-flex">
-          <div class="col-md-6">
-            <form action="/dashboard/indeks">
-                @if(request('parameter'))
-                    <input type="hidden" name="parameter" value="{{request('parameter')}}">
-                @endif
-              <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
-                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
-              </div>
-            </form>
-          </div>
-          <!-- Example single danger button -->
-          <div class="basic-dropdown">
-              <div class="dropdown">
-                  @if(request('parameter'))
-                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">{{request('parameter')}}</button>
-                  @else
-                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Semua Indeks</button>
-                  @endif
-                  <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/dashboard/indeks">Semua</a>
-                        <a class="dropdown-item" href="/dashboard/indeks?parameter=fungsi">Fungsi</a>
-                        <a class="dropdown-item" href="/dashboard/indeks?parameter=klasifikasi">Klasifikasi</a>
-                        <a class="dropdown-item" href="/dashboard/indeks?parameter=waktu">Waktu</a>
-                  </div>
-              </div>
-          </div>
-        </div>
     </div>
 </div>
             <!-- row -->
@@ -47,20 +18,57 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Data Indeks</h4>
-
-                    <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal" data-target="#ModalIndeks">
-                        Tambahkan Data Indeks
-                    </button>
-
+                    <h4 class="card-title mb-3">Data Indeks</h4>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <div class="search mr-2">
+                                <form action="/dashboard/indeks">
+                                    @if(request('parameter'))
+                                        <input type="hidden" name="parameter" value="{{request('parameter')}}">
+                                    @endif
+                                    <div class="input-group">
+                                        <input class="form-control border-end-0 border" type="search" placeholder="Search" id="example-search-input" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                                        <span class="input-group-append">
+                                            <button class="btn btn-outline-secondary border-start-0 border-bottom-0 border" type="submit" >
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        <!-- Example single danger button -->
+                            <div class="basic-dropdown">
+                                <div class="dropdown">
+                                    @if(request('parameter'))
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle" data-toggle="dropdown">{{request('parameter')}}</button>
+                                    @else
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle" data-toggle="dropdown">Semua Indeks</button>
+                                    @endif
+                                    <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/dashboard/indeks">Semua</a>
+                                            <a class="dropdown-item" href="/dashboard/indeks?parameter=fungsi">Fungsi</a>
+                                            <a class="dropdown-item" href="/dashboard/indeks?parameter=klasifikasi">Klasifikasi</a>
+                                            <a class="dropdown-item" href="/dashboard/indeks?parameter=waktu">Waktu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ModalIndeks">
+                            Tambahkan Data Indeks
+                        </button>
+                    </div>
                     <!-- Modal end -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered zero-configuration">
+                    <div class="table-responsive mt-3">
+                        <table class="table table-striped table-bordered zero-configuration text-center">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>ID</th>
+                                    @if(request('parameter') == "klasifikasi")
                                     <th>Kategori</th>
+                                    @elseif(!request('parameter'))
+                                    <th>Kategori</th>
+                                    @endif
                                     <th>Tingkatan</th>
                                     <th>Bobot</th>
                                     <th>Parameter</th>
@@ -73,11 +81,15 @@
                                 @foreach ($indeks as $indek)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$indek->id}}</td>
-                                    @if($indek->kategori_indeks_id == null)
-                                    <td>-</td>
-                                    @else
-                                    <td>{{$indek->kategori_indeks->nama}}</td>
+                                    <td>{{$indek->id}}</td>  
+                                    @if (!request('parameter'))
+                                        @if ($indek->kategori_indeks_id == null)
+                                            <td>-</td>
+                                        @else
+                                            <td>{{$indek->kategori_indeks->nama}}</td>
+                                        @endif 
+                                    @elseif (request('parameter') == "klasifikasi")
+                                        <td>{{$indek->kategori_indeks->nama}}</td>
                                     @endif
                                     <td>{{$indek->tingkatan}}</td>
                                     <td>{{$indek->bobot_indeks}}</td>
@@ -294,7 +306,7 @@
                                         @csrf
                                         <div class="form-group mt-2" id="dropdown_input">
                                             <label for="parameter">Parameter</label>
-                                            <select class="form-control @error('parameter') is-invalid @enderror" value="{{ @old('parameter') }}" aria-label=".form-select-sm example" name="parameter"
+                                            <select class="form-control @error('parameter') is-invalid @enderror" aria-label=".form-select-sm example" name="parameter"
                                                 id="parameter">
                                                 <option value="fungsi">Fungsi</option>
                                                 <option value="klasifikasi">Klasifikasi</option>

@@ -21,8 +21,8 @@
                                 <div class="form-group p-3">
                                     <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
-                                            name="luas_bangunan" required>
+                                        <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
+                                            name="luas_bangunan">
                                         <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                         @error('luas_bangunan')
                                             <div class="invalid-feedback">
@@ -36,8 +36,8 @@
                                 <div class="form-group p-3">
                                     <label class="hitung" for="luas_tanah">Luas Tanah</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
-                                            name="luas_tanah" required>
+                                        <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
+                                            name="luas_tanah">
                                         <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                         @error('luas_tanah')
                                             <div class="invalid-feedback">
@@ -84,7 +84,7 @@
                         <div class="row">
                             @foreach ($kategori_indeks as $ktgr)
                                 <div class="col-sm-6 {{ ($loop->iteration % 2 == 0) ? ' pe-0' : ' ps-0' }}">
-                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has('$ktgr->slug') ? 'estimasi_error' : '')}}">
+                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
                                         <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
                                         @foreach ($indeks as $tk_indek)
                                         @if ($tk_indek->kategori_indeks_id == $ktgr->id)
@@ -97,7 +97,7 @@
                                         </div>
                                         @endif
                                         @endforeach
-                                        {!! $errors->first('{{$ktgr->slug}}', '<p class="text-error mt-2">This field is required</p>') !!}
+                                        {!! $errors->first($ktgr->slug, '<p class="text-error mt-2">This field is required</p>') !!}
                                     </div>
                                 </div>
                              @endforeach
@@ -127,29 +127,29 @@
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Sarana Prasarana</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <button type="button" class="btn-close" data-dismiss="modal"></button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     @foreach ($kategori_sarana as $ktgr)
-                                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion" id="accordionExample">
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsStayOpen-heading_{{$ktgr->id}}">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapse_{{$ktgr->id}}" aria-expanded="true"
-                                                    aria-controls="panelsStayOpen-collapse_{{$ktgr->id}}">
+                                            <h2 class="accordion-header" id="heading{{$ktgr->id}}">
+                                                <button class="accordion-button {{ ($loop->first ? '' : 'collapsed') }}" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{$ktgr->id}}" aria-expanded="true"
+                                                    aria-controls="collapse{{$ktgr->id}}">
                                                     {{$ktgr->kategori}}
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapse_{{$ktgr->id}}"
-                                                class="accordion-collapse collapse show"
-                                                aria-labelledby="panelsStayOpen-heading_{{$ktgr->id}}">
+                                            <div id="collapse{{$ktgr->id}}"
+                                                class="accordion-collapse collapse {{ ($loop->first ? 'show' : '') }}"
+                                                aria-labelledby="heading{{$ktgr->id}}" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     @foreach ($saranas as $sarana)
                                                     @if ($sarana->kategori == $ktgr->kategori)
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
+                                                        <input class="form-check-input {{$sarana->kategori}}" type="checkbox"
                                                             value="{{$sarana->nama}}" name="sarana[]" id="{{$sarana->id}}">
                                                         <label class="form-check-label" for="{{$sarana->id}}">
                                                             {{$sarana->nama}}
@@ -193,6 +193,9 @@
             </div>
         </div>
     </div>
+    
+
+
 
 
      <script>
@@ -251,13 +254,73 @@
 				$.each(dataCheck, function (index, value) {
 					if (!table.find('tr[data-id="' + dataCheck.eq(index).val() + '"]').length) {
 						console.log('ini checked : '+dataCheck.eq(index).val());
+                        if(dataCheck.eq(index).hasClass("Perkerasan"||"Penghubung"||"Kolam")){
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
-										<td>\
-											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]">\
+                                        <td>\ <div class="input-group">\
+											<input type="number" class="form-control" placeholder="Ukuran Sarana" name="jumlah_sarana[]"> <span class="input-group-text">m<sup>2</sup></span>\ <div>\
 										</td>\
 									</tr>');
+                        }
+                        else if(dataCheck.eq(index).hasClass("Pembatas")){
+						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
+										<td>'+dataCheck.eq(index).val()+'</td>\
+                                        <td>\ <div class="input-group">\
+											<input type="number" class="form-control" placeholder="Ukuran Sarana" name="jumlah_sarana[]"> <span class="input-group-text">m</span>\ <div>\
+										</td>\
+									</tr>');
+                        }
+                        else{
+						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
+										<td>'+dataCheck.eq(index).val()+'</td>\
+                                        <td>\ <div class="input-group">\
+											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]"> <span class="input-group-text">Unit</span>\ <div>\
+										</td>\
+									</tr>');
+                        }
 					}
+                    // function incrementValue(e) {
+                    //     e.preventDefault();
+                    //     var fieldName = $(e.target).data('field');
+                    //     var parent = $(e.target).closest('div');
+                    //     var currentVal = parseInt(parent.find('input[type=number]').val(), 10);
+
+                    //     if (!isNaN(currentVal)) {
+                    //         parent.find('input[type=number]').val(currentVal + 1);
+                    //     } else {
+                    //         parent.find('input[type=number]').val(1);
+                    //     }
+                    //     }
+
+                    //     function decrementValue(e) {
+                    //     e.preventDefault();
+                    //     var fieldName = $(e.target).data('field');
+                    //     var parent = $(e.target).closest('div');
+                    //     var currentVal = parseInt(parent.find('input[type=number]').val(), 10);
+
+                    //     if (!isNaN(currentVal) && currentVal > 1) {
+                    //         parent.find('input[type=number]').val(currentVal - 1);
+                    //     } else {
+                    //         parent.find('input[type=number]').val(1);
+                    //     }
+                    //     }
+
+                    //     $('.input-group').on('click', '.button-plus', function(e) {
+                    //     incrementValue(e);
+                    //     });
+
+                    //     $('.input-group').on('click', '.button-minus', function(e) {
+                    //     decrementValue(e);
+                    //     });
+
+                    // JUMLAH SARANA
+
+                    // <td>\ <div class="input-group plus-minus-input">\
+                    //                             <input type="button" value="-" class="tombol button-minus" data-field="quantity">\
+                    //                             <input type="number" step="1" min="1" value="1" name="jumlah_sarana[]" class="quantity-field">\
+                    //                             <input type="button" value="+" class="tombol button-plus" data-field="quantity">\</div>\
+					// 					</td>\
+
 				});
 				$.each(dataUncheck, function (index, value) {
 					if (table.find('tr[data-id="' + dataUncheck.eq(index).val() + '"]').length) {
@@ -267,5 +330,7 @@
 				});
 			})
 		})
+
+        
 	</script>
 @endsection

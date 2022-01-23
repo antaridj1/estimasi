@@ -25,11 +25,22 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Data Masyarakat</h4>
-
+                    <div class="d-flex justify-content-between">
+                      <form action="/dashboard/masyarakat">
+                          <div class="input-group">
+                              <input class="form-control border-end-0 border" type="search" placeholder="Search" id="example-search-input" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                              <span class="input-group-append">
+                                  <button class="btn btn-outline-secondary border-start-0 border-bottom-0 border" type="submit" >
+                                      <i class="fa fa-search"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </form>
+                    </div>
                    
 
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered zero-configuration">
+                    <div class="table-responsive mt-3">
+                        <table class="table table-striped table-bordered zero-configuration text-center">
                             <thead>
                                 <tr>
                                     <th >No.</th>
@@ -60,6 +71,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{$masyarakats->links()}}
                 </div>
             </div>
         </div>

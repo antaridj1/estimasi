@@ -14,16 +14,6 @@
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
             <li class="breadcrumb-item active"><a href="javascript:void(0)">Kategori Klasifikasi</a></li>
         </ol>
-        <div class="d-flex">
-          <div class="col-md-6">
-            <form action="/dashboard/kategoriIndeks">
-              <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
-                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
-              </div>
-            </form>
-          </div>
-        </div>
     </div>
 </div>
             <!-- row -->
@@ -34,9 +24,21 @@
             <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Kategori Klasifikasi</h4>
-                    <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal" data-target="#ModalIndeks">
-                        Tambahkan Kategori Klasifikasi
-                    </button>
+                    <div class="d-flex justify-content-between">
+                      <form action="/dashboard/kategoriIndeks">
+                          <div class="input-group">
+                              <input class="form-control border-end-0 border" type="search" placeholder="Search" id="example-search-input" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
+                              <span class="input-group-append">
+                                  <button class="btn btn-outline-secondary border-start-0 border-bottom-0 border" type="submit" >
+                                      <i class="fa fa-search"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </form>
+                      <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal" data-target="#ModalIndeks">
+                          Tambahkan Kategori
+                      </button>
+                    </div>
 
                     <!-- The Modal -->
                     <div class="modal fade" id="ModalIndeks">
@@ -75,7 +77,7 @@
                     </div>
 
                     <div class="table-responsive">
-                      <table class="table table-striped table-bordered zero-configuration">
+                      <table class="table table-striped table-bordered text-center">
                         <thead>
                           <tr>
                             <th>No.</th>

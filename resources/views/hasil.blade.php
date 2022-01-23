@@ -38,9 +38,9 @@
             <table class="table table-borderless">
               @foreach($detail_saranas as $detail_sarana)
                   <tr>
-                    <td>{{$detail_sarana->saranas->nama}}</td>
-                    <td>{{$detail_sarana->jumlah_sarana}} x {{number_format($detail_sarana->saranas->biaya,0)}}</td>
-                    <td>{{number_format($detail_sarana->jumlah_sarana*$detail_sarana->saranas->biaya,0)}}</td>
+                    <td>{{$detail_sarana->sarana->nama}}</td>
+                    <td>{{$detail_sarana->jumlah_sarana}} x {{number_format($detail_sarana->sarana->biaya,0)}}</td>
+                    <td>{{number_format($detail_sarana->jumlah_sarana*$detail_sarana->sarana->biaya,0)}}</td>
                   </tr>
               @endforeach 
                   <tfoot class="border-top">
@@ -133,7 +133,7 @@
     <div class="container d-flex align-items-center justify-content-center">
       <nav id="navbar" class="navbar">
         @foreach($estimasis as $estimasi)
-          <h4 class="hitung"> TOTAL = Rp {{number_format($estimasi->total_biaya,0}}</h4>
+          <h4 class="hitung"> TOTAL = Rp {{number_format($estimasi->total_biaya,0)}}</h4>
         @endforeach
       </nav><!-- .navbar -->
     </div>

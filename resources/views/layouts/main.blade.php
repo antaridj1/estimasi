@@ -45,9 +45,8 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto {{ Request::is('estimasi' || 'hitung' || 'hasil') ? 'active' : ''}}" href="/estimasi">Beranda</a></li>
+          <li><a class="nav-link scrollto {{ Request::is('estimasi')||Request::is('hitung')||Request::is('hasil') ? 'active' : ''}}" href="/estimasi">Beranda</a></li>
           <li><a class="nav-link scrollto {{ Request::is('riwayat') ? 'active' : ''}}" href="/riwayat">Riwayat Estimasi</a></li>
-          <li><a class="nav-link scrollto {{ Request::is('about') ? 'active' : ''}}" href="#about">Tentang</a></li>
           <li>
             @guest
             <a class="getstarted scrollto" href="/login">Masuk</a>

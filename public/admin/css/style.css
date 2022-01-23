@@ -1821,10 +1821,10 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #212529;
-  background-color: #9097c4;
-  border-color: #9097c4; }
+  background-color: #fff;
+  border-color: #d3d3d3; }
   .btn-secondary:hover {
-    color: #fff;
+    color: #9097c4;
     background-color: #7780b7;
     border-color: #6f78b2; }
   .btn-secondary:focus, .btn-secondary.focus {
@@ -14010,7 +14010,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   padding-right: 15rem; }
 
 [data-nav-headerbg="color_1"] .nav-header {
-  background-color: #ffffff; }
+  background-color: rgb(209, 209, 245) }
 
 [data-nav-headerbg="color_2"] .nav-header {
   background-color: #27394F !important; }

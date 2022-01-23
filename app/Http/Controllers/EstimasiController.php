@@ -93,18 +93,28 @@ class EstimasiController extends Controller
         // Hitung Total Estimasi
         $total_estimasi = $bangunan_gedung + $total_sarana;
 
-         //Input Data Estimasi
-         $user_id = Auth::id();
+        //Input Data Estimasi
+        $user_id = Auth::id();
 
-         $request->validate([
+        //Validation
+        $valids = [
             'luas_tanah'=>'required|min:1',
             'luas_bangunan'=>'required|min:1',
             'gedung'=>'required',
             'fungsi'=>'required',
-            'waktu'=>'required',
-            
-        ]);
+            'waktu'=>'required', 
+        ];
 
+        $slugs = KategoriIndeks::pluck('slug');
+        $slugs_length = count($slugs);
+
+        for($i=0;$i<$slugs_length;$i++){
+            $slug = $slugs[$i];
+            $valids[$slug] = 'required';
+        }
+        $request->validate($valids);
+
+        //Input Estimasi
          $estimasi = Estimasi::create([
             'luas_tanah'=>$request->luas_tanah,
             'luas_bangunan'=>$request->luas_bangunan,

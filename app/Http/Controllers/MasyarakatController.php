@@ -33,8 +33,7 @@ class MasyarakatController extends Controller
     }
 
     public function tampil(){
-        $masyarakats = Masyarakat::all();
-
+        $masyarakats = Masyarakat::cari(request(['search']))->paginate(10)->withQueryString();;
         return view('admin.masyarakat',compact('masyarakats'));
     }
 

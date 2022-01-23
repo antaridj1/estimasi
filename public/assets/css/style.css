@@ -9,6 +9,68 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+/* Buatan Aing */
+.tombol,.quantity-field{
+  border: 1px solid #eeeeee;
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 10px;
+}
+
+.tombol{
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.plus-minus-button {
+  clear: both;
+  margin: 15px 0;
+  position: relative;
+}
+
+.plus-minus-button input[type='button'] {
+  background-color: #eeeeee;
+  min-width: 38px;
+  width: auto;
+  transition: all 300ms ease;
+}
+
+.input-group .button-minus,
+.input-group .button-plus {
+  font-weight: bold;
+  height: 38px;
+  padding: 0;
+  width: 30px;
+  position: relative;
+}
+
+.input-group .quantity-field {
+  position: relative;
+  height: 38px;
+  left: -6px;
+  text-align: center;
+  width: 62px;
+  display: inline-block;
+  font-size: 13px;
+  margin: 0 0 5px;
+  resize: vertical;
+}
+
+.button-plus {
+  left: -13px;
+}
+
+.quantity-field {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}
 .text-error{
   color: #e07a6f;
   font-size: small;
@@ -19,21 +81,21 @@
   border: 1px solid #e07a6f;
 }
 
+.round{
+  border-radius: 15px;
+}
+/* Buatan Aing Selesai */
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #212529;
   background-color: #fef8f5;
 }
 
-.round{
-  border-radius: 15px;
-}
-
 a {
   color: #eb5d1e;
   text-decoration: none;
 }
-
 
 a:hover {
   color: #ffb28f;
@@ -1239,4 +1301,6 @@ li .breadcrumb-item {
     text-align-last: center;
     padding: 3px 0;
   }
+
+  
 }
