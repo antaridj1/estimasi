@@ -22,7 +22,7 @@
                                     <div class="form-group p-3">
                                         <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
                                         <div class="input-group">
-                                            <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
+                                            <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan"
                                                 name="luas_bangunan">
                                             <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                             @error('luas_bangunan')
@@ -37,7 +37,7 @@
                                     <div class="form-group p-3">
                                         <label class="hitung" for="luas_tanah">Luas Tanah</label>
                                         <div class="input-group">
-                                            <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
+                                            <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" 
                                                 name="luas_tanah">
                                             <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                             @error('luas_tanah')
@@ -61,7 +61,7 @@
                                         @endif
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
-                                                    value="{{$fungsi->id}}">
+                                                    value="{{$fungsi->id}}" value="{{ @old('fungsi') }}">
                                                 <label class="form-check-label" for="{{$fungsi->tingkatan}}">
                                                     {{$fungsi->tingkatan}}
                                                 </label>
@@ -174,8 +174,8 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    @foreach ($kategori_sarana as $ktgr)
                                     <div class="accordion" id="accordionExample">
+                                        @foreach ($kategori_sarana as $ktgr)
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="heading{{$ktgr->id}}">
                                                 <button class="accordion-button {{ ($loop->first ? '' : 'collapsed') }}" type="button" data-bs-toggle="collapse"
@@ -201,10 +201,9 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-
                                         </div>
-                                    </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>  
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
@@ -216,7 +215,7 @@
                     </div>
 
                         <div class="col-12 round p-4 shadow-sm bg-body">                           
-                                <table class="table table-borderless text-center">
+                                <table class="table table-borderless">
                                     <label class="hitung">Sarana Prasarana</label>
                                     <tbody id="datanya"></tbody>
                                 </table>

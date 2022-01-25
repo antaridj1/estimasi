@@ -57,7 +57,7 @@
                                 @csrf
                                 <div class="form-group">
                                   <label for="nama">Nama</label>
-                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" placeholder="Nama" name="nama" >
+                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" name="nama" >
                                   @error('nama')
                                     <div class="invalid-feedback">
                                       {{$message}}
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="bobot_indeks">Bobot</label>
-                                  <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" placeholder="Bobot Indeks" name="bobot_indeks" >
+                                  <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" name="bobot_indeks" >
                                   @error('bobot_indeks')
                                     <div class="invalid-feedback">
                                       {{$message}}
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="biaya">Biaya</label>
-                                  <input type="text" class="form-control @error('biaya') is-invalid @enderror" value="{{ @old('biaya') }}" id="biaya" placeholder="Biaya" name="biaya" >
+                                  <input type="text" class="form-control @error('biaya') is-invalid @enderror" value="{{ @old('biaya') }}" id="biaya" name="biaya" >
                                   @error('biaya')
                                     <div class="invalid-feedback">
                                       {{$message}}
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="keterangan">Keterangan</label>
-                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="Keterangan" name="keterangan">
+                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" name="keterangan">
                                   @error('keterangan')
                                     <div class="invalid-feedback">
                                       {{$message}}

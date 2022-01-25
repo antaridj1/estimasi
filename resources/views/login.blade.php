@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                   <label for="name">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Masukkan Email" required >
+                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required >
                   @error('email')
                     <div class="invalid-feedback">
                       {{$message}}
@@ -29,7 +29,7 @@
               
                 <div class="form-group mt-3 mb-3">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Masukkan Password" required>
+                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required>
                   @error('password')
                       <div class="invalid-feedback">
                         {{$message}}

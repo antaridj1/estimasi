@@ -39,15 +39,15 @@
               @foreach($detail_saranas as $detail_sarana)
                   <tr>
                     <td>{{$detail_sarana->sarana->nama}}</td>
-                    <td>{{$detail_sarana->jumlah_sarana}} x {{number_format($detail_sarana->sarana->biaya,0)}}</td>
-                    <td>{{number_format($detail_sarana->jumlah_sarana*$detail_sarana->sarana->biaya,0)}}</td>
+                    <td>{{$detail_sarana->jumlah_sarana}} x Rp {{number_format($detail_sarana->sarana->biaya,0)}}</td>
+                    <td>Rp {{number_format($detail_sarana->jumlah_sarana*$detail_sarana->sarana->biaya,0)}}</td>
                   </tr>
               @endforeach 
                   <tfoot class="border-top">
                     <tr>
                       <th scope="col">Total</th>
                       <th scope="col"> </th>
-                      <th scope="col">{{number_format($total_sarana,0)}}</th>
+                      <th scope="col">Rp {{number_format($total_sarana,0)}}</th>
                     </tr> 
                   </tfoot>
               </table>
@@ -88,10 +88,10 @@
               <p>Indeks Klasifikasi = 
                   @foreach($detail_estimasis as $detail_estimasi)
                     @if ($detail_estimasi->indeks->kategori_indeks_id!==Null)
-                      @if(!$loop->last)
-                        ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}}) +
-                      @else
+                      @if($loop->first)
                         ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}})
+                      @else
+                        + ({{$detail_estimasi->indeks->bobot_indeks}} x {{$detail_estimasi->indeks->kategori_indeks->bobot_kategori}})
                       @endif
                     @endif
                   @endforeach
@@ -118,10 +118,10 @@
                 <p>= 
                     {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} x {{number_format($estimasi->gedungs->biaya,0)}}
                 </p>
-                <p> = {{$bangunan_gedung}} </p>
+                <p> = Rp {{number_format($bangunan_gedung,0)}} </p>
                 <p> Total Retribusi = Biaya Bangunan + Biaya Prasarana</p>
-                <p> = Rp{{number_format($bangunan_gedung,0)}} + Rp{{number_format($total_sarana,0)}}</p>
-                <p> = Rp{{number_format($estimasi->total_biaya,0)}}</p>
+                <p> = Rp {{number_format($bangunan_gedung,0)}} + Rp {{number_format($total_sarana,0)}}</p>
+                <p> = <b> Rp {{number_format($estimasi->total_biaya,0)}} </b> </p>
                 @endforeach
             </div>
           </div>

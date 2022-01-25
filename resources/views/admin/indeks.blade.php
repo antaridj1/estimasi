@@ -336,7 +336,7 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="tingkatan">Tingkatan</label>
-                                            <input type="text" class="form-control @error('tingkatan') is-invalid @enderror" value="{{ @old('tingkatan') }}" id="tingkatan" placeholder="tingkatan"
+                                            <input type="text" class="form-control @error('tingkatan') is-invalid @enderror" value="{{ @old('tingkatan') }}" id="tingkatan"
                                                 name="tingkatan">
                                             @error('tingkatan')
                                                 <div class="invalid-feedback">
@@ -346,7 +346,7 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="bobot_indeks">Bobot</label>
-                                            <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" placeholder="bobot"
+                                            <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" 
                                                 name="bobot_indeks">
                                             @error('bobot_indeks')
                                                 <div class="invalid-feedback">
@@ -356,7 +356,7 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="keterangan">Keterangan</label>
-                                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="keterangan"
+                                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan"
                                                 name="keterangan">
                                             @error('keterangan')
                                                 <div class="invalid-feedback">

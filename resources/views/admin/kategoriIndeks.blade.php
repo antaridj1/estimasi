@@ -57,15 +57,15 @@
                                 @csrf
                                 <div class="form-group">
                                   <label for="nama">Nama</label>
-                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" placeholder="Nama" name="nama" >
+                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" name="nama" >
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="bobot_kategori">Bobot</label>
-                                  <input type="text" class="form-control @error('bobot_kategori') is-invalid @enderror" value="{{ @old('bobot_kategori') }}" id="bobot_kategori" placeholder="Bobot" name="bobot_kategori">
+                                  <input type="text" class="form-control @error('bobot_kategori') is-invalid @enderror" value="{{ @old('bobot_kategori') }}" id="bobot_kategori" name="bobot_kategori">
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="keterangan">Keterangan</label>
-                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" placeholder="Keterangan" name="keterangan">
+                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" name="keterangan">
                                 </div>
                                 <div class="form-group mt-4"> 
                                     <button type="submit" class="btn btn-primary" >Simpan </button>
