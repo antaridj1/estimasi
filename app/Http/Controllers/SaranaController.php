@@ -8,7 +8,7 @@ class SaranaController extends Controller
 {
     public function index(Sarana $saranas)
     {
-        $saranas= Sarana::cari(request(['search']))->paginate(10)->withQueryString();
+        $saranas= Sarana::orderByRaw('kategori')->cari(request(['search']))->paginate(10)->withQueryString();
         return view('admin.sarana',compact('saranas'));
     }
 

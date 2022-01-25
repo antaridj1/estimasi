@@ -7,119 +7,161 @@
     <div class="container container_margin">
         <div class="row justify-content-center">
             <div class="col-sm-9">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
-                <li class="breadcrumb-item active"><a href="#">Hitung</a></li>
-            </ol>
-        </nav>
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Hitung</a></li>
+                    </ol>
+                </nav>
                 <form method="post" action="{{route('hitung')}}">
                     @csrf
                     <div id="form_umum">
-                        <div class="row shadow-sm p-3 mb-2 bg-body round">
-                            <div class="col-sm-6">
-                                <div class="form-group p-3">
-                                    <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
-                                    <div class="input-group">
-                                        <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
-                                            name="luas_bangunan">
-                                        <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
-                                        @error('luas_bangunan')
-                                            <div class="invalid-feedback">
-                                            {{$message}}
-                                            </div>
-                                        @enderror
+                        <div class="col-12 shadow-sm p-3 mb-2 bg-body round">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="col-sm-6">
+                                    <div class="form-group p-3">
+                                        <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
+                                        <div class="input-group">
+                                            <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan" placeholder="Luas Bangunan"
+                                                name="luas_bangunan">
+                                            <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                            @error('luas_bangunan')
+                                                <div class="invalid-feedback">
+                                                {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group p-3">
-                                    <label class="hitung" for="luas_tanah">Luas Tanah</label>
-                                    <div class="input-group">
-                                        <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
-                                            name="luas_tanah">
-                                        <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
-                                        @error('luas_tanah')
-                                            <div class="invalid-feedback">
-                                            {{$message}}
-                                            </div>
-                                        @enderror
+                                <div class="col-sm-6">
+                                    <div class="form-group p-3">
+                                        <label class="hitung" for="luas_tanah">Luas Tanah</label>
+                                        <div class="input-group">
+                                            <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" placeholder="Luas Tanah"
+                                                name="luas_tanah">
+                                            <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
+                                            @error('luas_tanah')
+                                                <div class="invalid-feedback">
+                                                {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-evenly">
-                            <div class="col-sm-6 ps-0 mb-2">
-                                <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('gedung') ? 'estimasi_error' : '')}}">
-                                    <label class="hitung" for="gedung">Status Bangunan</label>
-                                    @foreach ($gedungs as $gedung)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
-                                            value="{{$gedung->id}}">
-                                        <label class="form-check-label" for="{{$gedung->nama}}">
-                                            {{$gedung->nama}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                    {!! $errors->first('gedung', '<p class="text-error mt-2">This field is required</p>') !!}
-                                </div>
-                            </div>
-                            <div class="col-sm-6 pe-0 mb-2">
-                                <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('fungsi') ? 'estimasi_error' : '')}}">
-                                    <label for="fungsi" class="hitung">Fungsi Bangunan</label>
-                                    @foreach ($fungsis as $fungsi)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
-                                            value="{{$fungsi->id}}">
-                                        <label class="form-check-label" for="{{$fungsi->tingkatan}}">
-                                            {{$fungsi->tingkatan}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                    {!! $errors->first('fungsi', '<p class="text-error mt-2">This field is required</p>') !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            @foreach ($kategori_indeks as $ktgr)
-                                <div class="col-sm-6 {{ ($loop->iteration % 2 == 0) ? ' pe-0' : ' ps-0' }}">
-                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
-                                        <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
-                                        @foreach ($indeks as $tk_indek)
-                                        @if ($tk_indek->kategori_indeks_id == $ktgr->id)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
-                                                value="{{$tk_indek->id}}">
-                                            <label class="form-check-label" for="{{$tk_indek->id}}">
-                                                {{$tk_indek->tingkatan}}
-                                            </label>
+                        <div class="col-12 mb-2">
+                            <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('fungsi') ? 'estimasi_error' : '')}}">
+                                <label for="fungsi" class="hitung">Fungsi Bangunan</label>
+                                <div class="row">
+                                    <div class="d-flex justify-content-evenly"> 
+                                        @foreach ($fungsis as $fungsi)
+                                        @if($loop->first || $loop->index % 3 == 0)
+                                        <div class="col">
+                                        @endif
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
+                                                    value="{{$fungsi->id}}">
+                                                <label class="form-check-label" for="{{$fungsi->tingkatan}}">
+                                                    {{$fungsi->tingkatan}}
+                                                </label>
+                                            </div>
+                                        @if($loop->iteration % 3 == 0 || $loop->last)
                                         </div>
                                         @endif
                                         @endforeach
-                                        {!! $errors->first($ktgr->slug, '<p class="text-error mt-2">This field is required</p>') !!}
                                     </div>
                                 </div>
-                             @endforeach
-                        
-                            <div class="col-sm-6 p-4 shadow-sm mb-2 bg-body round {{($errors->first('waktu') ? 'estimasi_error' : '')}}">
-                                <div class="form-group">
-                                    <label for="waktu" class="hitung ">Jangka Waktu Bangunan</label>
-                                    @foreach ($jangka_waktu as $waktu)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
-                                            value="{{$waktu->id}}">
-                                        <label class="form-check-label" for="{{$waktu->id}}">
-                                            {{$waktu->tingkatan}}
-                                        </label>
+                                {!! $errors->first('fungsi', '<p class="text-error mt-2">This field is required</p>') !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="col-6 mb-2 me-1 ">
+                                    <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('gedung') ? 'estimasi_error' : '')}}">
+                                        <label class="hitung" for="gedung">Status Bangunan</label>
+                                        @foreach ($gedungs as $gedung)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
+                                                value="{{$gedung->id}}">
+                                            <label class="form-check-label" for="{{$gedung->nama}}">
+                                                {{$gedung->nama}}
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                        {!! $errors->first('gedung', '<p class="text-error mt-2">This field is required</p>') !!}
                                     </div>
-                                    @endforeach
-                                    {!! $errors->first('waktu', '<p class="text-error mt-2">This field is required</p>') !!}
+                                </div>
+                                <div class="col-6 ms-1 p-4 shadow-sm mb-2 bg-body round {{($errors->first('waktu') ? 'estimasi_error' : '')}}">
+                                    <div class="form-group">
+                                        <label for="waktu" class="hitung ">Jangka Waktu Bangunan</label>
+                                        @foreach ($jangka_waktu as $waktu)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
+                                                value="{{$waktu->id}}">
+                                            <label class="form-check-label" for="{{$waktu->id}}">
+                                                {{$waktu->tingkatan}}
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                        {!! $errors->first('waktu', '<p class="text-error mt-2">This field is required</p>') !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                   
+                       
+                        @foreach ($kategori_indeks as $ktgr)
+                            @if($ktgr->slug == "zonasi_gempa")
+                                <div class="col-12">
+                                    <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
+                                        <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
+                                            @foreach ($indeks as $tk_indek)  
+                                                @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
+                                                                value="{{$tk_indek->id}}">
+                                                            <label class="form-check-label" for="{{$tk_indek->id}}">
+                                                                {{$tk_indek->tingkatan}}
+                                                            </label>
+                                                        </div>
+                                                @endif
+                                            @endforeach
+                                        {!! $errors->first($ktgr->slug, '<p class="text-error mt-2">This field is required</p>') !!}
+                                    </div>
+                                </div>
+                            @else
+                                @if($loop->first || $loop->index % 2 == 0) 
+                                    <div class="row">
+                                        <div class="d-flex justify-content-evenly">
+                                @endif
+                
+                                    <div class="col-6 h-100 {{ ($loop->iteration % 2 == 0) ? 'ms-1' : ' me-1' }}">
+                                        <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
+                                            <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
+                                                @foreach ($indeks as $tk_indek)  
+                                                    @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
+                                                                    value="{{$tk_indek->id}}">
+                                                                <label class="form-check-label" for="{{$tk_indek->id}}">
+                                                                    {{$tk_indek->tingkatan}}
+                                                                </label>
+                                                            </div>
+                                                    @endif
+                                                @endforeach
+                                            {!! $errors->first($ktgr->slug, '<p class="text-error mt-2">This field is required</p>') !!}
+                                        </div>
+                                    </div>
+                                @if($loop->iteration % 2 == 0 || $loop->last)
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                           
+                        @endforeach
+                    </div>
+                    
                     <!-- The Modal -->
                     <div class="modal fade" id="ModalSarana">
                         <div class="modal-dialog modal-lg">
@@ -173,7 +215,7 @@
                         </div>
                     </div>
 
-                        <div class="row round p-3 shadow-sm bg-body">                           
+                        <div class="col-12 round p-4 shadow-sm bg-body">                           
                                 <table class="table table-borderless text-center">
                                     <label class="hitung">Sarana Prasarana</label>
                                     <tbody id="datanya"></tbody>
@@ -185,6 +227,8 @@
                                     </button>
                                 </div>              
                         </div>
+
+                        
 
                     <div class="form-group mt-4 contact">
                         <button type="submit" class="btn btn-primary">Hitung </button>

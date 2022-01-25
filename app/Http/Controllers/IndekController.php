@@ -15,7 +15,7 @@ class IndekController extends Controller
      */
     public function index()
     {
-        $indeks = Indek::orderByRaw('parameter','kategori_indeks_id')->filter(request(['search','parameter']))->paginate(10)->withQueryString();
+        $indeks = Indek::orderBy('parameter')->orderBy('kategori_indeks_id')->filter(request(['search','parameter']))->paginate(10)->withQueryString();
        // dd(request('search'));
         $kategori = KategoriIndeks::all();
         return view('admin.indeks',compact(['indeks','kategori']));

@@ -14,7 +14,8 @@ class Indek extends Model
 
     public function scopeFilter($query, array $filter){
         $query->when($filter['search'] ?? false, function($query, $search) {
-            return $query->where('tingkatan','like','%'.$search.'%');            
+            return $query->where('tingkatan','like','%'.$search.'%');
+            // ->where('tingkatan','like','%'.$search.'%');              
         });
 
         $query->when($filter['parameter'] ?? false, function($query, $parameter){

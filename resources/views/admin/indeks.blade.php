@@ -182,7 +182,7 @@
                                                     </div>
 
                                                     <!-- Modal body -->
-                                                    <div class="modal-body">
+                                                    <div class="modal-body text-left">
                                                         <form method="post" action="{{route('edit_indeks')}}">
                                                             @method('patch')
                                                             @csrf
@@ -378,29 +378,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
-$(document).ready(function () {
-    $('#parameter').on('change', function () {
-        if ($(this).val() == 'klasifikasi') {
-            $(this).parents('.modal').find('#kategori_indeks').show();
-        } else {
-            $(this).parents('.modal').find('#kategori_indeks').hide();
-        }
-    })
-});
+    $(document).ready(function () {
+        $('.edit_select').on('change', function () {
+            if ($(this).val() == 'klasifikasi') {
+                $(this).parents('.modal').find('.kategori').show();
+            } else {
+                $(this).parents('.modal').find('.kategori').hide();
+            }
+        })
 
-$(document).ready(function () {
-    $('.edit_select').on('change', function () {
-        if ($(this).val() == 'klasifikasi') {
-            $(this).parents('.modal').find('.kategori').show();
-        } else {
-            $(this).parents('.modal').find('.kategori').hide();
-        }
-    })
-});
-
-    //kategori
-
+        $('#parameter').on('change', function () {
+            if ($(this).val() == 'klasifikasi') {
+                $(this).parents('.modal').find('#kategori_indeks').show();
+            } else {
+                $(this).parents('.modal').find('#kategori_indeks').hide();
+            }
+        })
+    });
 </script>
 
 @endsection
