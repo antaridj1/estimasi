@@ -52,20 +52,35 @@
                           </div>
                           
                           <!-- Modal body -->
-                          <div class="modal-body">
+                          <div class="modal-body text-left">
                             <form method="post" action="{{route('input_kategoriIndeks')}}">
                                 @csrf
                                 <div class="form-group">
                                   <label for="nama">Nama</label>
                                   <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" name="nama" >
+                                  @error('nama')
+                                    <div class="invalid-feedback">
+                                      {{$message}}
+                                    </div>
+                                  @enderror
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="bobot_kategori">Bobot</label>
                                   <input type="text" class="form-control @error('bobot_kategori') is-invalid @enderror" value="{{ @old('bobot_kategori') }}" id="bobot_kategori" name="bobot_kategori">
+                                  @error('bobot_kategori')
+                                    <div class="invalid-feedback">
+                                      {{$message}}
+                                    </div>
+                                  @enderror
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="keterangan">Keterangan</label>
                                   <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ @old('keterangan') }}" id="keterangan" name="keterangan">
+                                  @error('keterangan')
+                                    <div class="invalid-feedback">
+                                      {{$message}}
+                                    </div>
+                                  @enderror
                                 </div>
                                 <div class="form-group mt-4"> 
                                     <button type="submit" class="btn btn-primary" >Simpan </button>
@@ -81,10 +96,8 @@
                         <thead>
                           <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama</th>
                             <th>Bobot</th>
-                            <th>Keterangan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                           </tr>
@@ -93,39 +106,17 @@
                           @foreach ($kategoriIndeks as $kategori)
                             <tr> 
                               <td>{{$loop->iteration}}</td>
-                              <td>{{$kategori->id}}</td>
-                              <td>{{$kategori->nama}}</td>
+                              <td class="text-left">{{$kategori->nama}}</td>
                               <td>{{$kategori->bobot_kategori}}</td>
                               <td>
-                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-primary" data-toggle="modal" data-target="#detail_{{$kategori->id}}">
-                                Detail
-                                </a>
-                                <!-- The Modal -->
-                                <div class="modal fade" id="detail_{{$kategori->id}}">
-                                  <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                      <!-- Modal Header -->
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">Keterangan</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      </div>
-                                      <!-- Modal body -->
-                                      <div class="modal-body">
-                                        <p>{{$kategori->keterangan}}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
                                 @if ($kategori->status == 1)
-                                  <a href="{{ route('edit_statusKategori', $kategori->id) }}" class="label label-pill label-success"
-                                      data-toggle="modal" data-target="#editStatus_{{$kategori->id}}">
+                                  <a href="{{ route('edit_statusKategori', $kategori->id) }}" class="label label-success"
+                                      data-toggle="modal" data-target="#editStatus_{{$kategori->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Nonaktifkan">
                                       Aktif
                                   </a> 
                                 @else
-                                  <a href="{{ route('edit_statusKategori', $kategori->id) }}" class="label label-pill label-danger"
-                                      data-toggle="modal" data-target="#editStatus_{{$kategori->id}}">
+                                  <a href="{{ route('edit_statusKategori', $kategori->id) }}" class="label label-danger"
+                                      data-toggle="modal" data-target="#editStatus_{{$kategori->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Aktifkan">
                                       Nonaktif
                                   </a>
                                 @endif
@@ -162,7 +153,8 @@
                                 </div>
                               </td>
                               <td>
-                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-secondary" data-toggle="modal" data-target="#edit_{{$kategori->id}}">
+                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-secondary m-1" 
+                                data-toggle="modal" data-target="#edit_{{$kategori->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                 <i class="fa fa-edit"></i>
                                 </a>
                                 <!-- The Modal -->
@@ -214,6 +206,26 @@
                                                 <button type="submit" class="btn btn-primary" >Simpan </button>
                                             </div>
                                         </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <a href="dashboard/kategoriIndeks/{{$kategori->id}}" class="label label-primary" 
+                                data-toggle="modal" data-target="#detail_{{$kategori->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                <i class="fa fa-search"></i>
+                                </a>
+                                <!-- The Modal -->
+                                <div class="modal fade" id="detail_{{$kategori->id}}">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Keterangan</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      </div>
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                        <p>{{$kategori->keterangan}}</p>
                                       </div>
                                     </div>
                                   </div>

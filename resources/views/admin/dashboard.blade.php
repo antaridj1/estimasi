@@ -23,7 +23,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="card gradient-2">
                             <div class="card-body">
-                                <h3 class="card-title text-white">Registrasi</h3>
+                                <h3 class="card-title text-white">User</h3>
                                 <div class="d-inline-block">
                                     <h2 class="text-white">{{$jumlah_regis}}</h2>
                                 </div>
@@ -66,24 +66,25 @@
                                         
                                             <tbody>
                                                 <tr>
+                                                    
                                                     <td>Indeks</td>
-                                                    <td><a href="/dashboard/indeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                    <td class="text-right"><a href="/dashboard/indeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gedung</td>
-                                                    <td><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                    <td class="text-right"><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sarana</td>
-                                                    <td><a href="/dashboard/sarana" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                    <td class="text-right"><a href="/dashboard/sarana" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Masyarakat</td>
-                                                    <td><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                    <td class="text-right"><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kategori Klasifikasi</td>
-                                                    <td><a href="/dashboard/kategoriIndeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
+                                                    <td class="text-right"><a href="/dashboard/kategoriIndeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>

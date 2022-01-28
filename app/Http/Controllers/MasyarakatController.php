@@ -14,15 +14,16 @@ class MasyarakatController extends Controller
         return view('akun',compact('masyarakat'));
     }
 
-    public function edit(Request $request, Masyarakat $masyarakat)
-    {
+    public function edit(Request $request)
+    {   
         $request->validate([
             'nama'=>'required|max:255',
-            'email'=>'required|email|unique:masyarakats|max:255',
+            'email'=>'required|email|max:255',
             'telp'=>'required|min:10|max:14',
-            'no_ktp'=>'required|unique:masyarakats'
+            'no_ktp'=>'required'
         ]);
-
+        
+        // $user_id = Auth::id();
         Masyarakat::where('id',$request->id)->update([
             'nama'=>$request->nama,
             'email'=>$request->email,
@@ -50,5 +51,23 @@ class MasyarakatController extends Controller
             dd('gagal');
         }
         return redirect('/akun');
+    }
+
+    public function updateStatus(Masyarakat $masyarakat)
+    {
+        $id = $masyarakat->id;
+
+        if( $masyarakat->status == false){
+            Masyarakat::where('id',$id)->update([
+                'status'=>true,
+            ]);
+            return redirect('/dashboard/masyarakat')->with('status','data diaktifkan');
+        }
+        else {
+            Masyarakat::where('id',$id)->update([
+                'status'=>false,
+            ]);
+            return redirect('/dashboard/masyarakat')->with('status','data dinonaktifkan');
+        }
     }
 }

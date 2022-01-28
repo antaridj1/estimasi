@@ -17,7 +17,7 @@ class GedungController extends Controller
     {
         $request->validate([
             'nama'=>'required|max:255',
-            'bobot_indeks'=>'required|numeric',
+            'bobot_indeks'=>'required|numeric|min:0|max:1',
             'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
@@ -30,7 +30,7 @@ class GedungController extends Controller
     {
         $request->validate([
             'nama'=>'required|max:255',
-            'bobot_indeks'=>'required|numeric',
+            'bobot_indeks'=>'required|numeric|min:0|max:1',
             'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);

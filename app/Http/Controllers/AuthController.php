@@ -42,12 +42,12 @@ class AuthController extends Controller
     }
 
     public function postLogin(Request $request){
-        $login = $request->validate([
+         $login = $request->validate([
             'email' => ['required','email'],
             'password' => 'required'
         ]);
 
-       if(Auth::guard('masyarakat')->attempt($login))
+       if(Auth::guard('masyarakat')->attempt(['email' => $request->email, 'password'=> $request->password, 'status'=>'1']))
        {   
             $request->session()->regenerate();
              return redirect()->intended('estimasi');

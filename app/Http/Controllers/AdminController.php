@@ -42,7 +42,7 @@ class AdminController extends Controller
             'telp' =>$request->telp,
             'alamat'=>$request->alamat,
         ]);
-        return redirect('admin.profil');
+        return redirect('/profil');
     }
 
     public function editpass(Request $request){

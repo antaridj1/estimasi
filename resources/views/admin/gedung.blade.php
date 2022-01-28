@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="bobot_indeks">Bobot</label>
-                                  <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" name="bobot_indeks" >
+                                  <input type="text" min="0" max="1" class="form-control @error('bobot_indeks') is-invalid @enderror" value="{{ @old('bobot_indeks') }}" id="bobot_indeks" name="bobot_indeks" >
                                   @error('bobot_indeks')
                                     <div class="invalid-feedback">
                                       {{$message}}
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="biaya">Biaya</label>
-                                  <input type="text" class="form-control @error('biaya') is-invalid @enderror" value="{{ @old('biaya') }}" id="biaya" name="biaya" >
+                                  <input type="text" min="1" class="form-control @error('biaya') is-invalid @enderror" value="{{ @old('biaya') }}" id="biaya" name="biaya" >
                                   @error('biaya')
                                     <div class="invalid-feedback">
                                       {{$message}}
@@ -105,11 +105,9 @@
                             <thead>
                                 <tr>
                                     <th >No.</th>
-                                    <th >ID</th>
                                     <th >Nama</th>
                                     <th >Bobot</th>
                                     <th >Biaya (Rp)</th>
-                                    <th >Ket</th>
                                     <th >Status</th>
                                     <th >Aksi</th>
                                 </tr>
@@ -118,44 +116,18 @@
                                 @foreach ($gedungs as $gedung)
                                   <tr> 
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$gedung->id}}</td>
-                                    <td>{{$gedung->nama}}</td>
+                                    <td class="text-left">{{$gedung->nama}}</td>
                                     <td>{{$gedung->bobot_indeks}}</td>
-                                    <td>{{number_format($gedung->biaya,0)}}</td>
-                                    <td>
-                                      <a href="dashboard/gedung/{{$gedung->id}}" class="label label-primary" data-toggle="modal" 
-                                          data-target="#detail_{{$gedung->id}}">
-                                          Detail
-                                      </a>
-                                      <!-- Modal -->
-                                      <div class="modal fade" id="detail_{{$gedung->id}}">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                          <div class="modal-content">
-                                          
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                              <h4 class="modal-title">Keterangan</h4>
-                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                              <p>{{$gedung->keterangan}}</p>
-                                            </div>
-                                            <!-- Modal footer -->
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </td>
+                                    <td class="text-right">{{number_format($gedung->biaya,0)}}</td>
                                     <td>
                                     @if ($gedung->status == 1)
-                                      <a href="{{ route('edit_statusGedung', $gedung->id) }}" class="label label-pill label-success"
-                                          data-toggle="modal" data-target="#editStatus_{{$gedung->id}}">
+                                      <a href="{{ route('edit_statusGedung', $gedung->id) }}" class="label label-success"
+                                          data-toggle="modal" data-target="#editStatus_{{$gedung->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Nonatifkan">
                                           Aktif
                                       </a> 
                                     @else
-                                      <a href="{{ route('edit_statusGedung', $gedung->id) }}" class="label label-pill label-danger"
-                                          data-toggle="modal" data-target="#editStatus_{{$gedung->id}}">
+                                      <a href="{{ route('edit_statusGedung', $gedung->id) }}" class="label label-danger"
+                                          data-toggle="modal" data-target="#editStatus_{{$gedung->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Aktifkan">
                                           Nonaktif
                                       </a>
                                     @endif
@@ -192,76 +164,99 @@
                                       </div>
                                     </td>
                                     <td>
-                                    <a href="dashboard/gedung/{{$gedung->id}}" class="label label-secondary " data-toggle="modal" 
-                                        data-target="#edit_{{$gedung->id}}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="edit_{{$gedung->id}}">
-                                      <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        
-                                          <!-- Modal Header -->
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">Edit Data</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          </div>
+                                      <a href="dashboard/gedung/{{$gedung->id}}" class="label label-secondary m-1" data-toggle="modal" 
+                                          data-target="#edit_{{$gedung->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                          <i class="fa fa-edit"></i>
+                                      </a>
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="edit_{{$gedung->id}}">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
                                           
-                                          <!-- Modal body -->
-                                          <div class="modal-body">
-                                            <form method="post" action="{{route('edit_gedung')}}">
-                                            @method('patch')
-                                            @csrf
-                                                <div class="form-group">
-                                                      <label for="id">ID</label>
-                                                      <input type="text" class="form-control" id="id" value="{{$gedung->id}}" name="id" readonly>
-                                                    </div>
-                                                <div class="form-group mt-2">
-                                                    <label for="nama">Nama</label>
-                                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" value="{{$gedung->nama}}" name="nama" >
-                                                    @error('nama')
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Edit Data</h4>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            
+                                            <!-- Modal body -->
+                                            <div class="modal-body text-left">
+                                              <form method="post" action="{{route('edit_gedung')}}">
+                                              @method('patch')
+                                              @csrf
+                                                  <div class="form-group">
+                                                        <label for="id">ID</label>
+                                                        <input type="text" class="form-control" id="id" value="{{$gedung->id}}" name="id" readonly>
+                                                      </div>
+                                                  <div class="form-group mt-2">
+                                                      <label for="nama">Nama</label>
+                                                      <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" value="{{$gedung->nama}}" name="nama" >
+                                                      @error('nama')
+                                                        <div class="invalid-feedback">
+                                                          {{$message}}
+                                                        </div>
+                                                      @enderror
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="bobot_indeks">Bobot</label>
+                                                    <input type="text" min="0" max="1" class="form-control @error('bobot_indeks') is-invalid @enderror" id="bobot_indeks" value="{{$gedung->bobot_indeks}}" name="bobot_indeks" >
+                                                    @error('bobot_indeks')
                                                       <div class="invalid-feedback">
                                                         {{$message}}
                                                       </div>
                                                     @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                  <label for="bobot_indeks">Bobot</label>
-                                                  <input type="text" class="form-control @error('bobot_indeks') is-invalid @enderror" id="bobot_indeks" value="{{$gedung->bobot_indeks}}" name="bobot_indeks" >
-                                                  @error('bobot_indeks')
-                                                    <div class="invalid-feedback">
-                                                      {{$message}}
-                                                    </div>
-                                                  @enderror
-                                                </div>
-                                                <div class="form-group mt-2">
-                                                  <label for="biaya">Biaya (Rp)</label>
-                                                  <input type="text" class="form-control @error('biaya') is-invalid @enderror" id="biaya" value="{{$gedung->biaya}}" name="biaya">
-                                                  @error('biaya')
-                                                    <div class="invalid-feedback">
-                                                      {{$message}}
-                                                    </div>
-                                                  @enderror
-                                                </div>
-                                                <div class="form-group mt-2">
-                                                  <label for="keterangan">Keterangan</label>
-                                                  <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" value="{{$gedung->keterangan}}" name="keterangan">
-                                                  @error('keterangan')
-                                                    <div class="invalid-feedback">
-                                                      {{$message}}
-                                                    </div>
-                                                  @enderror
-                                                </div>
-                                                <div class="form-group mt-4"> 
-                                                    <button type="submit" class="btn btn-primary" >Simpan </button>
-                                                </div>
-                                            </form>
+                                                  </div>
+                                                  <div class="form-group mt-2">
+                                                    <label for="biaya">Biaya (Rp)</label>
+                                                    <input type="text" min="1" class="form-control @error('biaya') is-invalid @enderror" id="biaya" value="{{$gedung->biaya}}" name="biaya">
+                                                    @error('biaya')
+                                                      <div class="invalid-feedback">
+                                                        {{$message}}
+                                                      </div>
+                                                    @enderror
+                                                  </div>
+                                                  <div class="form-group mt-2">
+                                                    <label for="keterangan">Keterangan</label>
+                                                    <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" value="{{$gedung->keterangan}}" name="keterangan">
+                                                    @error('keterangan')
+                                                      <div class="invalid-feedback">
+                                                        {{$message}}
+                                                      </div>
+                                                    @enderror
+                                                  </div>
+                                                  <div class="form-group mt-4"> 
+                                                      <button type="submit" class="btn btn-primary" >Simpan </button>
+                                                  </div>
+                                              </form>
+                                            </div>
+                                            <!-- Modal footer -->
                                           </div>
-                                          <!-- Modal footer -->
                                         </div>
                                       </div>
-                                    </div>
-                                    </td>
+                                 
+                                      <a href="dashboard/gedung/{{$gedung->id}}" class="label label-primary" data-toggle="modal" 
+                                            data-target="#detail_{{$gedung->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="detail_{{$gedung->id}}">
+                                          <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            
+                                              <!-- Modal Header -->
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">Keterangan</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              </div>
+                                              
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                                <p>{{$gedung->keterangan}}</p>
+                                              </div>
+                                              <!-- Modal footer -->
+                                            </div>
+                                          </div>
+                                      </td>
                                   </tr>
                                 @endforeach
                             </tbody>

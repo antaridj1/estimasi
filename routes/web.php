@@ -55,6 +55,7 @@ Route::group(['middleware' =>['auth:admin']], function (){
     Route::put('dashboard/kategoriIndeks/{kategoriIndeks}','App\Http\Controllers\KategoriIndeksController@updateStatus')->name('edit_statusKategori');
     //masyarakat
     Route::get('/dashboard/masyarakat','App\Http\Controllers\MasyarakatController@tampil');
+    Route::put('dashboard/masyarakat/{masyarakat}','App\Http\Controllers\MasyarakatController@updateStatus')->name('edit_statusUser');
     //admin
     Route::get('/profil','App\Http\Controllers\AdminController@profil');
     Route::patch('/profil','App\Http\Controllers\AdminController@edit')->name('edit_admin');

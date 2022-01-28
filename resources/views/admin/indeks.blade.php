@@ -63,7 +63,6 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>ID</th>
                                     @if(request('parameter') == "klasifikasi")
                                     <th>Kategori</th>
                                     @elseif(!request('parameter'))
@@ -72,7 +71,6 @@
                                     <th>Tingkatan</th>
                                     <th>Bobot</th>
                                     <th>Parameter</th>
-                                    <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -80,8 +78,7 @@
                             <tbody class="tabel_edit">
                                 @foreach ($indeks as $indek)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$indek->id}}</td>  
+                                    <td>{{$loop->iteration}}</td> 
                                     @if (!request('parameter'))
                                         @if ($indek->kategori_indeks_id == null)
                                             <td>-</td>
@@ -91,43 +88,18 @@
                                     @elseif (request('parameter') == "klasifikasi")
                                         <td>{{$indek->kategori_indeks->nama}}</td>
                                     @endif
-                                    <td>{{$indek->tingkatan}}</td>
+                                    <td class="text-left">{{$indek->tingkatan}}</td>
                                     <td>{{$indek->bobot_indeks}}</td>
                                     <td>{{$indek->parameter}}</td>
                                     <td>
-                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-primary" data-toggle="modal" 
-                                          data-target="#detail_{{$indek->id}}">
-                                          Detail
-                                        </a>
-                                      <!-- Modal -->
-                                        <div class="modal fade" id="detail_{{$indek->id}}">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                            
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                <h4 class="modal-title">Keterangan</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                                
-                                                <!-- Modal body -->
-                                                <div class="modal-body">
-                                                <p>{{$indek->keterangan}}</p>
-                                                </div>
-                                                <!-- Modal footer -->
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
                                     @if ($indek->status == true)
-                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-pill label-success"
-                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-success"
+                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Nonaktifkan">
                                             Aktif
                                         </a> 
                                         @else
-                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-pill label-danger"
-                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}">
+                                        <a href="{{ route('edit_keaktifan', $indek->id) }}" class="label label-danger"
+                                            data-toggle="modal" data-target="#editStatus_{{$indek->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Aktifkan">
                                             Nonaktif
                                         </a>
                                         @endif
@@ -164,8 +136,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-secondary button_edit"
-                                            data-toggle="modal" data-target="#edit_{{$indek->id}}">
+                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-secondary button_edit m-1"
+                                            data-toggle="modal" data-target="#edit_{{$indek->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
@@ -261,7 +233,7 @@
                                                             </div>
                                                             <div class="form-group mt-2">
                                                                 <label for="keterangan">Keterangan</label>
-                                                                <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
+                                                                <input type="text-area" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
                                                                     value="{{$indek->keterangan}}" name="keterangan">
                                                                 @error('keterangan')
                                                                     <div class="invalid-feedback">
@@ -276,6 +248,29 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <a href="dashboard/indeks/{{$indek->id}}" class="label label-primary" data-toggle="modal" 
+                                          data-target="#detail_{{$indek->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                          <i class="fa fa-search"></i>
+                                        </a>
+                                      <!-- Modal -->
+                                        <div class="modal fade" id="detail_{{$indek->id}}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Keterangan</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                <p>{{$indek->keterangan}}</p>
+                                                </div>
+                                                <!-- Modal footer -->
+                                            </div>
                                             </div>
                                         </div>
                                         <!-- Modal end -->

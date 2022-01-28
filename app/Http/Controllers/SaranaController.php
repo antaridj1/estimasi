@@ -8,7 +8,7 @@ class SaranaController extends Controller
 {
     public function index(Sarana $saranas)
     {
-        $saranas= Sarana::orderByRaw('kategori')->cari(request(['search']))->paginate(10)->withQueryString();
+        $saranas= Sarana::orderBy('kategori')->orderBy('nama')->cari(request(['search']))->paginate(10)->withQueryString();
         return view('admin.sarana',compact('saranas'));
     }
 
@@ -17,7 +17,7 @@ class SaranaController extends Controller
         $request->validate([
             'nama'=>'required',
             'kategori'=>'required',
-            'biaya'=>'required|numeric',
+            'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
 
@@ -30,7 +30,7 @@ class SaranaController extends Controller
         $request->validate([
             'nama'=>'required',
             'kategori'=>'required',
-            'biaya'=>'required|numeric',
+            'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
         

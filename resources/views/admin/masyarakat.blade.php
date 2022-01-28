@@ -44,7 +44,6 @@
                             <thead>
                                 <tr>
                                     <th >No.</th>
-                                    <th >ID</th>
                                     <th >Nama</th>
                                     <th >Email</th>
                                     <th >Telp</th>
@@ -55,18 +54,56 @@
                             <tbody>
                                 @foreach ($masyarakats as $masyarakat)
                                   <tr> 
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$masyarakat->id}}</td>
-                                    <td>{{$masyarakat->nama}}</td>
-                                    <td>{{$masyarakat->email}}</td>
+                                    <td>{{$loop->iteration}}</td>                                 
+                                    <td class="text-left">{{$masyarakat->nama}}</td>
+                                    <td class="text-left">{{$masyarakat->email}}</td>
                                     <td>{{$masyarakat->telp}}</td>
                                     <td>{{$masyarakat->no_ktp}}</td>
-                                    @if($masyarakat->status == 1)
-                                    <td>Aktif</td>
-                                    @else
-                                    <td>Nonaktif</td>
-                                    @endif
-                                  </tr>
+                                    <td>
+                                        @if ($masyarakat->status == 1)
+                                        <a href="{{ route('edit_statusUser', $masyarakat->id) }}" class="label label-success"
+                                            data-toggle="modal" data-target="#editStatus_{{$masyarakat->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Nonaktifkan">
+                                            Aktif
+                                        </a> 
+                                        @else
+                                        <a href="{{ route('edit_statusUser', $masyarakat->id) }}" class="label label-danger"
+                                            data-toggle="modal" data-target="#editStatus_{{$masyarakat->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Aktifkan">
+                                            Nonaktif
+                                        </a>
+                                        @endif
+                                        <div class="modal fade" id="editStatus_{{$masyarakat->id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        @if($masyarakat->status == 1)
+                                                        <h4 class="modal-title">Nonaktifkan Akun</h4>
+                                                        @else
+                                                        <h4 class="modal-title">Aktifkan Akun</h4>
+                                                        @endif
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="/dashboard/masyarakat/{{$masyarakat->id}}">
+                                                        @method('put')
+                                                        @csrf
+                                                        <div class="form-group"> 
+                                                            @if($masyarakat->status == 1)
+                                                            <p>Saat ini akun user sedang dalam keadaan Aktif. Apakah Anda yakin untuk menonaktifkan akun ini?</p>
+                                                            @else
+                                                            <p>Saat ini akun user sedang dalam keadaan Nonaktif. Apakah Anda yakin untuk mengaktifkan akun ini?</p>
+                                                            @endif
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary" >Ya </button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

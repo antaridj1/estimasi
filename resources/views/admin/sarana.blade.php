@@ -113,11 +113,9 @@
                         <thead>
                           <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Nama</th>
                             <th>Kategori</th>
                             <th>Biaya (Rp)</th>
-                            <th>Keterangan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                           </tr>
@@ -127,44 +125,18 @@
                         @foreach ($saranas as $sarana)
                           <tr> 
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$sarana->id}}</td>
-                            <td>{{$sarana->nama}}</td>
+                            <td class="text-left">{{$sarana->nama}}</td>
                             <td>{{$sarana->kategori}}</td>
-                            <td>{{number_format($sarana->biaya,0)}}</td>
-                            <td>
-                                <a href="dashboard/sarana/{{$sarana->id}}" class="label label-primary" data-toggle="modal" 
-                                  data-target="#detail_{{$sarana->id}}">
-                                  Detail
-                                </a>
-                              <!-- Modal -->
-                                <div class="modal fade" id="detail_{{$sarana->id}}">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Keterangan</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                        <p>{{$sarana->keterangan}}</p>
-                                        </div>
-                                        <!-- Modal footer -->
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td class="text-right">{{number_format($sarana->biaya,0)}}</td>
                             <td>
                             @if ($sarana->status == 1)
-                              <a href="{{ route('edit_statusSarana', $sarana->id) }}" class="label label-pill label-success"
-                                  data-toggle="modal" data-target="#editStatus_{{$sarana->id}}">
+                              <a href="{{ route('edit_statusSarana', $sarana->id) }}" class="label label-success"
+                                  data-toggle="modal" data-target="#editStatus_{{$sarana->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Nonaktifkan">
                                   Aktif
                               </a> 
                             @else
-                              <a href="{{ route('edit_statusSarana', $sarana->id) }}" class="label label-pill label-danger"
-                                  data-toggle="modal" data-target="#editStatus_{{$sarana->id}}">
+                              <a href="{{ route('edit_statusSarana', $sarana->id) }}" class="label label-danger"
+                                  data-toggle="modal" data-target="#editStatus_{{$sarana->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Aktifkan">
                                   Nonaktif
                               </a>
                             @endif
@@ -201,8 +173,9 @@
                               </div>
                             </td>
                             <td>
-                            <a href="dashboard/sarana/{{$sarana->id}}" class="label label-secondary" data-toggle="modal" data-target="#edit_{{$sarana->id}}">
-                              <i class="fa fa-edit"></i>
+                            <a href="dashboard/sarana/{{$sarana->id}}" class="label label-secondary m-1" data-toggle="modal" data-target="#edit_{{$sarana->id}}" 
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                <i class="fa fa-edit"></i>
                             </a>
 
                             <!-- The Modal -->
@@ -221,11 +194,11 @@
                                     <form method="post" action="{{route('edit_sarana')}}">
                                     @method('patch')
                                     @csrf
-                                        <div class="form-group">
+                                        <div class="form-group text-left">
                                               <label for="id">ID</label>
                                               <input type="text" class="form-control" id="id" value="{{$sarana->id}}" name="id" readonly>
                                             </div>
-                                        <div class="form-group mt-2">
+                                        <div class="form-group text-left mt-2">
                                             <label for="nama">Nama</label>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" value="{{$sarana->nama}}" name="nama" >
                                             @error('nama')
@@ -234,7 +207,7 @@
                                               </div>
                                             @enderror
                                           </div>
-                                        <div class="form-group mt-2">
+                                        <div class="form-group text-left mt-2">
                                           <label for="kategori">Kategori</label>
                                           <select class="form-control edit_select @error('kategori') is-invalid @enderror"
                                             aria-label=".form-select-sm example" name="kategori" value="{{$sarana->kategori}}">
@@ -245,7 +218,7 @@
                                               <option value="Kolam" {{ $sarana->kategori == "Kolam" ? 'selected' : '' }}>Konstruksi Kolam (m<sup>2</sup>)</option>
                                               <option value="Menara" {{ $sarana->kategori == "Menara" ? 'selected' : '' }}>Konstruksi Menara (unit)</option>
                                               <option value="Monumen" {{ $sarana->kategori == "Monumen" ? 'selected' : '' }}>Konstruksi Monumen (unit)</option>
-                                              <option value="Instalasi" {{ $sarana->kategori == "Instalasi/Gardu" ? 'selected' : '' }}>Konstruksi Instalasi/Gardu (unit)</option>
+                                              <option value="Instalasi" {{ $sarana->kategori == "Instalasi" ? 'selected' : '' }}>Konstruksi Instalasi/Gardu (unit)</option>
                                               <option value="Reklame" {{ $sarana->kategori == "Reklame" ? 'selected' : '' }}>Konstruksi Reklame (unit)</option>
                                               <option value="Tambahan" {{ $sarana->kategori == "Tambahan" ? 'selected' : '' }}>Lain-Lain</option>
                                           </select>
@@ -255,7 +228,7 @@
                                               </div>
                                           @enderror
                                         </div>
-                                        <div class="form-group mt-2">
+                                        <div class="form-group text-left mt-2">
                                           <label for="biaya">Biaya (Rp)</label>
                                           <input type="text" class="form-control @error('biaya') is-invalid @enderror" id="biaya" value="{{$sarana->biaya}}" name="biaya">
                                           @error('biaya')
@@ -264,7 +237,7 @@
                                               </div>
                                           @enderror
                                         </div>
-                                        <div class="form-group mt-2">
+                                        <div class="form-group text-left mt-2">
                                           <label for="keterangan">Keterangan</label>
                                           <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" value="{{$sarana->keterangan}}" name="keterangan">
                                           @error('keterangan')
@@ -281,6 +254,30 @@
                                 </div>
                               </div>
                             </div>
+                              <a href="dashboard/sarana/{{$sarana->id}}" class="label label-primary" data-toggle="modal" 
+                                    data-target="#detail_{{$sarana->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                    <i class="fa fa-search"></i>
+                                  </a>
+                                <!-- Modal -->
+                                  <div class="modal fade" id="detail_{{$sarana->id}}">
+                                      <div class="modal-dialog modal-dialog-centered">
+                                      <div class="modal-content">
+                                      
+                                          <!-- Modal Header -->
+                                          <div class="modal-header">
+                                          <h4 class="modal-title">Keterangan</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          </div>
+                                          
+                                          <!-- Modal body -->
+                                          <div class="modal-body">
+                                          <p>{{$sarana->keterangan}}</p>
+                                          </div>
+                                          <!-- Modal footer -->
+                                      </div>
+                                      </div>
+                                  </div>
+                            </td>
                           </tr>
                         @endforeach
                         </tbody>

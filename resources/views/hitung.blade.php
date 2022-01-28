@@ -10,7 +10,7 @@
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
-                        <li class="breadcrumb-item active"><a href="#">Hitung</a></li>
+                        <li class="breadcrumb-item active"><a href="/hitung">Hitung</a></li>
                     </ol>
                 </nav>
                 <form method="post" action="{{route('hitung')}}">
@@ -23,7 +23,7 @@
                                         <label class="hitung" for="luas_bangunan">Luas Bangunan</label>
                                         <div class="input-group">
                                             <input type="number" min="1" class="form-control @error('luas_bangunan') is-invalid @enderror" value="{{ @old('luas_bangunan') }}" id="luas_bangunan"
-                                                name="luas_bangunan">
+                                                name="luas_bangunan" required>
                                             <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                             @error('luas_bangunan')
                                                 <div class="invalid-feedback">
@@ -38,7 +38,7 @@
                                         <label class="hitung" for="luas_tanah">Luas Tanah</label>
                                         <div class="input-group">
                                             <input type="number" min="1" class="form-control @error('luas_tanah') is-invalid @enderror" value="{{ @old('luas_tanah') }}" id="luas_tanah" 
-                                                name="luas_tanah">
+                                                name="luas_tanah" required>
                                             <span class="input-group-text" id="basic-addon2">m<sup>2</sup></span>
                                             @error('luas_tanah')
                                                 <div class="invalid-feedback">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-12 mb-2">
                             <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('fungsi') ? 'estimasi_error' : '')}}">
-                                <label for="fungsi" class="hitung">Fungsi Bangunan</label>
+                                <label for="fungsi" class="hitung">Fungsi Bangunan</label><i class="bi bi-info-circle"></i>
                                 <div class="row">
                                     <div class="d-flex justify-content-evenly"> 
                                         @foreach ($fungsis as $fungsi)
@@ -61,7 +61,7 @@
                                         @endif
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="fungsi" id="{{$fungsi->tingkatan}}"
-                                                    value="{{$fungsi->id}}" value="{{ @old('fungsi') }}">
+                                                    value="{{$fungsi->id}}" @if(old('fungsi') == $fungsi->id) checked @endif>
                                                 <label class="form-check-label" for="{{$fungsi->tingkatan}}">
                                                     {{$fungsi->tingkatan}}
                                                 </label>
@@ -83,7 +83,7 @@
                                         @foreach ($gedungs as $gedung)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
-                                                value="{{$gedung->id}}">
+                                                value="{{$gedung->id}}" @if(old('gedung') == $gedung->id) checked @endif>
                                             <label class="form-check-label" for="{{$gedung->nama}}">
                                                 {{$gedung->nama}}
                                             </label>
@@ -98,7 +98,7 @@
                                         @foreach ($jangka_waktu as $waktu)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
-                                                value="{{$waktu->id}}">
+                                                value="{{$waktu->id}}" @if(old('waktu') == $waktu->id) checked @endif >
                                             <label class="form-check-label" for="{{$waktu->id}}">
                                                 {{$waktu->tingkatan}}
                                             </label>
@@ -120,7 +120,7 @@
                                                 @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
-                                                                value="{{$tk_indek->id}}">
+                                                                value="{{$tk_indek->id}}" @if(old($ktgr->slug) == $tk_indek->id) checked @endif >
                                                             <label class="form-check-label" for="{{$tk_indek->id}}">
                                                                 {{$tk_indek->tingkatan}}
                                                             </label>
@@ -143,7 +143,7 @@
                                                     @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="{{$ktgr->slug}}" id="{{$tk_indek->id}}"
-                                                                    value="{{$tk_indek->id}}">
+                                                                    value="{{$tk_indek->id}}" @if(old($ktgr->slug) == $tk_indek->id) checked @endif >
                                                                 <label class="form-check-label" for="{{$tk_indek->id}}">
                                                                     {{$tk_indek->tingkatan}}
                                                                 </label>
@@ -301,7 +301,7 @@
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
                                         <td>\ <div class="input-group">\
-											<input type="number" class="form-control" placeholder="Ukuran Sarana" name="jumlah_sarana[]"> <span class="input-group-text">m<sup>2</sup></span>\ <div>\
+											<input type="number" class="form-control" min="1" placeholder="Ukuran Sarana" required name="jumlah_sarana[]"> <span class="input-group-text">m<sup>2</sup></span>\ <div>\
 										</td>\
 									</tr>');
                         }
@@ -309,7 +309,7 @@
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
                                         <td>\ <div class="input-group">\
-											<input type="number" class="form-control" placeholder="Ukuran Sarana" name="jumlah_sarana[]"> <span class="input-group-text">m</span>\ <div>\
+											<input type="number" class="form-control" min="1" placeholder="Ukuran Sarana" required name="jumlah_sarana[]"> <span class="input-group-text">m</span>\ <div>\
 										</td>\
 									</tr>');
                         }
@@ -317,7 +317,7 @@
 						table.append('<tr data-id="'+dataCheck.eq(index).val()+'">\
 										<td>'+dataCheck.eq(index).val()+'</td>\
                                         <td>\ <div class="input-group">\
-											<input type="number" class="form-control" placeholder="Jumlah Sarana" name="jumlah_sarana[]"> <span class="input-group-text">Unit</span>\ <div>\
+											<input type="number" class="form-control" min="1" placeholder="Jumlah Sarana" required name="jumlah_sarana[]"> <span class="input-group-text">Unit</span>\ <div>\
 										</td>\
 									</tr>');
                         }

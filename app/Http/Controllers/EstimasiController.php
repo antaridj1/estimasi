@@ -25,9 +25,9 @@ class EstimasiController extends Controller
         $gedungs = Gedung::where('status','1')->get(['nama','id']);
         // $indeks = Indek::distinct('nama')->get(['nama','kategori']);
         $kategori_indeks = KategoriIndeks::where('status','1')->get();
-        $indeks = Indek::where([['parameter','klasifikasi'],['status','1']])->get(['id','tingkatan','kategori_indeks_id']);
+        $indeks = Indek::where([['parameter','klasifikasi'],['status','1']])->orderBy('bobot_indeks')->get(['id','tingkatan','kategori_indeks_id']);
         $fungsis = Indek::where([['parameter','fungsi'],['status','1']])->get(['tingkatan','id']);
-        $jangka_waktu = Indek::where([['parameter','waktu'],['status','1']])->get(['tingkatan','id']);
+        $jangka_waktu = Indek::where([['parameter','waktu'],['status','1']])->orderBy('bobot_indeks')->get(['tingkatan','id']);
         $collection = Sarana::where('status','1')->get();
         $unique = $collection->unique('kategori');
         $kategori_sarana = $unique->values()->all();
@@ -98,8 +98,8 @@ class EstimasiController extends Controller
 
         //Validation
         $valids = [
-            'luas_tanah'=>'required|min:1',
-            'luas_bangunan'=>'required|min:1',
+            'luas_tanah'=>'required',
+            'luas_bangunan'=>'required',
             'gedung'=>'required',
             'fungsi'=>'required',
             'waktu'=>'required', 
@@ -112,6 +112,7 @@ class EstimasiController extends Controller
             $slug = $slugs[$i];
             $valids[$slug] = 'required';
         }
+    
         $request->validate($valids);
 
         //Input Estimasi

@@ -15,7 +15,7 @@ class IndekController extends Controller
      */
     public function index()
     {
-        $indeks = Indek::orderBy('parameter')->orderBy('kategori_indeks_id')->filter(request(['search','parameter']))->paginate(10)->withQueryString();
+        $indeks = Indek::orderBy('parameter')->orderBy('kategori_indeks_id')->orderBy('bobot_indeks')->filter(request(['search','parameter']))->paginate(10)->withQueryString();
        // dd(request('search'));
         $kategori = KategoriIndeks::all();
         return view('admin.indeks',compact(['indeks','kategori']));
@@ -30,7 +30,7 @@ class IndekController extends Controller
             $request->validate([
                 'kategori_indeks_id'=>'required',
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required|numeric',
+                'bobot_indeks'=>'required|numeric|min:0|max:1',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -38,7 +38,7 @@ class IndekController extends Controller
         } else {
             $request->validate([
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required|numeric',
+                'bobot_indeks'=>'required|numeric|min:0|max:1',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -61,7 +61,7 @@ class IndekController extends Controller
             $request->validate([
                 'kategori_indeks_id'=>'required',
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required|numeric',
+                'bobot_indeks'=>'required|numeric|min:0|max:1',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);
@@ -75,7 +75,7 @@ class IndekController extends Controller
         } else {
             $request->validate([
                 'tingkatan'=>'required',
-                'bobot_indeks'=>'required|numeric',
+                'bobot_indeks'=>'required|numeric|min:0|max:1',
                 'parameter'=>'required',
                 'keterangan'=>'required',
             ]);

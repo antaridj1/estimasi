@@ -204,7 +204,6 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #2e28f6;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -10943,13 +10942,25 @@ table.dataTable thead .sorting::after {
   background-color: #7571f9;
   color: #fff; }
 
+    .label-secondary:hover{
+      background-color: #2e28f6;
+    }
+
 .label-primary {
   background-color: #9097c4;
   color: #fff; }
 
+  .label-primary:hover{
+    background-color: #505472;
+  }
+
 .label-success {
   background-color: #6fd96f;
   color: #fff; }
+
+  .label-success:hover{
+    background-color: #4c944c;
+  }
 
 .label-info {
   background-color: #4d7cff;
@@ -10962,6 +10973,10 @@ table.dataTable thead .sorting::after {
 .label-danger {
   background-color: #ff5e5e;
   color: #fff; }
+
+  .label-danger:hover{
+    background-color: #8a3434;
+  }
 
 .label-dark {
   background-color: #464a53;

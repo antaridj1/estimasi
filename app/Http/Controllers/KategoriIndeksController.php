@@ -24,7 +24,7 @@ class KategoriIndeksController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'bobot_kategori'=>'required|numeric',
+            'bobot_kategori'=>'required|numeric|min:0|max:1',
             'keterangan'=>'required',
         ]);
 
@@ -42,7 +42,7 @@ class KategoriIndeksController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'bobot_kategori'=>'required|numeric',
+            'bobot_kategori'=>'required|numeric|min:0|max:1',
             'keterangan'=>'required',
         ]);
 
