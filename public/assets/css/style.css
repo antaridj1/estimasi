@@ -84,6 +84,20 @@ input::-webkit-inner-spin-button {
 .round{
   border-radius: 15px;
 }
+
+#klasifikasi thead{
+  color: rgb(51, 51, 51) ;
+}
+
+.indent_it{
+  text-indent: 19%;
+}
+.indent_gedung{
+  text-indent: 19%;
+}
+.indent_total{
+  text-indent: 14%;
+}
 /* Buatan Aing Selesai */
 
 body {
@@ -102,7 +116,7 @@ a:hover {
   text-decoration: none;
 }
 
-p, h1, h2, h3, h4, h5, h6, label, a, button, input, td, tfoot, li, small{
+p, h1, h2, h3, h4, h5, h6, label, a, button, input, td, tfoot, li, small, thead{
   font-family: "Poppins", sans-serif;
 }
 

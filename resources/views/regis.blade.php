@@ -3,6 +3,7 @@
 @section('title','Daftar | Estimasi Retribusi IMB')
 
 @section('container')
+
    <!-- ======= Regis Section ======= -->
    <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
@@ -75,9 +76,35 @@
               <div class="text-center"><button type="submit">Daftar</button></div>
               <div class="text-center mt-3 "><p>Sudah memiliki Akun? <a href="/login"> Masuk</a></p></div>
             </form>
+            
           </div>
         </div>
       </div>
     </section><!-- End Regis Section -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" rel="stylesheet" type="text/css">
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
+
+@if(session()->has('status'))
+<script>
+    $(document).ready(function(){       
+        Swal.fire({        
+           type: '{{session()->get('status')}}',
+           title: '{{session()->get('message')}}',
+           showConfirmButton: false,
+           timer: 3000
+        })
+    });
+</script>
+@endif
+
+
+  
+
+
+
+
 @endsection
 

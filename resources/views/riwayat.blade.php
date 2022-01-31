@@ -13,14 +13,39 @@
                             data-target="#detail_{{$estimasi->id}}"> 
                     
                         <div class="shadow-sm p-3 mb-2 round" id="riwayat"> 
-                            <div class="d-flex justify-content-between">
-                                <p class="item">ID : {{$estimasi->id}}</p>
-                                <small class="date">{{ $estimasi->created_at->diffForHumans()}}</small>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="item">Total : <b> Rp {{number_format($estimasi->total_biaya,0)}}</b></h5> 
-                                <i class="bi bi-chevron-right item"></i>
-                            </div>
+                            <div class="d-flex justify-content-between">  
+                                <table class="table table-borderless">
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>: {{$estimasi->id}}</td>
+                                        </tr>
+                                
+                                        <tr>
+                                            <td>Luas Tanah</td>
+                                            <td>: {{$estimasi->luas_tanah}} m<sup>2</sup></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Luas Bangunan</td>
+                                            <td>: {{$estimasi->luas_bangunan}} m<sup>2</sup></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status Bangunan</td>
+                                            <td>: {{$estimasi->gedungs->nama}}</td>
+                                        </tr>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th>:<b> Rp {{number_format($estimasi->total_biaya,0)}}</b></th>
+                                        </tr>
+                                        </tfoot>
+                                </table>
+                                    <!-- <h5 class="item">Total : <b> Rp {{number_format($estimasi->total_biaya,0)}}</b></h5>  -->
+                                     
+                                    <small class="date col-2 text-end">{{ $estimasi->created_at->diffForHumans()}}</small>
+                                    <div class="d-flex align-items-center"> 
+                                        <i class="bi bi-chevron-right item"></i>
+                                    </div>
+                    </div>  
                         </div>
                     </a>
                 
@@ -97,45 +122,52 @@
                                         @endforeach
                                     </div>
                                     <div class="mt-2">
-                                        <table class="table mb-0">
-                                            <label class="mb-2"><b>Klasifikasi</b></label>
-                                            @foreach($estimasi->detail_estimasi as $detail)
-                                            @if ($detail->indeks->kategori_indeks_id!==Null)
-                                            <tr>
-                                                <td>{{$detail->indeks->kategori_indeks->nama}} : {{$detail->indeks->tingkatan}}</td>
-                                                <td>Indeks : {{$detail->indeks->bobot_indeks}}</td>
-                                                <td>Bobot Kategori : {{$detail->indeks->kategori_indeks->bobot_kategori}}</td>
-                                            </tr>
-                                            @endif
-                                        @endforeach
-                                        </table>
-                                    </div>  
-                                    <div class="mt-4">
-                                        @php
-                                            $ik = 0;
-                                        @endphp
-                                        <p>Indeks Klasifikasi = 
-                                            @foreach($estimasi->detail_estimasi as $detail)
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Klasifikasi</th>
+                                                    <th class="text-center">Indeks x Bobot Kategori</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $jml = 0;
+                                                    $ik = 0;
+                                                @endphp
+                                                @foreach($estimasi->detail_estimasi as $detail)
                                                 @if ($detail->indeks->kategori_indeks_id!==Null)
-                                                    @if(!$loop->last)
-                                                        ({{$detail->indeks->bobot_indeks}} x {{$detail->indeks->kategori_indeks->bobot_kategori}}) +
-                                                    @else
-                                                        ({{$detail->indeks->bobot_indeks}} x {{$detail->indeks->kategori_indeks->bobot_kategori}})
-                                                    @endif
+                                                <tr>
+                                                    <td>{{$detail->indeks->kategori_indeks->nama}} : {{$detail->indeks->tingkatan}}</td>
+                                                    <td class="text-center">{{$detail->indeks->bobot_indeks}} x {{$detail->indeks->kategori_indeks->bobot_kategori}}</td>
+                                                        @php 
+                                                        $jml = $detail->indeks->bobot_indeks * $detail->indeks->kategori_indeks->bobot_kategori
+                                                        @endphp
+                                                    <td>{{$jml}}</td>
+                                                </tr>
                                                     @php
                                                         $ik += $detail->indeks->bobot_indeks * $detail->indeks->kategori_indeks->bobot_kategori;
                                                     @endphp
                                                 @endif
-                                            @endforeach
-                                            = {{$ik}}
-                                        </p>
-                                    </div>
+                                               @endforeach
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Indeks Klasifikasi</th>
+                                                    <td></td>
+                                                    
+                                                    <th>{{$ik}}</th>
+                                                </tr>
+                                            </tfoot>
+                                             
+                                        </table>
+                                    </div>  
                                     <div class="mt-2 mb-2">
                                         @php
                                             $tes = 1;
                                         @endphp
-                                        <p>Indeks Terintegrasi =  
-                                            @foreach($estimasi->detail_estimasi as $detail)
+                                        <p> Indeks Terintegrasi = Indeks Fungsi x Indeks Waktu x Indeks Klasifikasi</p>
+                                        <p class="tab_it">
+                                           = @foreach($estimasi->detail_estimasi as $detail)
                                                 @if ($detail->indeks->kategori_indeks_id == Null)
                                                     {{$detail->indeks->bobot_indeks}} x
                                                     @php
@@ -150,9 +182,10 @@
                                             @php
                                                 $it = $tes*$ik;
                                             @endphp
-
-                                            {{$ik}} = {{$it}}
-                                         </p>
+                                            {{$ik}}
+                                        </p>
+                                        <p class="tab_it"> = {{$it}}</p>
+                                         
                                          
                                     </div>
                                 </div>
@@ -160,11 +193,11 @@
                                         <h5 class="hitung">Total Biaya Retribusi</h5>
                                         <div class="mt-2">
                                             <p>Total Retribusi = L x It x Indeks Gedung x HSbg + Biaya Sarana</p>
-                                            <p>
+                                            <p class="tab_total">
                                                =  {{$estimasi->luas_bangunan}} x {{$it}} x {{$estimasi->gedungs->bobot_indeks}} 
                                                x {{number_format($estimasi->gedungs->biaya,0)}} + Rp{{number_format($totalsarana,0)}}
                                             </p>
-                                            <p> = Rp {{number_format($estimasi->total_biaya,0)}}</p>
+                                            <p class="tab_total"> = Rp {{number_format($estimasi->total_biaya,0)}}</p>
                                         </div>
                                     </div>
                                 </div>

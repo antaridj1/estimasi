@@ -31,10 +31,11 @@ class AuthController extends Controller
                 'telp'=>$request->telp,
                 'no_ktp'=>$request->no_ktp,
             ]);
-            return redirect('login');
+            return redirect('login')->with('message','Registrasi berhasil. Silahkan login')->with('status','success');
         }
         else
-            return back();
+            return back()->with('message','Registrasi gagal, silahkan registrasi ulang')->with('status','error');
+          
     }
     
     public function getLogin(){
