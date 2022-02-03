@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Gedung;
+use Throwable;
 
 class GedungController extends Controller
 {
@@ -15,15 +16,21 @@ class GedungController extends Controller
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'nama'=>'required|max:255',
             'bobot_indeks'=>'required|numeric|min:0|max:1',
             'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
+       try{
+        Gedung::create($request->all()); 
 
-        Gedung::create($request->all());  
+        } catch (Throwable $e){
+            return back()->with('error','gagal');
+        }
         return redirect('dashboard/gedung');
+        
     }
 
     public function update(Request $request, Gedung $gedungs)

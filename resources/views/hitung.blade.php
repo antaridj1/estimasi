@@ -52,7 +52,30 @@
                         </div>
                         <div class="col-12 mb-2">
                             <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('fungsi') ? 'estimasi_error' : '')}}">
-                                <label for="fungsi" class="hitung">Fungsi Bangunan</label><i class="bi bi-info-circle"></i>
+                                <label for="fungsi" class="hitung">Fungsi Bangunan</label>
+                                <!-- Modal -->
+                                <i class="bi bi-info-circle tooltip-test" title="Info" data-bs-placement="top" data-bs-toggle="modal" data-toggle="tooltip" data-bs-target="#fungsiModal"></i>
+                                    <div class="modal fade" id="fungsiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Fungsi Bangunan</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-borderless"> 
+                                                        @foreach ($fungsis as $fungsi)
+                                                        <tr> 
+                                                            <td>{{$fungsi->tingkatan}}</td>
+                                                            <td>: {{$fungsi->keterangan}}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- End Modal -->
                                 <div class="row">
                                     <div class="d-flex justify-content-evenly"> 
                                         @foreach ($fungsis as $fungsi)
@@ -80,6 +103,27 @@
                                 <div class="col-6 mb-2 me-1 ">
                                     <div class="form-group p-4 shadow-sm bg-body round h-100 {{($errors->first('gedung') ? 'estimasi_error' : '')}}">
                                         <label class="hitung" for="gedung">Status Bangunan</label>
+                                        <i class="bi bi-info-circle tooltip-test" title="Info" data-bs-placement="top" data-bs-toggle="modal" data-toggle="tooltip" data-bs-target="#gedungModal"></i>
+                                        <div class="modal fade" id="gedungModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Status Bangunan</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-borderless"> 
+                                                            @foreach ($gedungs as $gedung)
+                                                            <tr> 
+                                                                <td>{{$gedung->nama}}</td>
+                                                                <td>: {{$gedung->keterangan}}</td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         @foreach ($gedungs as $gedung)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="gedung" id="{{$gedung->nama}}"
@@ -94,7 +138,28 @@
                                 </div>
                                 <div class="col-6 ms-1 p-4 shadow-sm mb-2 bg-body round {{($errors->first('waktu') ? 'estimasi_error' : '')}}">
                                     <div class="form-group">
-                                        <label for="waktu" class="hitung ">Jangka Waktu Bangunan</label>
+                                        <label for="waktu" class="hitung">Jangka Waktu Bangunan</label>
+                                        <i class="bi bi-info-circle tooltip-test" title="Info" data-bs-placement="top" data-bs-toggle="modal" data-toggle="tooltip" data-bs-target="#waktuModal"></i>
+                                        <div class="modal fade" id="waktuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Jangka Waktu Bangunan</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-borderless"> 
+                                                            @foreach ($jangka_waktu as $waktu)
+                                                            <tr> 
+                                                                <td>{{$waktu->tingkatan}}</td>
+                                                                <td>: {{$waktu->keterangan}}</td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         @foreach ($jangka_waktu as $waktu)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="waktu" id="{{$waktu->id}}"
@@ -116,6 +181,30 @@
                                 <div class="col-12">
                                     <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
                                         <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
+                                        <i class="bi bi-info-circle tooltip-test" title="Info" data-bs-placement="top" data-bs-toggle="modal" data-toggle="tooltip" data-bs-target="#Modal{{$ktgr->id}}"></i>
+                                        <div class="modal fade" id="Modal{{$ktgr->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">{{$ktgr->nama}}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>{{$ktgr->keterangan}}</p>
+                                                        <table class="table table-borderless"> 
+                                                            @foreach ($indeks as $tk_indek)  
+                                                                @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
+                                                                <tr> 
+                                                                    <td>{{$tk_indek->tingkatan}}</td>
+                                                                    <td>: {{$tk_indek->keterangan}}</td>
+                                                                </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                             @foreach ($indeks as $tk_indek)  
                                                 @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
                                                         <div class="form-check">
@@ -139,6 +228,30 @@
                                     <div class="col-6 h-100 {{ ($loop->iteration % 2 == 0) ? 'ms-1' : ' me-1' }}">
                                         <div class="form-group p-4 shadow-sm mb-2 bg-body round {{($errors->has($ktgr->slug) ? 'estimasi_error' : '')}}">
                                             <label for="{{$ktgr->nama}}" class="hitung">{{$ktgr->nama}}</label>
+                                            <i class="bi bi-info-circle tooltip-test" title="Info" data-bs-placement="top" data-bs-toggle="modal" data-toggle="tooltip" data-bs-target="#Modal{{$ktgr->id}}"></i>
+                                            <div class="modal fade" id="Modal{{$ktgr->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">{{$ktgr->nama}}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>{{$ktgr->keterangan}}</p>
+                                                            <table class="table table-borderless"> 
+                                                                @foreach ($indeks as $tk_indek)  
+                                                                    @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
+                                                                    <tr> 
+                                                                        <td>{{$tk_indek->tingkatan}}</td>
+                                                                        <td>: {{$tk_indek->keterangan}}</td>
+                                                                    </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                                 @foreach ($indeks as $tk_indek)  
                                                     @if ($tk_indek->kategori_indeks->slug == $ktgr->slug)
                                                             <div class="form-check">
@@ -164,7 +277,7 @@
                     
                     <!-- The Modal -->
                     <div class="modal fade" id="ModalSarana">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                             <div class="modal-content">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
@@ -206,8 +319,8 @@
                                     </div>  
                                 </div>
                                 <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="simpan" data-dismiss="modal">Simpan
+                                <div class="modal-footer contact">
+                                    <button type="button" class="btn btn-primary contact" id="simpan" data-dismiss="modal">Simpan
                                     </button>
                                 </div>
                             </div>
@@ -374,6 +487,12 @@
 			})
 		})
 
-        
+
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+
 	</script>
+
+    
 @endsection

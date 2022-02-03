@@ -48,6 +48,7 @@
                                     <th >Email</th>
                                     <th >Telp</th>
                                     <th >NIK</th>
+                                    <th >Jumlah Estimasi</th>
                                     <th >Status</th>
                                 </tr>
                             </thead>
@@ -59,6 +60,7 @@
                                     <td class="text-left">{{$masyarakat->email}}</td>
                                     <td>{{$masyarakat->telp}}</td>
                                     <td>{{$masyarakat->no_ktp}}</td>
+                                    <td>{{$total_estimasi[$masyarakat->id]}}</td>
                                     <td>
                                         @if ($masyarakat->status == 1)
                                         <a href="{{ route('edit_statusUser', $masyarakat->id) }}" class="label label-success"
@@ -105,6 +107,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -117,4 +120,10 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+            $('[data-bs-toggle="tooltip"]').tooltip();   
+        });
+</script>
 @endsection

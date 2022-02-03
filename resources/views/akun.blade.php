@@ -7,10 +7,18 @@
 
 @foreach($masyarakat as $user)
 <div class="container container_margin">
-    <div class="card round">
+  <div class="row justify-content-center">
+    <div class="card col-9 round shadow-black ">
         <div class="card-body">
-            <h5 class="card-title">Biodata</h5>
-            <table class="table table-borderless">
+          <div class="d-flex justify-content-between">
+            <h4 class="card-title mb-2"><b>Biodata</b></h4>
+            <div class="contact">
+              <button type="button" class="btn btn-primary" title="Edit" data-bs-placement="Top" data-bs-toggle="tooltip" data-toggle="modal" data-target="#edit_{{$user->id}}">
+              <i class="bi bi-pencil-square"></i>
+              </button>
+            </div>
+          </div>
+              <table class="table table-borderless">
                 <tr>
                     <td>Nama</td>
                     <td>: {{$user->nama}}</td>
@@ -28,11 +36,7 @@
                     <td>: {{$user->telp}}</td>
                 </tr>
             </table>
-            <div class="contact">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_{{$user->id}}">
-                  Edit Biodata
-              </button>
-            </div>
+           
             <!-- The Modal -->
             <div class="modal fade" id="edit_{{$user->id}}">
               <div class="modal-dialog">
@@ -101,9 +105,9 @@
         </div>
     </div>
 
-    <div class="card mt-3">
+    <div class="card col-9 round shadow-black mt-4">
         <div class="card-body contact">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPass_{{$user->id}}">
+            <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#editPass_{{$user->id}}">
                 Ubah Password
             </button>
 
@@ -159,5 +163,13 @@
         </div>
     </div>
 </div>
+</div>
 @endforeach
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+            $('[data-bs-toggle="tooltip"]').tooltip();   
+        });
+</script>
  @endsection

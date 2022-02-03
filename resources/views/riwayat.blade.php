@@ -97,7 +97,7 @@
                                             <tr>
                                             <th scope="col">Total</th>
                                             <th scope="col"> </th>
-                                            <th scope="col">{{number_format($totalsarana,0)}}</th>
+                                            <th scope="col">Rp {{number_format($totalsarana,0)}}</th>
                                             </tr> 
                                         </tfoot>
                                     </table>

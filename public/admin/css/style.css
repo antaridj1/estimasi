@@ -27,14 +27,26 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .gradient-1, .dropdown-mega-menu .ext-link.link-1 a, .morris-hover, .datamaps-hoverover {
   background-image: linear-gradient(230deg, #759bff, #843cf6); }
 
+.gradient-1:hover{
+  background-image: linear-gradient(230deg, #475f9c, #522599);
+}
 .gradient-2, .dropdown-mega-menu .ext-link.link-3 a {
   background-image: linear-gradient(230deg, #fc5286, #fbaaa2); }
+
+.gradient-2:hover {
+  background-image: linear-gradient(230deg, #a73658, #996863); }
 
 .gradient-3, .dropdown-mega-menu .ext-link.link-2 a, .header-right .icons .user-img .activity {
   background-image: linear-gradient(230deg, #ffc480, #ff763b); }
 
+.gradient-3:hover {
+  background-image: linear-gradient(230deg, #a78053, #b4532a); }
+
 .gradient-4, .sidebar-right .nav-tabs .nav-item .nav-link.active::after, .sidebar-right .nav-tabs .nav-item .nav-link.active span i::before {
   background-image: linear-gradient(230deg, #0e4cfd, #6a8eff); }
+
+.gradient-4:hover {
+  background-image: linear-gradient(230deg, #0c3bbb, #5069bb); }
 
 .gradient-5 {
   background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%); }

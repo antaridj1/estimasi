@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use App\Models\Estimasi;
 use Illuminate\Support\Facades\Auth;
 
 class MasyarakatController extends Controller
@@ -34,8 +35,17 @@ class MasyarakatController extends Controller
     }
 
     public function tampil(){
-        $masyarakats = Masyarakat::cari(request(['search']))->paginate(10)->withQueryString();;
-        return view('admin.masyarakat',compact('masyarakats'));
+        $masyarakats = Masyarakat::orderBy('id')->cari(request(['search']))->paginate(10)->withQueryString();
+        $masyarakat_id = Masyarakat::orderBy('id')->pluck('id');
+
+        $total_estimasi = collect();
+        foreach ($masyarakat_id as $key => $value){
+            $count = Estimasi::where('masyarakats_id', $value)->count();
+            $total_estimasi->put($value , $count);
+            
+        }
+// dd($total_estimasi);
+        return view('admin.masyarakat',compact('masyarakats','total_estimasi'));
     }
 
     public function editpass(Request $request){

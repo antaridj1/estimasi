@@ -23,7 +23,7 @@ class Masyarakat extends Authenticatable
         });
     }
 
-    public function estimasis(){
+    public function estimasi(){
         return $this->hasMany(Estimasi::class);
     }
 }

@@ -98,6 +98,48 @@ input::-webkit-inner-spin-button {
 .indent_total{
   text-indent: 14%;
 }
+
+.tab_it{
+  text-indent: 22%;
+}
+
+.tab_total{
+  text-indent: 17%;
+}
+
+.bi-info-circle:hover{
+  color: #ffd000;
+  cursor: pointer;
+}
+.shadow-black{
+  box-shadow: 0px 2px 12px 2px rgba(168,168,168,1);
+  -webkit-box-shadow: 0px 2px 12px 2px rgba(168,168,168,1);
+  -moz-box-shadow: 0px 2px 12px 2px rgba(168,168,168,1);
+}
+
+.accordion-button:not(.collapsed){
+  color: #eb5d1e;
+  background-color: #f5ebe6 ;
+}
+
+.accordion-button:focus{
+  color: #eb5d1e;
+}
+
+.accordion-button:focus {
+  z-index: 3;
+  border-color: #ff8800;
+  outline: 0;
+  outline-color: initial;
+  outline-style: initial;
+  outline-width: 0px;
+  box-shadow: 0 0 0 0.25rem rgba(255, 123, 0, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: #eb5d1e;
+  border-color: #eb5d1e;
+}
 /* Buatan Aing Selesai */
 
 body {

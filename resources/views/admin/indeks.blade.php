@@ -393,7 +393,10 @@
                 $(this).parents('.modal').find('#kategori_indeks').hide();
             }
         })
+        
+        $('[data-bs-toggle="tooltip"]').tooltip();   
     });
+
 </script>
 
 @endsection

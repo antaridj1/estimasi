@@ -3,10 +3,9 @@
 @section('title','Gedung | Admin IMB')
 
 @section('container')
-
-                
+           
   <!-- Modal end -->
-
+ 
 <div class="row page-titles mx-0">
     <div class="col p-md-0">
         <ol class="breadcrumb">
@@ -270,5 +269,14 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+            $('[data-bs-toggle="tooltip"]').tooltip();   
+        });
+</script>
+
 
 @endsection

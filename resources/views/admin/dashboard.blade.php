@@ -9,7 +9,7 @@
 
             <div class="container-fluid mt-3">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                    <a href="/dashboard/estimasi" class="col-lg-6 col-sm-6">
                         <div class="card gradient-1">
                             <div class="card-body">
                                 <h3 class="card-title text-white">Estimasi Retribusi</h3>
@@ -19,8 +19,8 @@
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-calculator"></i></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
+                    </a>
+                    <a href="/dashboard/masyarakat" class="col-lg-6 col-sm-6">
                         <div class="card gradient-2">
                             <div class="card-body">
                                 <h3 class="card-title text-white">User</h3>
@@ -30,8 +30,7 @@
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <a href="/dashboard/gedung" class="col-lg-6 col-sm-6">
                         <div class="card gradient-3">
                             <div class="card-body">
                                 <h3 class="card-title text-white">Gedung</h3>
@@ -41,8 +40,7 @@
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-building"></i></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <a href="/dashboard/sarana" class="col-lg-6 col-sm-6">
                         <div class="card gradient-4">
                             <div class="card-body">
                                 <h3 class="card-title text-white">Sarana Prasarana </h3>
@@ -52,49 +50,9 @@
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-road"></i></span>
                             </div>
                         </div>
-                    </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Kelola Master</h4>
-                                <div class="active-member">
-                                    <div class="table-responsive">
-                                        <table class="table table-xs mb-0">
-                                        
-                                            <tbody>
-                                                <tr>
-                                                    
-                                                    <td>Indeks</td>
-                                                    <td class="text-right"><a href="/dashboard/indeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gedung</td>
-                                                    <td class="text-right"><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sarana</td>
-                                                    <td class="text-right"><a href="/dashboard/sarana" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Masyarakat</td>
-                                                    <td class="text-right"><a href="/dashboard/gedung" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Kategori Klasifikasi</td>
-                                                    <td class="text-right"><a href="/dashboard/kategoriIndeks" type="button" class="btn mb-1 btn-primary btn-sm">Kelola Data</button></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-            </div>
+                
             <!-- #/ container -->
         <!--**********************************
             Content body end

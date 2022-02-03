@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => 'revalidate'],function(){
-Route::get('/', 'App\Http\Controllers\EstimasiController@landing')->middleware('guest');
+Route::get('/', 'App\Http\Controllers\HitungController@landing')->middleware('guest');
 
 Route::get('/regis','App\Http\Controllers\AuthController@getRegis')->middleware('guest');
 Route::get('/login','App\Http\Controllers\AuthController@getLogin')->name('login')->middleware('guest');
 Route::post('/login','App\Http\Controllers\AuthController@postLogin')->name('postlogin');
 
 Route::group(['middleware' =>['auth:masyarakat']], function (){
-    Route::get('/estimasi','App\Http\Controllers\EstimasiController@landing');
-    Route::get('/hitung','App\Http\Controllers\EstimasiController@index')->name('hitung');
-    Route::post('/hitung','App\Http\Controllers\EstimasiController@hitungEstimasi')->name('hitung');
-    Route::get('/hasil','App\Http\Controllers\EstimasiController@hitungEstimasi');
-    Route::get('/riwayat','App\Http\Controllers\EstimasiController@riwayatEstimasi');
+    Route::get('/estimasi','App\Http\Controllers\HitungController@landing');
+    Route::get('/hitung','App\Http\Controllers\HitungController@index')->name('hitung');
+    Route::post('/hitung','App\Http\Controllers\HitungController@hitungEstimasi')->name('hitung');
+    Route::get('/hasil','App\Http\Controllers\HitungController@hitungEstimasi');
+    Route::get('/riwayat','App\Http\Controllers\HitungController@riwayatEstimasi');
     Route::get('/akun','App\Http\Controllers\MasyarakatController@index');
     Route::patch('/akun','App\Http\Controllers\MasyarakatController@edit')->name('edit_user');
     Route::post('/akun','App\Http\Controllers\MasyarakatController@editpass')->name('edit_pass_akun');
@@ -60,6 +60,8 @@ Route::group(['middleware' =>['auth:admin']], function (){
     Route::get('/profil','App\Http\Controllers\AdminController@profil');
     Route::patch('/profil','App\Http\Controllers\AdminController@edit')->name('edit_admin');
     Route::post('/profil','App\Http\Controllers\AdminController@editpass')->name('edit_pass_admin');
+    //estimasi
+    Route::get('/dashboard/estimasi','App\Http\Controllers\EstimasiController@index');
 });
 
 Route::get('/logout','App\Http\Controllers\AuthController@getLogout');
