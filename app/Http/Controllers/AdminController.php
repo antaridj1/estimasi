@@ -29,20 +29,24 @@ class AdminController extends Controller
 
     public function edit(Request $request, Admin $admin)
     {
-        $request->validate([
-            'nama'=>'required|max:255',
-            'email'=>'required|email|unique:masyarakats|max:255',
-            'telp'=>'required|min:10|max:14',
-            'alamat'=>'required|max:255'
-        ]);
+        try{
+            $request->validate([
+                'nama'=>'required|max:255',
+                'email'=>'required|unique:masyarakats|max:255',
+                'telp'=>'required|min:10|max:14',
+                'alamat'=>'required|max:255'
+            ]);
 
-        Admin::where('id',$request->id)->update([
-            'nama'=>$request->nama,
-            'email'=>$request->email,
-            'telp' =>$request->telp,
-            'alamat'=>$request->alamat,
-        ]);
-        return redirect('/profil');
+            Admin::where('id',$request->id)->update([
+                'nama'=>$request->nama,
+                'email'=>$request->email,
+                'telp' =>$request->telp,
+                'alamat'=>$request->alamat,
+            ]);
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/profil')->with('update_berhasil','success');
     }
 
     public function editpass(Request $request){
@@ -54,15 +58,15 @@ class AdminController extends Controller
             'password_lama'=>'required|min:3|max:255',
             'konfirmasi'=>'required||min:3|max:255',
         ]);
-
+        
         if(password_verify($request->password_lama, $password) && 
         $request->password_baru == $request->konfirmasi){
             Admin::where('id',$user_id)->update([
                 'password'=>bcrypt($request->password_baru)
             ]);
         }else{
-            dd('gagal');
+            return back()->with('update_gagal','error');
         }
-        return redirect('/profil');
+        return redirect('/profil')->with('update_berhasil','success');
     }
 }

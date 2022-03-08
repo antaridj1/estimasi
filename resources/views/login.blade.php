@@ -18,8 +18,8 @@
                     <p>Login</p>
                 </div>
                 <div class="form-group">
-                  <label for="name">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required >
+                  <label for="email">Username</label>
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required >
                   @error('email')
                     <div class="invalid-feedback">
                       {{$message}}
@@ -65,4 +65,16 @@
     });
 </script>
 @endif
+
+@if(session()->has('gagal'))
+<script>
+$(document).ready(function(){
+  toastr.error("Username atau password yang Anda masukkan salah","Gagal Login",
+  {positionClass:"toast-top-full-width",timeOut:5e3,closeButton:!0,debug:!1,newestOnTop:!0,
+  progressBar:!0,preventDuplicates:!0,onclick:null,showDuration:"300",
+  hideDuration:"1000",extendedTimeOut:"1000",showEasing:"swing",hideEasing:"linear",
+  showMethod:"fadeIn",hideMethod:"fadeOut",tapToDismiss:!1})});
+</script>
+@endif
+
 @endsection

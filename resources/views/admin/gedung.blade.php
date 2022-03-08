@@ -131,7 +131,7 @@
                                       </a>
                                     @endif
                                       <div class="modal fade" id="editStatus_{{$gedung->id}}">
-                                        <div class="modal-dialog">
+                                        <div class="modal-dialog modal-dialog-centered">
                                           <div class="modal-content">
                                             <div class="modal-header">
                                               @if($gedung->status == 1)

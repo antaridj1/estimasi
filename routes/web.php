@@ -24,6 +24,7 @@ Route::group(['middleware' =>['auth:masyarakat']], function (){
     Route::get('/hitung','App\Http\Controllers\HitungController@index')->name('hitung');
     Route::post('/hitung','App\Http\Controllers\HitungController@hitungEstimasi')->name('hitung');
     Route::get('/hasil','App\Http\Controllers\HitungController@hitungEstimasi');
+    Route::get('/cetak','App\Http\Controllers\HitungController@cetak');
     Route::get('/riwayat','App\Http\Controllers\HitungController@riwayatEstimasi');
     Route::get('/akun','App\Http\Controllers\MasyarakatController@index');
     Route::patch('/akun','App\Http\Controllers\MasyarakatController@edit')->name('edit_user');

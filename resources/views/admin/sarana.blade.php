@@ -141,7 +141,7 @@
                               </a>
                             @endif
                               <div class="modal fade" id="editStatus_{{$sarana->id}}">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered">
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       @if($sarana->status == 1)
@@ -246,7 +246,7 @@
                                               </div>
                                           @enderror
                                         </div>
-                                        <div class="form-group mt-4"> 
+                                        <div class="form-group mt-4 text-left"> 
                                             <button type="submit" class="btn btn-primary" >Simpan </button>
                                         </div>
                                     </form>

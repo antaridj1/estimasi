@@ -20,27 +20,34 @@ class SaranaController extends Controller
             'biaya'=>'required|numeric|min:1',
             'keterangan'=>'required',
         ]);
-
-        Sarana::create($request->all());  
-        return redirect('dashboard/sarana');
+        try{
+            Sarana::create($request->all()); 
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/dashboard/sarana')->with('input_berhasil','success');
     }
 
     public function update(Request $request, Sarana $saranas)
     {
-        $request->validate([
-            'nama'=>'required',
-            'kategori'=>'required',
-            'biaya'=>'required|numeric|min:1',
-            'keterangan'=>'required',
-        ]);
-        
-        Sarana::where('id',$request->id)->update([
-            'nama'=>$request->nama,
-            'kategori'=>$request->kategori,
-            'biaya'=>$request->biaya,
-            'keterangan' =>$request->keterangan,
-        ]);
-        return redirect('/dashboard/sarana');
+        try{
+            $request->validate([
+                'nama'=>'required',
+                'kategori'=>'required',
+                'biaya'=>'required|numeric|min:1',
+                'keterangan'=>'required',
+            ]);
+            
+            Sarana::where('id',$request->id)->update([
+                'nama'=>$request->nama,
+                'kategori'=>$request->kategori,
+                'biaya'=>$request->biaya,
+                'keterangan' =>$request->keterangan,
+            ]);
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/dashboard/sarana')->with('update_berhasil','success');
     }
 
     public function updateStatus(Sarana $sarana)

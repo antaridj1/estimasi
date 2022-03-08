@@ -24,7 +24,7 @@
                     <td>: {{$user->nama}}</td>
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Username</td>
                     <td>: {{$user->email}}</td>
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
                             @enderror
                           </div>
                         <div class="form-group">
-                          <label for="email">Email</label>
+                          <label for="email">Username</label>
                           <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" value="{{$user->email}}" name="email" >
                           @error('email')
                               <div class="invalid-feedback">
@@ -172,4 +172,29 @@
             $('[data-bs-toggle="tooltip"]').tooltip();   
         });
 </script>
+
+@if(session()->has('update_gagal'))
+    <script>
+        $(document).ready(function(){
+            toastr.error("Password yang Anda masukkan salah","Gagal Update",
+                {positionClass:"toast-top-right",timeOut:5e3,closeButton:!0,
+                debug:!1,newestOnTop:!0,progressBar:!0,preventDuplicates:!0,
+                onclick:null,showDuration:"300",hideDuration:"1000",
+                extendedTimeOut:"1000",showEasing:"swing",hideEasing:"linear",
+                showMethod:"fadeIn",hideMethod:"fadeOut",tapToDismiss:!1})})
+    </script>
+@endif
+
+@if(session()->has('update_berhasil'))
+    <script>
+        $(document).ready(function(){
+            toastr.success("Data telah terupdate","Update Berhasil",
+                {timeOut:5e3,closeButton:!0,debug:!1,newestOnTop:!0,
+                progressBar:!0,positionClass:"toast-top-right",
+                preventDuplicates:!0,onclick:null,showDuration:"300",
+                hideDuration:"1000",extendedTimeOut:"1000",showEasing:"swing",
+                hideEasing:"linear",showMethod:"fadeIn",hideMethod:"fadeOut",
+                tapToDismiss:!1})})
+    </script>
+@endif
  @endsection

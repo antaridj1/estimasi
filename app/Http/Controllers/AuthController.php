@@ -16,7 +16,7 @@ class AuthController extends Controller
     public function postRegis(Request $request){
         $request->validate([
             'nama'=>'required|max:255',
-            'email'=>'required|email|unique:masyarakats|max:255',
+            'email'=>'required|unique:masyarakats|max:255',
             'password1'=>'required|min:3|max:255',
             'password2'=>'required|min:3|max:255|',
             'telp'=>'required|min:10|max:14',
@@ -44,7 +44,7 @@ class AuthController extends Controller
 
     public function postLogin(Request $request){
          $login = $request->validate([
-            'email' => ['required','email'],
+            'email' => 'required',
             'password' => 'required'
         ]);
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return redirect()->intended('dashboard');
         }
          else{
-            return back();
+            return back()->with('message','Username atau password yang Anda masukkan salah')->with('gagal','error');
          }
      }
 

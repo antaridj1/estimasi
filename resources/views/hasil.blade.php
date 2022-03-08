@@ -7,17 +7,26 @@
 <div class="container container_margin">
     <div class="row justify-content-center">
       <div class="col-sm-9">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
-              <li class="breadcrumb-item"><a href="/hitung">Hitung</a></li>
-              <li class="breadcrumb-item active"><a href="#">Hasil</a></li>
-            </ol>
-          </nav>
+        <div class="d-flex justify-content-between">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/estimasi">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="/hitung">Hitung</a></li>
+                <li class="breadcrumb-item active"><a href="#">Hasil</a></li>
+              </ol>
+            </nav>
+            <div class="form-group mb-2 tombols">
+              <a href="/cetak" class="btn btn-primary" target="_blank"><i class="bi bi-download"></i> Unduh PDF</a>
+            </div>
+        </div>
           <div class="row shadow-sm p-3 mb-2 bg-body round">
               <h5 class="hitung">Data Dasar</h5>
                 @foreach($estimasis as $estimasi)
                 <table class="table table-borderless">
+                  <tr>
+                    <td>Tanggal</td>
+                    <td>: {{$estimasi->created_at->format('d-m-Y')}}</td>
+                  </tr>
                   <tr>
                     <td>Luas Tanah</td>
                     <td>: {{$estimasi->luas_tanah}} m<sup>2</sup></td>

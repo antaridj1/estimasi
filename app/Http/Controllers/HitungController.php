@@ -163,5 +163,11 @@ class HitungController extends Controller
         return view('riwayat',compact('estimasis'));
     }
 
+    public function cetak(){
+        $user_id = Auth::id();
+        $estimasi = Estimasi::with(['detailsarana','detail_estimasi'])->where('masyarakats_id',$user_id)->orderBy('created_at','DESC')->first();
+
+        return view('cetak',compact('estimasi'));
+    }
     
 }

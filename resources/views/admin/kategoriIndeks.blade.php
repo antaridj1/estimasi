@@ -1,6 +1,6 @@
 @extends('admin.mainlayout')
 
-@section('title','Kategori Klasifikasi | Admin IMB')
+@section('title','Kategori Indeks | Admin IMB')
 
 @section('container')
 
@@ -11,7 +11,7 @@
     <div class="col p-md-0">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Kategori Klasifikasi</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Kategori Indeks</a></li>
         </ol>
     </div>
 </div>
@@ -22,7 +22,7 @@
         <div class="col-12">
             <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Kategori Klasifikasi</h4>
+                    <h4 class="card-title">Data Kategori Indeks</h4>
                     <div class="d-flex justify-content-between">
                       <form action="/dashboard/kategoriIndeks">
                           <div class="input-group">
@@ -120,7 +120,7 @@
                                   </a>
                                 @endif
                                 <div class="modal fade" id="editStatus_{{$kategori->id}}">
-                                  <div class="modal-dialog">
+                                  <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         @if($kategori->status == 1)
@@ -166,7 +166,7 @@
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                       </div>
                                       <!-- Modal body -->
-                                      <div class="modal-body">
+                                      <div class="modal-body text-left">
                                         <form method="post" action="{{route('edit_kategoriIndeks')}}">
                                         @method('patch')
                                         @csrf
@@ -201,7 +201,7 @@
                                                 </div>
                                               @enderror
                                             </div>
-                                            <div class="form-group mt-4"> 
+                                            <div class="form-group mt-4 text-left"> 
                                                 <button type="submit" class="btn btn-primary" >Simpan </button>
                                             </div>
                                         </form>

@@ -133,7 +133,7 @@
                     </li>
                     <li>
                         <a href="/dashboard/kategoriIndeks" aria-expanded="false">
-                            <i class="fa fa-list"></i><span class="nav-text">Kategori Klasifikasi</span>
+                            <i class="fa fa-list"></i><span class="nav-text">Kategori Indeks</span>
                         </a>
                     </li>
                 </ul>
@@ -155,10 +155,6 @@
     <!--**********************************
         Scripts
     ***********************************-->
-
-    
-
-
     <script src="{{asset('admin/plugins/common/common.min.js')}}"></script>
     <script src="{{asset('admin/js/custom.min.js')}}"></script>
     <script src="{{asset('admin/js/settings.js')}}"></script>
@@ -168,7 +164,43 @@
     <script src="{{asset('admin/plugins/toastr/js/toastr.min.js')}}"></script>
     <script src="{{asset('admin/plugins/toastr/js/toastr.init.js')}}"></script>
 
+    @if(session()->has('input_berhasil'))
+    <script>
+        $(document).ready(function(){
+            toastr.success("Data telah ditambahkan","Input Berhasil",
+                {timeOut:5e3,closeButton:!0,debug:!1,newestOnTop:!0,
+                progressBar:!0,positionClass:"toast-top-right",
+                preventDuplicates:!0,onclick:null,showDuration:"300",
+                hideDuration:"1000",extendedTimeOut:"1000",showEasing:"swing",
+                hideEasing:"linear",showMethod:"fadeIn",hideMethod:"fadeOut",
+                tapToDismiss:!1})})
+    </script>
+    @endif
 
+    @if(session()->has('update_berhasil'))
+    <script>
+        $(document).ready(function(){
+            toastr.success("Data telah terupdate","Update Berhasil",
+                {timeOut:5e3,closeButton:!0,debug:!1,newestOnTop:!0,
+                progressBar:!0,positionClass:"toast-top-right",
+                preventDuplicates:!0,onclick:null,showDuration:"300",
+                hideDuration:"1000",extendedTimeOut:"1000",showEasing:"swing",
+                hideEasing:"linear",showMethod:"fadeIn",hideMethod:"fadeOut",
+                tapToDismiss:!1})})
+    </script>
+    @endif
+
+    @if(session()->has('update_gagal'))
+    <script>
+        $(document).ready(function(){
+            toastr.error("Password yang Anda masukkan salah","Gagal Update",
+                {positionClass:"toast-top-right",timeOut:5e3,closeButton:!0,
+                debug:!1,newestOnTop:!0,progressBar:!0,preventDuplicates:!0,
+                onclick:null,showDuration:"300",hideDuration:"1000",
+                extendedTimeOut:"1000",showEasing:"swing",hideEasing:"linear",
+                showMethod:"fadeIn",hideMethod:"fadeOut",tapToDismiss:!1})})
+    </script>
+    @endif
 </body>
 
 </html>

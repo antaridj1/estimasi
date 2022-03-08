@@ -28,8 +28,8 @@
                   @enderror
                 </div>
                 <div class="form-group col-md-6 mt-3 mt-md-0">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ @old('email') }}" name="email" id="email" required>
+                  <label for="email">Username</label>
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ @old('email') }}" name="email" id="email" required>
                   @error('email')
                     <div class="invalid-feedback">
                       {{$message}}

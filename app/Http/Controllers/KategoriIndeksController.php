@@ -21,38 +21,44 @@ class KategoriIndeksController extends Controller
 
   
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'bobot_kategori'=>'required|numeric|min:0|max:1',
-            'keterangan'=>'required',
-        ]);
+    {   try{
+            $request->validate([
+                'nama' => 'required',
+                'bobot_kategori'=>'required|numeric|min:0|max:1',
+                'keterangan'=>'required',
+            ]);
 
-        KategoriIndeks::create([
-            'nama' => $request->nama,
-            'bobot_kategori'=>$request->bobot_kategori,
-            'keterangan' =>$request->keterangan,
-            'slug'=>Str::slug($request->nama,'_'),
-        ]);
-
-        return redirect('dashboard/kategoriIndeks');
+            KategoriIndeks::create([
+                'nama' => $request->nama,
+                'bobot_kategori'=>$request->bobot_kategori,
+                'keterangan' =>$request->keterangan,
+                'slug'=>Str::slug($request->nama,'_'),
+            ]);
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/dashboard/kategoriIndeks')->with('input_berhasil','success');
     }
 
     public function update(Request $request, KategoriIndeks $kategoriIndeks)
     {
-        $request->validate([
-            'nama' => 'required',
-            'bobot_kategori'=>'required|numeric|min:0|max:1',
-            'keterangan'=>'required',
-        ]);
+        try{
+            $request->validate([
+                'nama' => 'required',
+                'bobot_kategori'=>'required|numeric|min:0|max:1',
+                'keterangan'=>'required',
+            ]);
 
-        KategoriIndeks::where('id',$request->id)->update([
-            'nama' => $request->nama,
-            'bobot_kategori'=>$request->bobot_kategori,
-            'keterangan' =>$request->keterangan,
-            'slug'=>Str::slug($request->nama,'_'),
-        ]);
-        return redirect('/dashboard/kategoriIndeks');
+            KategoriIndeks::where('id',$request->id)->update([
+                'nama' => $request->nama,
+                'bobot_kategori'=>$request->bobot_kategori,
+                'keterangan' =>$request->keterangan,
+                'slug'=>Str::slug($request->nama,'_'),
+            ]);
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/dashboard/kategoriIndeks')->with('update_berhasil','success');
     }
 
     public function updateStatus(KategoriIndeks $kategoriIndeks)

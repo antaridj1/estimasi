@@ -1172,6 +1172,18 @@ li .breadcrumb-item {
 .contact button:hover {
   background: #ef7f4d;
 }
+
+.tombols a {
+  background: #eb5d1e;
+  border: 0;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.tombols a:hover {
+  background: #ef7f4d;
+}
+
 .secondary button #btnmodal {
   padding: 2px 12px;
 }

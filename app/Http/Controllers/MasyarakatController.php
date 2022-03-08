@@ -17,21 +17,25 @@ class MasyarakatController extends Controller
 
     public function edit(Request $request)
     {   
-        $request->validate([
-            'nama'=>'required|max:255',
-            'email'=>'required|email|max:255',
-            'telp'=>'required|min:10|max:14',
-            'no_ktp'=>'required'
-        ]);
-        
-        // $user_id = Auth::id();
-        Masyarakat::where('id',$request->id)->update([
-            'nama'=>$request->nama,
-            'email'=>$request->email,
-            'no_ktp'=>$request->no_ktp,
-            'telp' =>$request->telp,
-        ]);
-        return redirect('/akun');
+        try{
+            $request->validate([
+                'nama'=>'required|max:255',
+                'email'=>'required|max:255',
+                'telp'=>'required|min:10|max:14',
+                'no_ktp'=>'required'
+            ]);
+            
+            // $user_id = Auth::id();
+            Masyarakat::where('id',$request->id)->update([
+                'nama'=>$request->nama,
+                'email'=>$request->email,
+                'no_ktp'=>$request->no_ktp,
+                'telp' =>$request->telp,
+            ]);
+        } catch (Exception $e) {
+            return back()->with('gagal','error');
+        }
+        return redirect('/akun')->with('update_berhasil','success');
     }
 
     public function tampil(){
@@ -58,9 +62,9 @@ class MasyarakatController extends Controller
                 'password'=>bcrypt($request->password_baru)
             ]);
         }else{
-            dd('gagal');
+            return back()->with('update_gagal','error');
         }
-        return redirect('/akun');
+        return redirect('akun')->with('update_berhasil','success');
     }
 
     public function updateStatus(Masyarakat $masyarakat)

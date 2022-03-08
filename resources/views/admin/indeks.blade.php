@@ -104,7 +104,7 @@
                                         </a>
                                         @endif
                                         <div class="modal fade" id="editStatus_{{$indek->id}}">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                 @if($indek->status == 1)
@@ -143,7 +143,7 @@
 
                                         <!-- The Modal Edit -->
                                         <div class="modal fade " id="edit_{{$indek->id}}">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                 <div class="modal-content">
 
                                                     <!-- Modal Header -->
