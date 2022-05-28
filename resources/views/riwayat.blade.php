@@ -19,7 +19,10 @@
                                             <td>ID</td>
                                             <td>: {{$estimasi->id}}</td>
                                         </tr>
-                                
+                                        <tr>
+                                            <td>Tanggal</td>
+                                            <td>: {{$estimasi->created_at->format('d-m-Y')}}</td>
+                                        </tr>
                                         <tr>
                                             <td>Luas Tanah</td>
                                             <td>: {{$estimasi->luas_tanah}} m<sup>2</sup></td>
